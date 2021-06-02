@@ -123,7 +123,7 @@ const StakingScreen = () => {
     return rs.dividedBy(new BigNumber(10 ** 18)).toFixed()
   };
 
-//CALL API AND GET THE LIST , 
+  //CALL API AND GET THE LIST , 
   useEffect(() => {
     (async () => {
       try {
@@ -139,15 +139,12 @@ const StakingScreen = () => {
 
   //THEN SET THE STAKE ITEM = FADO SJS
   const toggleStakingModal = () =>{
-   console.log(validatorList);
-   validatorList.map((validator) => {
-     if(validator.name === "FADO JSC"){
-       setValidatorItem(validator);
-     }
-   })
+    validatorList.map((validator) => {
+      if(validator.name === "FADO JSC"){
+        setValidatorItem(validator);
+      }
+    })
   };
-
-
 
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
