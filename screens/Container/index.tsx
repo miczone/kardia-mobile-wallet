@@ -428,7 +428,7 @@ const AppContainer = () => {
       <View style={[styles.splashContainer, {backgroundColor: theme.backgroundColor}]}>
         <ImageBackground
           style={styles.splashImage}
-          source={require('../../assets/splash-screen.png')}
+          source={require('../../assets/fado-wallet/splash-screen.png')}
         />
       </View>
     );
