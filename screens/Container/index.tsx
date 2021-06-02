@@ -427,8 +427,8 @@ const AppContainer = () => {
     return (
       <View style={[styles.splashContainer, {backgroundColor: theme.backgroundColor}]}>
         <Image
-          style={styles.splashLogo}
-          source={require('../../assets/kardia-logo-full-white.png')}
+          style={styles.splashImage}
+          source={require('../../assets/splash-screen.png')}
         />
       </View>
     );
