@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {View, Image, AppState, Dimensions, Linking, Platform} from 'react-native';
+import {View, Image, AppState, Dimensions, Linking, Platform, ImageBackground} from 'react-native';
 import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -217,7 +217,7 @@ const Wrap = () => {
       {/* <Tab.Screen name="Home" component={HomeScreen} /> */}
       <Tab.Screen name="Home" component={HomeStackScreen} />
       <Tab.Screen name="Transaction" component={TransactionStackScreen} />
-      <Tab.Screen name="DEX" component={KAIDex} />
+      {/* <Tab.Screen name="DEX" component={KAIDex} /> */}
       <Tab.Screen name="Staking" component={StakingStackScreen} />
       <Tab.Screen name="Address" component={AddressStackScreen} />
       {/* <Tab.Screen name="News" component={NewsScreen} /> */}
@@ -426,9 +426,9 @@ const AppContainer = () => {
   if (!inited) {
     return (
       <View style={[styles.splashContainer, {backgroundColor: theme.backgroundColor}]}>
-        <Image
-          style={styles.splashLogo}
-          source={require('../../assets/kardia-logo-full-white.png')}
+        <ImageBackground
+          style={styles.splashImage}
+          source={require('../../assets/fado-wallet/splash-screen.png')}
         />
       </View>
     );

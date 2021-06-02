@@ -1,6 +1,6 @@
 {
-  "name": "KardiaChainWallet",
-  "version": "0.0.1",
+  "name": "FadoWallet",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -11,7 +11,8 @@
     "postinstall": "rn-nodeify --install assert,crypto,buffer,stream,events,process,http,https,url,os --hack",
     "bundle-android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/",
     "build-apk": "cd android && ./gradlew assembleDebug",
-    "link": "react-native link"
+    "link": "react-native link",
+    "setup:icon": "react-native set-icon --path ./assets/fado-wallet/app-icon.png"
   },
   "dependencies": {
     "@apollo/client": "^3.3.16",
@@ -81,6 +82,7 @@
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/runtime": "^7.8.4",
+    "@bam.tech/react-native-make": "^3.0.3",
     "@react-native-community/eslint-config": "^1.1.0",
     "@types/jest": "^25.2.3",
     "@types/react-native": "^0.63.2",
