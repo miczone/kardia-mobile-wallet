@@ -349,7 +349,7 @@ const AppContainer = () => {
       setAppStatus(compareResult)
 
       if (compareResult !== 'OK') {
-        // setInited(1);
+        setInited(1);
         return;
       }
 
@@ -411,7 +411,7 @@ const AppContainer = () => {
       const fontSizeSetting = await getFontSize();
       setFontSize(fontSizeSetting)
 
-      // setInited(1);
+      setInited(1);
     })();
   }, [
     setWallets,
