@@ -8,7 +8,7 @@ import {languageAtom} from '../../atoms/language';
 import {selectedWalletAtom, walletsAtom} from '../../atoms/wallets';
 import { BigNumber } from "bignumber.js";
 import List from '../../components/List';
-import {getCurrentStaking, mapValidatorRole} from '../../services/staking';
+import {getAllValidator, getCurrentStaking, mapValidatorRole} from '../../services/staking';
 import {ThemeContext} from '../../ThemeContext';
 import {getLanguageString} from '../../utils/lang';
 import {styles} from './style';
@@ -24,6 +24,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { showTabBarAtom } from '../../atoms/showTabBar';
 import CustomText from '../../components/Text';
 import { formatNumberString } from '../../utils/number';
+import NewStakingModal from '../common/NewStakingModal';
+import { log } from 'react-native-reanimated';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
@@ -43,6 +45,11 @@ const StakingScreen = () => {
   // const [focusingItem, setFocusingItem] = useState(-1);
   const setStatusBarColor = useSetRecoilState(statusBarColorAtom);
   const setTabBarVisible = useSetRecoilState(showTabBarAtom);
+
+  //Validator List
+  const [validatorList, setValidatorList] = useState<Validator[]>([]);
+  const [validatorItem, setValidatorItem] = useState<Validator>();
+  
 
   const getStakingData = async () => {
     const localWallets = await getWallets();
@@ -115,6 +122,32 @@ const StakingScreen = () => {
     }, new BigNumber(0));
     return rs.dividedBy(new BigNumber(10 ** 18)).toFixed()
   };
+
+//CALL API AND GET THE LIST , 
+  useEffect(() => {
+    (async () => {
+      try {
+        const {validators} = await getAllValidator();
+        setValidatorList(validators);
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    })();
+  }, []);
+
+  //THEN SET THE STAKE ITEM = FADO SJS
+  const toggleStakingModal = () =>{
+   console.log(validatorList);
+   validatorList.map((validator) => {
+     if(validator.name === "FADO JSC"){
+       setValidatorItem(validator);
+     }
+   })
+  };
+
+
 
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
@@ -202,7 +235,7 @@ const StakingScreen = () => {
             </CustomText>
             <Button
               type="primary"
-              onPress={() => navigation.navigate('ValidatorList')}
+              onPress={() => toggleStakingModal()}
               title={getLanguageString(language, 'STAKE_NOW')}
               textStyle={{
                 fontWeight: '500', 
@@ -219,8 +252,18 @@ const StakingScreen = () => {
                 />
               }
             />
+
+              {/* Toggle FADO JSC */}
+             <NewStakingModal
+                validatorItem={validatorItem}
+                visible={validatorItem !== undefined}
+                onClose={() => {
+                  setValidatorItem(undefined);
+                 }}
+      />
           </View>
         }
+        //END LIST EMPTY
         render={(item, index) => {
           return (
             <StakingItem
@@ -230,14 +273,24 @@ const StakingScreen = () => {
         }}
         ItemSeprator={() => <View style={{height: 6}} />}
       />
+      
       {currentStaking.length > 0 && (
+        <>
         <Button
           type="primary"
           icon={<AntIcon name="plus" size={24} />}
           size="small"
-          onPress={() => navigation.navigate('ValidatorList')}
+          onPress={() => toggleStakingModal()}
           style={styles.floatingButton}
         />
+        <NewStakingModal
+                validatorItem={validatorItem}
+                visible={validatorItem !== undefined}
+                onClose={() => {
+                  setValidatorItem(undefined);
+                 }}
+      />
+      </>
       )}
       {message !== '' && (
         <AlertModal
