@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {View, Image, AppState, Dimensions, Linking, Platform} from 'react-native';
+import {View, Image, AppState, Dimensions, Linking, Platform, ImageBackground} from 'react-native';
 import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -349,7 +349,7 @@ const AppContainer = () => {
       setAppStatus(compareResult)
 
       if (compareResult !== 'OK') {
-        setInited(1);
+        // setInited(1);
         return;
       }
 
@@ -411,7 +411,7 @@ const AppContainer = () => {
       const fontSizeSetting = await getFontSize();
       setFontSize(fontSizeSetting)
 
-      setInited(1);
+      // setInited(1);
     })();
   }, [
     setWallets,
@@ -426,7 +426,7 @@ const AppContainer = () => {
   if (!inited) {
     return (
       <View style={[styles.splashContainer, {backgroundColor: theme.backgroundColor}]}>
-        <Image
+        <ImageBackground
           style={styles.splashImage}
           source={require('../../assets/splash-screen.png')}
         />
