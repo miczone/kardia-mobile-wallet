@@ -1,3 +1,6 @@
+# large file
+java_pid*
+
 # fastlane specific
 fastlane/report.xml
 
