@@ -26,6 +26,7 @@ import { statusBarColorAtom } from '../../atoms/statusBar';
 import CustomTextInput from '../../components/TextInput';
 
 const TransactionScreen = () => {
+  console.log('TransactionScreen')
   const theme = useContext(ThemeContext);
   // const navigation = useNavigation();
 
