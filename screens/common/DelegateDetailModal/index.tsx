@@ -226,7 +226,7 @@ export default ({
           style={{
             width: 36,
             height: 36,
-            borderRadius: 12,
+            borderRadius: 32,
             marginRight: 12,
             alignItems: 'center',
             justifyContent: 'center',
