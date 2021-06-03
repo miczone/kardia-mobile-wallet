@@ -17,4 +17,4 @@ export const WKAI_SMC = '0x02655eEF130e5F37F8b648BD9c8D10aA2e6bf698';
 export const KAI_TOKEN_NAME = "Kardiachain";
 export const KAI_TOKEN_SYMBOL = "KAI";
 
-export const SERVICE_ENDPOINT_ENV: 'development' | 'staging' | 'production' = 'production';
+export const SERVICE_ENDPOINT_ENV: 'development' | 'staging' | 'production' = 'development';

@@ -258,7 +258,7 @@ export default () => {
                   value={name}
                   onChangeText={setName}
                   headlineStyle={{ marginTop: 16, fontWeight: 'normal', color: theme.textColor }}
-                  inputStyle={{ marginTop: 6, backgroundColor: theme.gray200, color: theme.textColor, borderColor: theme.gray300, borderWidth: 1.5 }}
+                  inputStyle={{ marginTop: 6, backgroundColor: theme.inputBgColor, color: theme.textColor, borderColor: theme.inputBorderColor, borderWidth: 1.5 }}
                 />
               </View>
             </TouchableWithoutFeedback>

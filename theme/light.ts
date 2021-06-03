@@ -77,4 +77,11 @@ export const theme = {
   defaultFontSize: 12,
   inputBackgroundColor: 'rgba(96, 99, 108, 1)',
   warningTextColor: ColorPalette.yellow500,
+
+  // Input
+  inputBgColor: ColorPalette.gray100,
+  inputBorderColor: ColorPalette.gray300,
+
+  // Modal
+  modalBgColor: ColorPalette.gray200,
 };

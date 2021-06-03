@@ -319,7 +319,7 @@ const AddressDetail = () => {
           )}
           <CustomText
             style={{
-              color: theme.textColor,
+              color: theme.white,
               textAlign: 'center',
               fontSize: 24,
               fontWeight: 'bold',
@@ -330,7 +330,7 @@ const AddressDetail = () => {
           <View style={{flexDirection: 'row'}}>
             <CustomText
               style={{
-                color: 'rgba(252, 252, 252, 0.54)',
+                color: 'rgba(252, 252, 252, 0.7)',
                 textAlign: 'center',
                 fontSize: 15,
                 marginRight: 8,
@@ -419,7 +419,7 @@ const AddressDetail = () => {
                         // marginHorizontal: 20,
                         marginVertical: 8,
                         borderRadius: 8,
-                        backgroundColor: theme.backgroundFocusColor,
+                        backgroundColor: theme.gray100,
                       }}>
                       <TouchableOpacity
                         style={{
@@ -438,12 +438,12 @@ const AddressDetail = () => {
                             flex: 4,
                             paddingHorizontal: 14,
                           }}>
-                          <CustomText style={{color: '#FFFFFF'}}>
+                          <CustomText style={{color: theme.textColor}}>
                             {item.type === 'IN'
                               ? getLanguageString(language, 'TX_TYPE_RECEIVED')
                               : getLanguageString(language, 'TX_TYPE_SEND')}
                           </CustomText>
-                          <CustomText style={{color: '#DBDBDB', fontSize: 12}}>
+                          <CustomText style={{color: theme.gray600, fontSize: 12}}>
                             {truncate(item.label, 8, 10)}
                           </CustomText>
                         </View>
@@ -456,13 +456,13 @@ const AddressDetail = () => {
                             style={[
                               styles.kaiAmount,
                               item.type === 'IN'
-                                ? {color: '#53B680'}
+                                ? {color: theme.green600}
                                 : {color: 'red'},
                             ]}>
                             {item.type === 'IN' ? '+' : '-'}
                             {parseKaiBalance(item.amount, true)} KAI
                           </CustomText>
-                          <CustomText style={{color: '#DBDBDB', fontSize: 12}}>
+                          <CustomText style={{color: theme.gray500, fontSize: 12}}>
                             {format(item.date, 'hh:mm aa')}
                           </CustomText>
                         </View>

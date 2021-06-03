@@ -151,14 +151,14 @@ export default ({
     if (Platform.OS === 'android') {
       return {
         height: 460,
-        backgroundColor: theme.backgroundFocusColor,
+        backgroundColor: theme.modalBgColor,
         // marginBottom: keyboardShown ? -70 : 0,
         // marginTop: keyboardShown ? 70 : 0,
       };
     } else {
       return {
         height: 460,
-        backgroundColor: theme.backgroundFocusColor,
+        backgroundColor: theme.modalBgColor,
         marginBottom: keyboardOffset,
         marginTop: -keyboardOffset,
       };
@@ -215,7 +215,8 @@ export default ({
               onChangeText={setABName}
               value={abName}
               inputStyle={{
-                backgroundColor: 'rgba(96, 99, 108, 1)',
+                backgroundColor: theme.inputBgColor,
+                borderColor: theme.inputBorderColor,
                 color: theme.textColor,
               }}
               message={errName}
@@ -250,7 +251,8 @@ export default ({
                   onChangeText={setABAddress}
                   value={abAddress}
                   inputStyle={{
-                    backgroundColor: 'rgba(96, 99, 108, 1)',
+                    backgroundColor: theme.inputBgColor,
+                    borderColor: theme.inputBorderColor,
                     color: theme.textColor,
                   }}
                   message={errAddress}
@@ -263,7 +265,7 @@ export default ({
                 style={{
                   // flex: 1,
                   padding: 15,
-                  borderColor: 'rgba(255, 255, 255, 0.1)',
+                  borderColor: theme.gray300,
                   height: 44,
                   width: 44,
                   borderWidth: 1.5,
@@ -273,7 +275,7 @@ export default ({
                   marginLeft: 8,
                 }}>
                 <Image
-                  source={require('../../../assets/icon/scan_qr_dark.png')}
+                  source={require('../../../assets/icon/scan_qr.png')}
                   style={{width: 18, height: 18}}
                 />
               </TouchableOpacity>

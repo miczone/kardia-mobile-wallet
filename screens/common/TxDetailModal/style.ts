@@ -1,3 +1,4 @@
+import { theme } from './../../../theme/light';
 import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   container: {
@@ -16,7 +17,7 @@ export const styles = StyleSheet.create({
   },
   txhash: {
     textAlign: 'center',
-    color: 'rgba(252, 252, 252, 0.54)',
+    color: theme.textColor,
     fontSize: 15,
     textDecorationLine: 'underline'
   },
