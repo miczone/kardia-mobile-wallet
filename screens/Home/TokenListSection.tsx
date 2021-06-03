@@ -150,26 +150,6 @@ const TokenListSection = ({refreshTime}: {
   return (
     <View style={styles.tokenListContainer}>
       {/* <NewTokenModal visible={showModal} onClose={() => setShowModal(false)} /> */}
-      <View
-        style={{
-          alignItems: 'center',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingHorizontal: 20,
-          paddingTop: 16,
-          paddingBottom: 12,
-        }}>
-        <CustomText style={{fontSize: 18, fontWeight: 'bold', color: theme.textColor}}>
-          {getLanguageString(language, 'KRC20_TOKENS_SECTION_TITLE')}
-        </CustomText>
-        {tokenList.length > 0 && (
-          <TouchableOpacity onPress={() => navigation.navigate('KRC20Tokens')}>
-            <CustomText style={{fontSize: theme.defaultFontSize, color: theme.textColor}}>
-              {getLanguageString(language, 'VIEW_ALL')} ({tokenList.length})
-            </CustomText>
-          </TouchableOpacity>
-        )}
-      </View>
       {tokenList.length === 0 && !loading && (
         <View style={{alignItems: 'center', marginTop: 45, marginBottom: 30}}>
           <Image
