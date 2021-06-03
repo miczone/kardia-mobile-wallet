@@ -22,6 +22,7 @@ const TokenListSection = ({refreshTime}: {
 }) => {
   const navigation = useNavigation();
   const theme = useContext(ThemeContext);
+  
   const selectedWallet = useRecoilValue(selectedWalletAtom);
   const wallets = useRecoilValue(walletsAtom)
 
@@ -29,6 +30,8 @@ const TokenListSection = ({refreshTime}: {
   const [loading, setLoading] = useState(true);
   const [balance, setBalance] = useState<number[]>([]);
   // const tokenList = useRecoilValue(krc20ListAtom);
+
+  // Lấy ví địa chỉ ví hiện tại để lấy ra danh sách TOKEN
   const tokenList = useRecoilValue(filterByOwnerSelector(wallets[selectedWallet].address))
 
   const updateBalanceAll = async () => {
@@ -78,7 +81,11 @@ const TokenListSection = ({refreshTime}: {
     );
   };
 
+
+  //PHAN TOKEN LIST O DUOI, CU THE LA FADO COIN
   const renderTokenList = () => {
+    
+    
     return tokenList.slice(0, 7).map((item, index) => {
       return <View
         key={item.name}
@@ -95,20 +102,21 @@ const TokenListSection = ({refreshTime}: {
             alignItems: 'center',
             flex: 1,
           }}
-          onPress={() => {
-            navigation.navigate('Home', {
-              screen: 'TokenDetail',
-              initial: false,
-              params: {
-                tokenAddress: item.address,
-                name: item.name,
-                symbol: item.symbol,
-                avatar: item.avatar,
-                decimals: item.decimals,
-                // balance: balance[index],
-              },
-            });
-          }}>
+          // onPress={() => {
+          //   navigation.navigate('Home', {
+          //     screen: 'TokenDetail',
+          //     initial: false,
+          //     // params: {
+          //     //   tokenAddress: item.address,
+          //     //   name: item.name,
+          //     //   symbol: item.symbol,
+          //     //   avatar: item.avatar,
+          //     //   decimals: item.decimals,
+          //     //   // balance: balance[index],
+          //     // },
+          //   });
+          // }}
+          >
           {renderIcon(item.avatar || '')}
           <View
             style={{
@@ -125,7 +133,7 @@ const TokenListSection = ({refreshTime}: {
                 fontWeight: 'bold',
                 fontSize: 16,
               }}>
-              {item.symbol}
+              {item.symbol} 
             </CustomText>
           </View>
           <View
@@ -136,7 +144,7 @@ const TokenListSection = ({refreshTime}: {
               justifyContent: 'center',
             }}>
             <CustomText style={[styles.kaiAmount, {color: theme.textColor}]}>
-              {formatNumberString(parseDecimals(balance[index], item.decimals), 2)}
+              {formatNumberString(parseDecimals(balance[index], item.decimals), 2)} 
             </CustomText>
             <CustomText style={{color: theme.ghostTextColor}}>
               {item.symbol}
@@ -160,8 +168,10 @@ const TokenListSection = ({refreshTime}: {
           paddingBottom: 12,
         }}>
         <CustomText style={{fontSize: 18, fontWeight: 'bold', color: theme.textColor}}>
-          {getLanguageString(language, 'KRC20_TOKENS_SECTION_TITLE')}
+          {getLanguageString(language, 'KRC20_TOKENS_SECTION_TITLE')} 
         </CustomText>
+
+        {/* Chuyển qua trang danh sách các token list */}
         {tokenList.length > 0 && (
           <TouchableOpacity onPress={() => navigation.navigate('KRC20Tokens')}>
             <CustomText style={{fontSize: theme.defaultFontSize, color: theme.textColor}}>
@@ -170,6 +180,9 @@ const TokenListSection = ({refreshTime}: {
           </TouchableOpacity>
         )}
       </View>
+
+
+      {/* Empty Token List */}
       {tokenList.length === 0 && !loading && (
         <View style={{alignItems: 'center', marginTop: 45, marginBottom: 30}}>
           <Image

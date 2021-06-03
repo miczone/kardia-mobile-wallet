@@ -171,6 +171,7 @@ const HomeScreen = () => {
             />
           }
         >
+          {/* Thông tin của ví ở homescreen */}
           <CardSliderSection showQRModal={() => setShowQRModal(true)} />
           <View
             style={{

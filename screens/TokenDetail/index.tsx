@@ -5,10 +5,10 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {Image, TouchableOpacity, View, Dimensions} from 'react-native';
+import {Image, TouchableOpacity, View, Dimensions, ImageBackground} from 'react-native';
 import ENIcon from 'react-native-vector-icons/Entypo';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
-import {krc20ListAtom} from '../../atoms/krc20';
+import {filterByOwnerSelector, krc20ListAtom} from '../../atoms/krc20';
 import {languageAtom} from '../../atoms/language';
 import {DEFAULT_KRC20_TOKENS} from '../../config';
 import {getBalance} from '../../services/krc20';
@@ -29,13 +29,22 @@ import {showTabBarAtom} from '../../atoms/showTabBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomText from '../../components/Text';
 import { selectedWalletAtom, walletsAtom } from '../../atoms/wallets';
+import { log } from 'react-native-reanimated';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { HEADER_HEIGHT } from '../../theme';
 
-const {width: viewportWidth} = Dimensions.get('window');
+
+
+const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
+
 
 const TokenDetail = () => {
   const theme = useContext(ThemeContext);
-  const navigation = useNavigation();
-  const {params} = useRoute();
+  const navigation = useNavigation();  
+  const {params} = useRoute();  
+ 
+
+  
   const tokenAvatar = params ? (params as Record<string, any>).avatar : '';
   // const tokenBalance = params ? (params as Record<string, any>).balance : 0;
   const tokenSymbol = params ? (params as Record<string, any>).symbol : '';
@@ -46,25 +55,33 @@ const TokenDetail = () => {
 
   const language = useRecoilValue(languageAtom);
 
+  const wallets = useRecoilValue(walletsAtom)
+  const selectedWallet = useRecoilValue(selectedWalletAtom)
+ 
+ 
+ 
   const [showAddressQR, setShowAddressQR] = useState(false);
   const [tokenBalance, setTokenBalance] = useState('0');
   const setTokenList = useSetRecoilState(krc20ListAtom);
 
   const setTabBarVisible = useSetRecoilState(showTabBarAtom);
-  const wallets = useRecoilValue(walletsAtom)
-  const selectedWallet = useRecoilValue(selectedWalletAtom)
+  const tabBarHeight = useBottomTabBarHeight();
 
   useFocusEffect(
     useCallback(() => {
-      setTabBarVisible(false);
+      setTabBarVisible(true);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []),
   );
 
+  // Fetch thông tin ví
   const fetchBalance = async () => {
     const _wallets = await getWallets();
     const _selectedWallet = await getSelectedWallet();
+   
+    //Thông tin ví TOKEN : FADO
     const wallet = _wallets[_selectedWallet];
+
     const _balance = await getBalance(tokenAddress, wallet.address);
     setTokenBalance(_balance);
   };
@@ -142,6 +159,11 @@ const TokenDetail = () => {
         onPress={() => navigation.goBack()}
         backgroundColor="transparent"
       />
+      <ImageBackground
+        source={require('../../assets/home_background.jpg')}
+        imageStyle={{width: viewportWidth, height: viewportHeight, resizeMode: 'cover'}}
+        style={{width: viewportWidth, height: viewportHeight - tabBarHeight - HEADER_HEIGHT - 48}}
+      ></ImageBackground>
       <View style={styles.kaiCardContainer}>
         <View style={styles.kaiCard}>
           <Image
@@ -206,6 +228,8 @@ const TokenDetail = () => {
           </View>
         </View>
       </View>
+
+{/* Lịch sử giao dịch của một token */}
       <View style={{flex: 3, width: '100%', paddingVertical: 12}}>
         <View
           style={{

@@ -20,6 +20,7 @@ import { formatNumberString, parseDecimals } from '../../utils/number';
 import {styles} from './style';
 import Button from '../../components/Button';
 import CustomText from '../../components/Text';
+import { log } from 'react-native-reanimated';
 
 export default () => {
   const theme = useContext(ThemeContext);
@@ -112,6 +113,8 @@ export default () => {
         loadingColor={theme.textColor}
         keyExtractor={(item) => item.id}
         render={(item, index) => {
+          console.log(item);
+          
           return (
             <View
               key={item.name}

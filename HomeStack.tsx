@@ -46,6 +46,7 @@ const HomeStackScreen = () => {
         name="TokenDetail"
         component={TokenDetail}
         options={{headerShown: false}}
+      
       />
       <HomeStack.Screen
         name="TokenTxDetail"
