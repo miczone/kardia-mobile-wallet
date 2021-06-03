@@ -49,7 +49,7 @@ import KAIDex from '../KAIDex';
 import { dexStatusAtom } from '../../atoms/dexStatus';
 import { initDexConfig } from '../../services/dex';
 import { getVerifiedTokenList } from '../../services/krc20';
-import { FADO_TOKEN_ID } from '../../config';
+import { FADO_TOKEN_ID } from '../../fado.config';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
