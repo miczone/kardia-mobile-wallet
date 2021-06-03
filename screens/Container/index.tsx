@@ -70,37 +70,37 @@ const Wrap = () => {
         tabBarLabel: ({focused, color, position}) => {
           if (route.name === 'Home') {
             return (
-              <CustomText style={{fontSize: 10, color: focused ? theme.textColor : '#7A859A'}}>
+              <CustomText style={{fontSize: 10, color: focused ? theme.white : 'rgba(255,255,255,0.7)'}}>
                 {getLanguageString(language, 'HOME')}
               </CustomText>
             )
           } else if (route.name === 'Transaction') {
             return (
-              <CustomText style={{fontSize: 10, color: focused ? theme.textColor : '#7A859A'}}>
+              <CustomText style={{fontSize: 10, color: focused ? theme.white : 'rgba(255,255,255,0.7)'}}>
                 {getLanguageString(language, 'TRANSACTIONS')}
               </CustomText>
             )
           } else if (route.name === 'Staking') {
             return (
-              <CustomText style={{fontSize: 10, color: focused ? theme.textColor : '#7A859A'}}>
+              <CustomText style={{fontSize: 10, color: focused ? theme.white : 'rgba(255,255,255,0.7)'}}>
                 {getLanguageString(language, 'STAKING')}
               </CustomText>
             )
           } else if (route.name === 'Address') {
             return (
-              <CustomText style={{fontSize: 10, color: focused ? theme.textColor : '#7A859A'}}>
+              <CustomText style={{fontSize: 10, color: focused ? theme.white : 'rgba(255,255,255,0.7)'}}>
                 {getLanguageString(language, 'ADDRESS_BOOK')}
               </CustomText>
             )
           } else if (route.name === 'Setting') {
             return (
-              <CustomText style={{fontSize: 10, color: focused ? theme.textColor : '#7A859A'}}>
+              <CustomText style={{fontSize: 10, color: focused ? theme.white : 'rgba(255,255,255,0.7)'}}>
                 {getLanguageString(language, 'SETTING')}
               </CustomText>
             )
           } else if (route.name === 'DEX') {
             return (
-              <CustomText style={{fontSize: 10, color: focused ? theme.textColor : '#7A859A'}}>
+              <CustomText style={{fontSize: 10, color: focused ? theme.white : 'rgba(255,255,255,0.7)'}}>
                 {getLanguageString(language, 'KAI_DEX')}
               </CustomText>
             )
@@ -187,13 +187,13 @@ const Wrap = () => {
         tabBarVisible: showTabBar,
       })}
       tabBarOptions={{
-        activeTintColor: theme.primaryColor,
-        inactiveTintColor: '#7A859A',
+        activeTintColor: theme.white,
+        inactiveTintColor: theme.white,
         inactiveBackgroundColor: theme.backgroundColor,
-        activeBackgroundColor: theme.backgroundColor,
+        activeBackgroundColor: theme.red600,
         keyboardHidesTabBar: true,
         tabStyle: {
-          backgroundColor: theme.backgroundFocusColor,
+          backgroundColor: theme.red600,
           borderTopColor: theme.backgroundFocusColor,
           paddingBottom: 4,
           elevation: 24,
@@ -203,9 +203,9 @@ const Wrap = () => {
           marginBottom: 4,
         },
         style: {
-          backgroundColor: theme.backgroundFocusColor,
-          borderTopColor: theme.backgroundFocusColor,
-          shadowColor: 'rgba(0, 0, 0, 0.3)',
+          backgroundColor: theme.red600,
+          borderTopColor: theme.red700,
+          shadowColor: 'rgba(0, 0, 0, 0.1)',
           shadowOffset: {
             width: 0,
             height: -4,
