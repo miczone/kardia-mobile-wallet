@@ -1,7 +1,7 @@
 import {atom} from 'recoil';
 import themes from '../theme/index';
 
-const DEFAULT_THEME = themes.dark;
+const DEFAULT_THEME = themes.light;
 
 export const statusBarColorAtom = atom({
   key: 'statusBarColorAtom', // unique ID (with respect to other atoms/selectors)

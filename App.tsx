@@ -36,7 +36,7 @@ const client = new ApolloClient({
 
 declare const global: { HermesInternal: null | {} };
 
-const DEFAULT_THEME = themes.dark;
+const DEFAULT_THEME = themes.light;
 export { ThemeContext };
 
 const App = () => {

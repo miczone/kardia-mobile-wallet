@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
+export const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : (StatusBar.currentHeight ?? 0);
 
 const styles = StyleSheet.create({
   statusBar: {
