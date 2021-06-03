@@ -140,7 +140,7 @@ const SettingPasscode = () => {
         <CustomText
           style={[
             styles.title,
-            {color: 'rgba(252, 252, 252, 0.54)', fontSize: 15},
+            {color: theme.textColor, fontSize: 15},
           ]}>
           {getLanguageString(language, 'ENTER_PASSCODE')}
         </CustomText>

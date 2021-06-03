@@ -64,7 +64,7 @@ export default () => {
               </View>
               <View style={{justifyContent: 'space-between'}}>
                 <CustomText style={{color: theme.textColor, fontSize: 13, fontWeight: 'bold'}}>{item.name || getLanguageString(language, 'NEW_WALLET')}</CustomText>
-                <CustomText style={{fontSize: theme.defaultFontSize, color: 'rgba(252, 252, 252, 0.54)'}}>{truncate(item.address, 10, 10)}</CustomText>
+                <CustomText style={{fontSize: theme.defaultFontSize, color: theme.gray600}}>{truncate(item.address, 10, 10)}</CustomText>
               </View>
             </TouchableOpacity>
           )

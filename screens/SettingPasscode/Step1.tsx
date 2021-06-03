@@ -37,7 +37,7 @@ const Step1 = ({onSubmit}: {onSubmit: (passcode: string) => void}) => {
         </CustomText>
       </View>
       <View style={{flex: 1, width: '100%'}}>
-        <CustomText style={[styles.title, {color: 'rgba(252, 252, 252, 0.54)'}]}>
+        <CustomText style={[styles.title, {color: theme.textColor}]}>
           {getLanguageString(language, 'NEW_PASSCODE')}
         </CustomText>
         <View style={{marginBottom: 40, width: '100%'}}>

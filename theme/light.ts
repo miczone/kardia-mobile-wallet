@@ -71,7 +71,7 @@ export const theme = {
   backgroundFocusColor: ColorPalette.gray200,
   textColor: ColorPalette.gray700,
   urlColor: 'rgba(128, 156, 255, 1)',
-  mutedTextColor: 'rgba(252, 252, 252, 0.54)',
+  mutedTextColor: ColorPalette.gray600,
   successColor: ColorPalette.green500,
   failColor: ColorPalette.red700,
   defaultFontSize: 12,
