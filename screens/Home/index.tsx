@@ -30,6 +30,7 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { HEADER_HEIGHT } from '../../theme';
 import CustomText from '../../components/Text';
 import { SIMPLEX_URL } from '../../services/config';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window')
 
@@ -100,6 +101,8 @@ const HomeScreen = () => {
   useFocusEffect(
     useCallback(() => {
       updateWalletBalance();
+
+      {/* BOTTOM TAB BAR NÈ */}
       setTabBarVisible(true);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []),
@@ -154,7 +157,7 @@ const HomeScreen = () => {
       <HomeHeader />
       <QRModal visible={showQRModal} onClose={() => setShowQRModal(false)} />
 
-      {/* BOTTOM TAB BAR NÈ */}
+      
       <ImageBackground
         source={require('../../assets/home_background.jpg')}
         imageStyle={{width: viewportWidth, height: viewportHeight, resizeMode: 'cover'}}
@@ -176,11 +179,12 @@ const HomeScreen = () => {
           {/* Thông tin của ví ở homescreen */}
           <CardSliderSection showQRModal={() => setShowQRModal(true)} />
           <TokenListSection refreshTime={refreshTime} />
-          <View
+          <TouchableOpacity
+          onPress={() => {navigation.navigate('TransactionList')}}
             style={{
-              paddingVertical: 24,
+              paddingVertical: 12,
               paddingHorizontal: 16,
-              backgroundColor: 'rgba(58, 59, 60, 0.42)',
+              backgroundColor: theme.backgroundFocusColor,
               borderRadius: 12,
               marginHorizontal: 20,
               flexDirection: 'row',
@@ -198,20 +202,11 @@ const HomeScreen = () => {
                 source={require('../../assets/logo_dark.png')}
               />
               <View>
-                <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 14}}>
-                  {getLanguageString(language, 'BALANCE').toUpperCase()}
-                </CustomText>
+               
                 <CustomText style={{color: theme.textColor, fontSize: 18, marginVertical: 4, fontWeight: 'bold'}}>
                   {
                     numeral(Number(weiToKAI(_getBalance()))).format('0,0.00')}{' '}
                   <CustomText style={{color: theme.mutedTextColor, fontWeight: '500'}}>KAI</CustomText>
-                </CustomText>
-                <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 14}}>
-                  $
-                  {numeral(
-                    tokenInfo.price *
-                      Number(weiToKAI(_getBalance())),
-                  ).format('0,0.00')}
                 </CustomText>
               </View>
             </View>
@@ -224,7 +219,7 @@ const HomeScreen = () => {
               textStyle={Platform.OS === 'android' ? {color: '#000000', fontFamily: 'WorkSans-SemiBold'} : {color: '#000000', fontWeight: '500'}}
               style={{paddingHorizontal: 16, paddingVertical: 8}}
             />
-          </View>
+          </TouchableOpacity>
         </ScrollView>
       </ImageBackground>
     </SafeAreaView>
