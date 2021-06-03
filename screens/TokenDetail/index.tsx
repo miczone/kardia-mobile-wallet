@@ -156,12 +156,6 @@ const TokenDetail = () => {
               alignItems: 'flex-start',
             }}>
             <View>{renderIcon(tokenAvatar)}</View>
-            <TouchableOpacity onPress={() => removeToken(tokenAddress)}>
-              <Image
-                source={require('../../assets/icon/remove_dark.png')}
-                style={{width: 24, height: 24}}
-              />
-            </TouchableOpacity>
           </View>
           <View
             style={{
