@@ -265,7 +265,7 @@ export default () => {
               <CustomText
                 style={[
                   styles.addressName,
-                  {color: theme.textColor, fontSize: 13},
+                  {color: theme.white, fontSize: 13},
                 ]}>
                 {address.name
                   ? address.name
@@ -275,7 +275,7 @@ export default () => {
                 style={[
                   styles.addressHash,
                   {
-                    color: 'rgba(252, 252, 252, 0.54)',
+                    color: theme.white,
                     fontSize: theme.defaultFontSize,
                   },
                 ]}>
@@ -306,7 +306,7 @@ export default () => {
               <CustomText
                 style={[
                   styles.addressName,
-                  {color: theme.textColor, fontSize: 13},
+                  {color: theme.white, fontSize: 13},
                 ]}>
                 {validatorItem.name}
               </CustomText>
@@ -314,7 +314,7 @@ export default () => {
                 style={[
                   styles.commissionRateText,
                   {
-                    color: 'rgba(252, 252, 252, 0.54)',
+                    color: theme.white,
                     fontSize: theme.defaultFontSize,
                   },
                 ]}>
@@ -351,7 +351,7 @@ export default () => {
               <CustomText
                 style={[
                   styles.addressName,
-                  {color: theme.textColor, fontSize: 13},
+                  {color: theme.white, fontSize: 13},
                 ]}>
                 {address.name
                   ? address.name
@@ -361,7 +361,7 @@ export default () => {
                 style={[
                   styles.addressHash,
                   {
-                    color: 'rgba(252, 252, 252, 0.54)',
+                    color: theme.white,
                     fontSize: theme.defaultFontSize,
                   },
                 ]}>
@@ -484,19 +484,19 @@ export default () => {
         </View>
         {renderReceiver()}
         <Divider
-          style={{width: 280, backgroundColor: '#60636C', marginVertical: 32}}
+          style={{width: 280, backgroundColor: theme.gray300, marginVertical: 32}}
         />
         <CustomText style={{textAlign: 'center', color: theme.textColor, fontSize: 15}}>
           {getLanguageString(language, 'TRANSACTION_AMOUNT')}
         </CustomText>
         {renderAmount()}
-        <CustomText style={{fontSize: 15, color: 'rgba(252, 252, 252, 0.54)'}}>
+        <CustomText style={{fontSize: 15, color: theme.gray500}}>
           {txObj.date &&
             format(txObj.date, 'MMM dd, yyyy - hh:mm aa', {
               locale: dateLocale,
             })}
         </CustomText>
-        <View style={{backgroundColor: '#212121', paddingHorizontal: 16, paddingVertical: 12, borderRadius: 8, marginTop: 20, width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{backgroundColor: theme.gray200, paddingHorizontal: 16, paddingVertical: 12, borderRadius: 8, marginTop: 20, width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
           <CustomText style={{color: theme.textColor}}>
             {truncate(txObj.hash, 16, 16)}
           </CustomText>
@@ -512,7 +512,7 @@ export default () => {
               <Image source={require('../../assets/icon/copy.png')} style={{width: 16, height: 16, marginRight: 12}} />
             </TouchableOpacity>
             <TouchableOpacity onPress={() => handleClickLink(getTxURL(txObj.hash))}>
-              <Image source={require('../../assets/icon/external_url_dark.png')} style={{width: 16, height: 16}} />
+              <Image source={require('../../assets/icon/external_url.png')} style={{width: 16, height: 16}} />
             </TouchableOpacity>
           </View>
         </View>

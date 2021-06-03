@@ -1,3 +1,4 @@
+import { theme } from './../../theme/light';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -18,7 +19,7 @@ export const styles = StyleSheet.create({
     shadowOpacity: 2,
     shadowRadius: 4,
     elevation: 9,
-    backgroundColor: 'rgba(33, 33, 33, 1)',
+    backgroundColor: theme.green500,
     width: '100%',
     paddingVertical: 12,
     paddingHorizontal: 18,

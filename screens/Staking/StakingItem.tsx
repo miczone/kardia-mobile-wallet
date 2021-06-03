@@ -103,7 +103,7 @@ const StakingItem = ({
         paddingHorizontal: 16,
         paddingVertical: 12,
         marginVertical: 2,
-        backgroundColor: theme.backgroundFocusColor,
+        backgroundColor: theme.gray100,
         borderRadius: 7,
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -146,7 +146,7 @@ const StakingItem = ({
               allowFontScaling={false}
               style={{
                 fontSize: theme.defaultFontSize,
-                color: 'rgba(252, 252, 252, 0.54)',
+                color: theme.gray600,
               }}>
               {getLanguageString(language, 'ESTIMATED_APR')}: {numeral(estimatedAPR).format('0,0.00')}{' '}%
             </CustomText>
@@ -169,7 +169,7 @@ const StakingItem = ({
             <CustomText
               allowFontScaling={false}
               style={{
-                color: 'rgba(252, 252, 252, 0.54)',
+                color: theme.gray500,
                 fontSize: theme.defaultFontSize,
               }}>
               {formatNumberString(stakedAmountInKAI, 6)} KAI

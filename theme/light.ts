@@ -70,7 +70,7 @@ export const theme = {
   backgroundColor: '#FFFFFF',
   backgroundFocusColor: ColorPalette.gray200,
   textColor: ColorPalette.gray700,
-  urlColor: 'rgba(128, 156, 255, 1)',
+  urlColor: ColorPalette.red500,
   mutedTextColor: ColorPalette.gray600,
   successColor: ColorPalette.green500,
   failColor: ColorPalette.red700,
