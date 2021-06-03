@@ -156,5 +156,6 @@ export const styles = StyleSheet.create({
   },
   tokenListContainer: {
     flex: 1,
+    marginBottom: 16,
   },
 });

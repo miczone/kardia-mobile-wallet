@@ -172,6 +172,7 @@ const HomeScreen = () => {
           }
         >
           <CardSliderSection showQRModal={() => setShowQRModal(true)} />
+          <TokenListSection refreshTime={refreshTime} />
           <View
             style={{
               paddingVertical: 24,
@@ -221,7 +222,6 @@ const HomeScreen = () => {
               style={{paddingHorizontal: 16, paddingVertical: 8}}
             />
           </View>
-          <TokenListSection refreshTime={refreshTime} />
         </ScrollView>
       </ImageBackground>
     </SafeAreaView>

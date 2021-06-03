@@ -70,13 +70,13 @@ export default () => {
           )
         }}
       />
-      <Button
+      {/* <Button
         type="primary"
         icon={<AntIcon name="plus" size={24} />}
         size="small"
         onPress={() => navigation.navigate('ImportWallet')}
         style={styles.floatingButton}
-      />
+      /> */}
     </SafeAreaView>
   );
 };
