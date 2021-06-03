@@ -17,8 +17,4 @@ export const WKAI_SMC = '0x02655eEF130e5F37F8b648BD9c8D10aA2e6bf698';
 export const KAI_TOKEN_NAME = "Kardiachain";
 export const KAI_TOKEN_SYMBOL = "KAI";
 
-export const FADO_TOKEN_NAME = "FADO";
-export const FADO_TOKEN_SYMBOL = "FADO";
-export const FADO_TOKEN_ID = "0x0292d0AfA6DDaFCFA54ed17eC5e639976DbCb137";
-
 export const SERVICE_ENDPOINT_ENV: 'development' | 'staging' | 'production' = 'production';
