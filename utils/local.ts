@@ -38,11 +38,11 @@ export const getWallets = async () => {
       // Migrate old value
       const oldValue = await _getWallets();
       if (oldValue !== null) {
-        await saveWallets(oldValue)
+        await saveWallets(oldValue);
         // Remove old value
-        await AsyncStorage.removeItem('@kardia_wallets')
-        console.log('old value cleared')
-        return oldValue
+        await AsyncStorage.removeItem('@kardia_wallets');
+        console.log('old value cleared');
+        return oldValue;
       }
     }
     return [];
@@ -71,7 +71,7 @@ export const saveWallets = async (wallets: Wallet[]) => {
     console.error(e);
     return false;
   }
-}; 
+};
 
 export const saveSelectedWallet = async (selectedWallet: number) => {
   try {
@@ -318,24 +318,36 @@ export const saveWalkThroughView = async (on: boolean) => {
 export const getFontSize = async () => {
   try {
     const value = await AsyncStorage.getItem('@kardia_font_size');
-    if (!value) return 'small'
-    return value
+    if (!value) return 'small';
+    return value;
   } catch (e) {
     console.error(e);
     return 'small';
     // error reading value
   }
-}
+};
 
 export const saveFontSize = async (fontSize: 'small' | 'large') => {
   try {
-    await AsyncStorage.setItem(
-      '@kardia_font_size',
-      fontSize,
-    );
+    await AsyncStorage.setItem('@kardia_font_size', fontSize);
     return true;
   } catch (e) {
     console.error(e);
     return false;
   }
-}
+};
+
+export const saveFadoToTokenList = (walletOwnerAddress: string) => {
+  const fadoToken: KRC20 = {
+    address: '0x0292d0AfA6DDaFCFA54ed17eC5e639976DbCb137',
+    avatar:
+      'https://kardiachain-explorer.s3-ap-southeast-1.amazonaws.com/explorer.kardiachain.io/logo/f86fae3716af9ab5ce6527cb76f2a4c7da16ca58.webp',
+    decimals: 18,
+    id: '0x0292d0AfA6DDaFCFA54ed17eC5e639976DbCb137',
+    name: 'FADO',
+    symbol: 'FADO',
+    walletOwnerAddress: walletOwnerAddress,
+  };
+
+  return saveTokenList([fadoToken]);
+};

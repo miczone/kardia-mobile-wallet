@@ -48,6 +48,8 @@ import Button from '../../components/Button';
 import KAIDex from '../KAIDex';
 import { dexStatusAtom } from '../../atoms/dexStatus';
 import { initDexConfig } from '../../services/dex';
+import { getVerifiedTokenList } from '../../services/krc20';
+import { FADO_TOKEN_ID } from '../../config';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -375,6 +377,7 @@ const AppContainer = () => {
       // Get selected wallet
       try {
         let _selectedWallet = await getSelectedWallet();
+        console.log(_selectedWallet);
         setSelectedWallet(_selectedWallet);
       } catch (error) {
         console.error(error);
@@ -395,6 +398,16 @@ const AppContainer = () => {
       // Get language setting
       const languageSetting = await getLanguageSetting();
       languageSetting && setLanguage(languageSetting);
+
+      // Add fado token to local list
+      const vertifiedTokenList = await getVerifiedTokenList();
+      const newTokenList = vertifiedTokenList.filter((item, idx) => {
+        if(item.id === FADO_TOKEN_ID) {
+          vertifiedTokenList[idx].walletOwnerAddress = address;
+          return item;
+        }
+      })
+      await saveTokenList(newTokenList);
 
       // Get local KRC20 list
       const krc20List = await getTokenList();

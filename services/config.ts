@@ -1,27 +1,39 @@
-// Dev endpoint
-export const DEX_ENDPOINT = 'https://dex-backend-dev.kardiachain.io/api/v1/';
-export const ENDPOINT = 'https://backend-dev.kardiachain.io/api/v1/';
-export const RPC_ENDPOINT = 'https://dev-1.kardiachain.io';
-export const HASURA_ENDPOINT = 'https://hasura-dev.kardiachain.io/v1/graphql';
-export const EXPLORER_URL = 'https://explorer-dev.kardiachain.io';
-export const HASURA_CREDENTIALS = 'fengari@kaitothemoon123';
-export const PROXY_ENDPOINT = 'https://backend-proxy-dev.kardiachain.io/api/';
+import {SERVICE_ENDPOINT_ENV} from '../config';
 
-// Staging endpoint
-// export const DEX_ENDPOINT = 'https://exchange-backend.kardiachain.io/api/v1/';
-// export const ENDPOINT = 'https://backend-beta.kardiachain.io/api/v1/';
-// export const RPC_ENDPOINT = 'https://rpc.kardiachain.io';
-// export const HASURA_ENDPOINT = 'https://hasura-exchange.kardiachain.io/v1/graphql';
-// export const EXPLORER_URL = 'https://explorer.kardiachain.io';
-// export const HASURA_CREDENTIALS = 'ZjE0ZDgzMWNlOWNlNTY0YmRlMGNiYjJl';
+let DEX_ENDPOINT = 'https://exchange-backend.kardiachain.io/api/v1/';
+let ENDPOINT = 'https://backend.kardiachain.io/api/v1/';
+let RPC_ENDPOINT = 'https://rpc.kardiachain.io';
+let HASURA_ENDPOINT = 'https://hasura-exchange.kardiachain.io/v1/graphql';
+let EXPLORER_URL = 'https://explorer.kardiachain.io';
+let HASURA_CREDENTIALS = 'ZjE0ZDgzMWNlOWNlNTY0YmRlMGNiYjJl';
+let PROXY_ENDPOINT = 'https://backend-proxy.kardiachain.io/api/';
 
-// Production endpoint
-// export const DEX_ENDPOINT = 'https://exchange-backend.kardiachain.io/api/v1/';
-// export const ENDPOINT = 'https://backend.kardiachain.io/api/v1/';
-// export const RPC_ENDPOINT = 'https://rpc.kardiachain.io';
-// export const HASURA_ENDPOINT = 'https://hasura-exchange.kardiachain.io/v1/graphql';
-// export const EXPLORER_URL = 'https://explorer.kardiachain.io';
-// export const HASURA_CREDENTIALS = 'ZjE0ZDgzMWNlOWNlNTY0YmRlMGNiYjJl';
-// export const PROXY_ENDPOINT = 'https://backend-proxy.kardiachain.io/api/';
+if (SERVICE_ENDPOINT_ENV === 'development') {
+  DEX_ENDPOINT = 'https://dex-backend-dev.kardiachain.io/api/v1/';
+  ENDPOINT = 'https://backend-dev.kardiachain.io/api/v1/';
+  RPC_ENDPOINT = 'https://dev-1.kardiachain.io';
+  HASURA_ENDPOINT = 'https://hasura-dev.kardiachain.io/v1/graphql';
+  EXPLORER_URL = 'https://explorer-dev.kardiachain.io';
+  HASURA_CREDENTIALS = 'fengari@kaitothemoon123';
+  PROXY_ENDPOINT = 'https://backend-proxy-dev.kardiachain.io/api/';
+} else if (SERVICE_ENDPOINT_ENV === 'staging') {
+  DEX_ENDPOINT = 'https://exchange-backend.kardiachain.io/api/v1/';
+  ENDPOINT = 'https://backend-beta.kardiachain.io/api/v1/';
+  RPC_ENDPOINT = 'https://rpc.kardiachain.io';
+  HASURA_ENDPOINT = 'https://hasura-exchange.kardiachain.io/v1/graphql';
+  EXPLORER_URL = 'https://explorer.kardiachain.io';
+  HASURA_CREDENTIALS = 'ZjE0ZDgzMWNlOWNlNTY0YmRlMGNiYjJl';
+}
 
-export const SIMPLEX_URL = 'https://buy.chainbits.com/?crypto=KAI';
+const SIMPLEX_URL = 'https://buy.chainbits.com/?crypto=KAI';
+
+export {
+  DEX_ENDPOINT,
+  ENDPOINT,
+  RPC_ENDPOINT,
+  HASURA_ENDPOINT,
+  EXPLORER_URL,
+  HASURA_CREDENTIALS,
+  PROXY_ENDPOINT,
+  SIMPLEX_URL
+};

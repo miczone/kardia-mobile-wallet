@@ -39,12 +39,6 @@ const HomeHeader = () => {
         </CustomText>
       </View>
       <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity onPress={() => navigation.navigate('ImportWallet')}>
-          <Image 
-            source={require('../../assets/icon/plus_dark.png')}
-            style={{width: 24, height: 24, marginRight: 8}}
-          />
-        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
           <Image 
             source={require('../../assets/icon/setting_dark.png')}
