@@ -153,17 +153,7 @@ const TokenDetail = () => {
         tokenDecimals={tokenDecimals}
         tokenBalance={tokenBalance}
       />
-      <ENIcon.Button
-        style={{paddingHorizontal: 20}}
-        name="chevron-left"
-        onPress={() => navigation.goBack()}
-        backgroundColor="transparent"
-      />
-      <ImageBackground
-        source={require('../../assets/home_background.jpg')}
-        imageStyle={{width: viewportWidth, height: viewportHeight, resizeMode: 'cover'}}
-        style={{width: viewportWidth, height: viewportHeight - tabBarHeight - HEADER_HEIGHT - 48}}
-      ></ImageBackground>
+      
       <View style={styles.kaiCardContainer}>
         <View style={styles.kaiCard}>
           <Image

@@ -153,6 +153,8 @@ const HomeScreen = () => {
     <SafeAreaView style={{flex: 1, backgroundColor: theme.backgroundColor}}>
       <HomeHeader />
       <QRModal visible={showQRModal} onClose={() => setShowQRModal(false)} />
+
+      {/* BOTTOM TAB BAR NÈ */}
       <ImageBackground
         source={require('../../assets/home_background.jpg')}
         imageStyle={{width: viewportWidth, height: viewportHeight, resizeMode: 'cover'}}
