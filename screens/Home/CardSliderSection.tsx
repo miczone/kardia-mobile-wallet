@@ -42,8 +42,7 @@ const CardSliderSection = ({showQRModal}: {showQRModal: () => void}) => {
   const tokenList = useRecoilValue(filterByOwnerSelector(wallets[selectedWallet].address))
 
   const updateBalanceAll = async () => {
-    console.log("HELLO");
-    
+  
   const _wallets = await getWallets();
   const _selectedWallet = await getSelectedWallet();
   const promiseArr = tokenList.map((i) => {

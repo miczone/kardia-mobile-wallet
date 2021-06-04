@@ -416,7 +416,7 @@ export default () => {
             {
               name: 'Home',
               state: {
-                routes: [{name: 'HomeScreen'}, {name: 'TokenDetail', params: {
+                routes: [{name: 'HomeScreen'}, {name: 'TransactionList', params: {
                   symbol: tokenSymbol,
                   tokenAddress,
                   decimals: tokenDecimals,
