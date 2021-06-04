@@ -35,7 +35,7 @@ import ConfirmPasscode from '../ConfirmPasscode';
 import StakingStackScreen from '../../StakingStack';
 import {getLanguageString} from '../../utils/lang';
 import Portal from '@burstware/react-native-portal';
-import {krc20ListAtom} from '../../atoms/krc20';
+import {filterByOwnerSelector, krc20ListAtom} from '../../atoms/krc20';
 import HomeStackScreen from '../../HomeStack';
 import AddressStackScreen from '../../AddressStack';
 import {showTabBarAtom} from '../../atoms/showTabBar';
@@ -50,6 +50,7 @@ import { dexStatusAtom } from '../../atoms/dexStatus';
 import { initDexConfig } from '../../services/dex';
 import { getVerifiedTokenList } from '../../services/krc20';
 import { FADO_TOKEN_ID } from '../../fado.config';
+import { useForceUpdate } from '../../hooks/forceUpdate';
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -244,6 +245,7 @@ const AppContainer = () => {
   );
   const [inited, setInited] = useState(0);
   const [appStatus, setAppStatus] = useState('OK')
+  const forceUpdate = useForceUpdate();
 
   const setDexStatus = useSetRecoilState(dexStatusAtom)
 
@@ -317,6 +319,27 @@ const AppContainer = () => {
   useEffect(() => {
     (async () => {
       if (!wallets || !wallets[selectedWallet]) return
+
+      const selectedWalletAddress = wallets[selectedWallet].address;
+      const localTokenList = await getTokenList();
+      const currentWalletTokenList = localTokenList.filter((item) => item.walletOwnerAddress === selectedWalletAddress);
+
+      // Fix get fado token for use case remove all wallet in app
+      if(currentWalletTokenList.length <= 0 ) {
+        // Add fado token to local list
+        const vertifiedTokenList = await getVerifiedTokenList();
+        const newTokenList = vertifiedTokenList.filter((item, idx) => {
+          if(item.id === FADO_TOKEN_ID) {
+            vertifiedTokenList[idx].walletOwnerAddress = selectedWalletAddress;
+            return item;
+          }
+        })
+        await saveTokenList(newTokenList);
+        setKRC20TokenList(newTokenList);
+
+        forceUpdate();
+      }
+
       const serverStatus = await getAppStatus(wallets[selectedWallet].address);
       try {
         // Init dex config
