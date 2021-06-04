@@ -66,7 +66,7 @@ const TokenListSection = ({refreshTime}: {
             alignItems: 'center',
 
             borderWidth: 1,
-            borderColor: 'gray',
+            borderColor: theme.red700,
           }}>
           {avatar ? (
             <Image source={{uri: avatar}} style={styles.tokenLogo} />
@@ -93,9 +93,16 @@ const TokenListSection = ({refreshTime}: {
           padding: 14,
           paddingLeft:12,
           marginHorizontal: 20,
-          borderRadius: 8,
+          borderRadius: 12,
           marginVertical: 6,
-          backgroundColor: 'rgba(58, 59, 60, 0.42)'
+          backgroundColor: theme.red600,
+          shadowColor: "#000",
+          shadowOffset: {
+            width: 0,
+            height: 1,
+          },
+          shadowOpacity: 0.22,
+          shadowRadius: 2.22,
         }}>
         <View
           style={{
@@ -116,9 +123,9 @@ const TokenListSection = ({refreshTime}: {
                 }}>
                       <CustomText allowFontScaling={false}  
                                   style={{ 
-                                    color: 'rgba(252, 252, 252, 0.54)', 
+                                    color: 'rgba(255, 255, 255, 0.8)', 
                                     fontSize: 14,
-                                    marginBottom: 5}}>
+                                    marginBottom: 4}}>
                             {getLanguageString(language, 'BALANCE').toUpperCase()}
                       </CustomText>
                       <View
@@ -127,18 +134,17 @@ const TokenListSection = ({refreshTime}: {
                             flexDirection: 'row',
                             justifyContent: 'space-between',
                             alignItems:'center',
-                            
                           }}>
                           <View>
-                            <CustomText style={{color: theme.textColor, fontSize: 18,  fontWeight: 'bold' ,marginRight: 5}}>
+                            <CustomText style={{color: theme.white, fontSize: 18,  fontWeight: 'bold' ,marginRight: 5, marginBottom: 4,}}>
                               {formatNumberString(parseDecimals(balance[index], item.decimals), 2)}{' '} 
-                              <CustomText style={{color: theme.mutedTextColor, fontWeight: '500' , fontSize: 18}}>
+                              <CustomText style={{color: 'rgba(255,255,255,0.8)', fontWeight: '500' , fontSize: 18}}>
                                 {item.symbol}
                               </CustomText>
                             </CustomText>
 
-                            <CustomText style={{color: theme.mutedTextColor, fontWeight: '500' , fontSize: 18}}>
-                              <CustomText style={{color: theme.mutedTextColor, fontWeight: '500' , fontSize: 18}}>
+                            <CustomText style={{color: theme.white, fontWeight: '500' , fontSize: 14}}>
+                              <CustomText style={{color: theme.white, fontWeight: '500' , fontSize: 14}}>
                               $
                               </CustomText>
                               {formatNumberString(parseDecimals(balance[index] * 0.023, item.decimals), 2)} 

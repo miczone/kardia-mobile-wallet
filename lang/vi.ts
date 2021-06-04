@@ -127,6 +127,7 @@ export const lang: Language = {
     // Wallet key
     IMPORT: 'Thêm ví',
     WALLET: 'Ví',
+    BRAND_WALLET: 'Ví Fado',
     ADDRESS: 'Địa chỉ',
     REMOVE_WALLET: 'Xóa ví',
     NEW_WALLET: 'Ví mới',

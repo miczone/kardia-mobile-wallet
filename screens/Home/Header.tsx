@@ -35,7 +35,7 @@ const HomeHeader = () => {
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <CustomText
           style={{fontSize: 36, color: theme.textColor, fontFamily: 'Work Sans'}}>
-          {getLanguageString(language, 'WALLET')}
+          {getLanguageString(language, 'BRAND_WALLET')}
         </CustomText>
       </View>
       <View style={{flexDirection: 'row'}}>

@@ -132,6 +132,7 @@ export const lang: Language = {
     // Wallet key
     IMPORT: 'Import',
     WALLET: 'Wallet',
+    BRAND_WALLET: 'Fado Wallet',
     ADDRESS: 'Address',
     REMOVE_WALLET: 'Remove Wallet',
     NEW_WALLET: 'New Wallet',

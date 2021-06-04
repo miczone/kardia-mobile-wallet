@@ -156,10 +156,9 @@ const HomeScreen = () => {
     <SafeAreaView style={{flex: 1, backgroundColor: theme.backgroundColor}}>
       <HomeHeader />
       <QRModal visible={showQRModal} onClose={() => setShowQRModal(false)} />
-
       
       <ImageBackground
-        source={require('../../assets/home_background.jpg')}
+        source={require('../../assets/home_background_light.jpg')}
         imageStyle={{width: viewportWidth, height: viewportHeight, resizeMode: 'cover'}}
         style={{width: viewportWidth, height: viewportHeight - tabBarHeight - HEADER_HEIGHT - 48}}
       >
@@ -185,8 +184,8 @@ const HomeScreen = () => {
           onPress={() => {navigation.navigate('TransactionList')}}
             style={{
               paddingVertical: 12,
-              paddingHorizontal: 16,
-              backgroundColor: theme.backgroundFocusColor,
+              paddingHorizontal: 12,
+              backgroundColor: theme.gray200,
               borderRadius: 12,
               marginHorizontal: 20,
               flexDirection: 'row',
@@ -199,17 +198,41 @@ const HomeScreen = () => {
                 justifyContent: 'flex-start',
                 alignItems: 'center',
               }}>
-              <Image
-                style={{width: 32, height: 32, marginRight: 12}}
-                source={require('../../assets/logo_dark.png')}
-              />
+                <View
+                  style={{
+                    width: 36,
+                    height: 36,
+                    
+        
+                    borderRadius: 20,
+                    backgroundColor: 'white',
+        
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+        
+                    borderWidth: 1,
+                    borderColor: theme.gray400,
+                    marginLeft: 1,
+                    marginRight: 10,
+                  }}
+                >
+                  <Image
+                    style={{
+                      width: 20,
+                      height: 20,
+                    }}
+                    source={require('../../assets/logo.png')}
+                  />
+                </View>
+              
               <View>
-                <CustomText style={{color: theme.textColor, fontSize: 18, marginVertical: 4, fontWeight: 'bold'}}>
+                <CustomText style={{color: theme.textColor, fontSize: 18, marginBottom: 4, fontWeight: 'bold'}}>
                   {
                     numeral(Number(weiToKAI(_getBalance()))).format('0,0.00')}{' '}
-                  <CustomText style={{color: theme.mutedTextColor, fontWeight: '500'}}>KAI</CustomText>
+                  <CustomText style={{color: theme.gray600, fontWeight: '500'}}>KAI</CustomText>
                 </CustomText>
-                <CustomText style={{color:theme.mutedTextColor, fontSize: 18, fontWeight: '500'}}>
+                <CustomText style={{color:theme.gray600, fontSize: 14, fontWeight: '500'}}>
                   $
                   {numeral(
                     tokenInfo.price *
@@ -226,7 +249,7 @@ const HomeScreen = () => {
               type="ghost"
               size="small"
               textStyle={Platform.OS === 'android' ? {color: '#000000', fontFamily: 'WorkSans-SemiBold'} : {color: '#000000', fontWeight: '500'}}
-              style={{paddingHorizontal: 16, paddingVertical: 8}}
+              style={{paddingHorizontal: 16, paddingVertical: 8, backgroundColor: theme.gray300}}
             />
           </TouchableOpacity>
         </ScrollView>
