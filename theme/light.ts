@@ -75,8 +75,12 @@ export const theme = {
   successColor: ColorPalette.green500,
   failColor: ColorPalette.red700,
   defaultFontSize: 12,
-  inputBackgroundColor: 'rgba(96, 99, 108, 1)',
+  inputBackgroundColor: ColorPalette.gray100,
   warningTextColor: ColorPalette.yellow500,
+
+  // Header
+  backBtnTextColor: ColorPalette.gray700,
+  backBtnUnderlayColor: 'rgba(0,0,0,0.05)',
 
   // Input
   inputBgColor: ColorPalette.gray100,

@@ -45,6 +45,8 @@ export default () => {
         <ENIcon.Button
           name="chevron-left"
           onPress={() => navigation.goBack()}
+          color={theme.backBtnTextColor}
+          underlayColor={theme.backBtnUnderlayColor}
           backgroundColor="transparent"
           style={{padding: 0, marginBottom: 18}}
         />

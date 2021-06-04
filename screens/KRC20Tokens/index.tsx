@@ -98,6 +98,8 @@ export default () => {
           name="chevron-left"
           onPress={() => navigation.goBack()}
           backgroundColor="transparent"
+          color={theme.backBtnTextColor}
+          underlayColor={theme.backBtnUnderlayColor}
           style={{ padding: 0 }}
         />
       </View>

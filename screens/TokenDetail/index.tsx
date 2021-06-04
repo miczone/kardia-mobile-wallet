@@ -140,6 +140,8 @@ const TokenDetail = () => {
         style={{paddingHorizontal: 20}}
         name="chevron-left"
         onPress={() => navigation.goBack()}
+        color={theme.backBtnTextColor}
+        underlayColor={theme.backBtnUnderlayColor}
         backgroundColor="transparent"
       />
       <View style={styles.kaiCardContainer}>

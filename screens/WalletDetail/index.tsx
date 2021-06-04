@@ -142,6 +142,8 @@ export default () => {
           name="chevron-left"
           onPress={saveWallet}
           backgroundColor="transparent"
+          color={theme.backBtnTextColor}
+          underlayColor={theme.backBtnUnderlayColor}
           style={{ padding: 0, marginBottom: 18 }}
         />
       </View>

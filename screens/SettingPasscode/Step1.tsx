@@ -30,6 +30,8 @@ const Step1 = ({onSubmit}: {onSubmit: (passcode: string) => void}) => {
           name="chevron-left"
           onPress={() => navigation.goBack()}
           backgroundColor="transparent"
+          color={theme.backBtnTextColor}
+          underlayColor={theme.backBtnUnderlayColor}
           style={{padding: 0, marginBottom: 18}}
         />
         <CustomText style={{color: theme.textColor, fontSize: 36}}>

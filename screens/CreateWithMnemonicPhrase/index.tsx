@@ -136,6 +136,8 @@ const CreateWithMnemonicPhrase = () => {
           style={{paddingLeft: 20}}
           name="chevron-left"
           onPress={() => navigation.goBack()}
+          color={theme.backBtnTextColor}
+          underlayColor={theme.backBtnUnderlayColor}
           backgroundColor="transparent"
         />
       </View>

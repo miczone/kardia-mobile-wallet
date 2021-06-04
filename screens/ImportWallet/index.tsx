@@ -36,6 +36,8 @@ export default () => {
         style={{paddingLeft: 0}}
         name="chevron-left"
         onPress={() => navigation.goBack()}
+        color={theme.backBtnTextColor}
+        underlayColor={theme.backBtnUnderlayColor}
         backgroundColor="transparent"
       />
       <CustomText style={[styles.title, {color: theme.textColor}]}>
