@@ -129,14 +129,21 @@ const TokenListSection = ({refreshTime}: {
                             alignItems:'center',
                             
                           }}>
-                            <View>
+                          <View>
                             <CustomText style={{color: theme.textColor, fontSize: 18,  fontWeight: 'bold' ,marginRight: 5}}>
-                            {formatNumberString(parseDecimals(balance[index], item.decimals), 2)} 
-                          </CustomText>
-                          <CustomText style={{color: theme.mutedTextColor, fontWeight: '500' , fontSize: 18}}>
-                          {item.symbol}
-                          </CustomText>
-                            </View>
+                              {formatNumberString(parseDecimals(balance[index], item.decimals), 2)}{' '} 
+                              <CustomText style={{color: theme.mutedTextColor, fontWeight: '500' , fontSize: 18}}>
+                                {item.symbol}
+                              </CustomText>
+                            </CustomText>
+
+                            <CustomText style={{color: theme.mutedTextColor, fontWeight: '500' , fontSize: 18}}>
+                              <CustomText style={{color: theme.mutedTextColor, fontWeight: '500' , fontSize: 18}}>
+                               $
+                              </CustomText>
+                              {formatNumberString(parseDecimals(balance[index] * 0.023, item.decimals), 2)} 
+                            </CustomText>
+                          </View>
                       </View>
             </View>
             <Button

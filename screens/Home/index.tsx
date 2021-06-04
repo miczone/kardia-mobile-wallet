@@ -43,14 +43,9 @@ const HomeScreen = () => {
   const [refreshTime, setRefreshTime] = useState(Date.now())
 
   const [wallets, setWallets] = useRecoilState(walletsAtom);
-  console.log(wallets);
-  
   const [selectedWallet, setSelectedWallet] = useRecoilState(
     selectedWalletAtom,
   );
-  console.log(selectedWallet);
-
-  const [tokenBalance, setTokenBalance] = useState('0');
 
   const setTabBarVisible = useSetRecoilState(showTabBarAtom);
   const tabBarHeight = useBottomTabBarHeight();
@@ -84,7 +79,6 @@ const HomeScreen = () => {
     }
     try {
       const balance = await getBalance(_wallets[_selectedWallet].address);
-      
       const staked = await getStakingAmount(_wallets[_selectedWallet].address);
       const undelegating = await getUndelegatingAmount(_wallets[_selectedWallet].address);
 
