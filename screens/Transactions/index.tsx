@@ -358,7 +358,7 @@ const TransactionScreen = () => {
       {txList.length > 0 && (
         <Button
           type="primary"
-          icon={<AntIcon name="plus" size={24} />}
+          icon={<AntIcon name="plus" size={24}  color={theme.white}/>}
           size="small"
           onPress={() => setShowNewTxModal(true)}
           style={styles.floatingButton}

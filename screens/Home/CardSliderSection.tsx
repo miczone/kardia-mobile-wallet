@@ -19,6 +19,7 @@ import { getSelectedWallet, getWallets } from '../../utils/local';
 import { getBalance } from '../../services/account';
 import {getBalance as getFadoBalance} from '../../services/krc20';
 import { formatNumberString, parseDecimals } from '../../utils/number';
+import { FADO_EXCHANGE_RATE } from '../../fado.config';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
@@ -62,7 +63,7 @@ useEffect(() => {
 
   const [snapTimeoutId, setSnapTimeoutId] = useState<any>()
 
-  const fadoWalletToNumber =  Number(parseDecimals(balance[0] * 0.023, tokenList.slice(0,7)[0].decimals));
+  const fadoWalletToNumber =  Number(parseDecimals(balance[0] * FADO_EXCHANGE_RATE, tokenList.slice(0,7)[0].decimals));
   
   const renderWalletItem = ({item: wallet}: any) => (
     <View style={styles.kaiCardContainer}>
