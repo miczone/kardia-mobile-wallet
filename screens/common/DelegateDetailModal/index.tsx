@@ -206,7 +206,7 @@ export default ({
       showCloseButton={false}
       onClose={handleClose}
       contentStyle={{
-        backgroundColor: theme.backgroundFocusColor,
+        backgroundColor: theme.modalBgColor,
         justifyContent: 'flex-start',
         padding: 20,
         height: getModalHeight(),
@@ -239,7 +239,7 @@ export default ({
           </CustomText>
         </View>
       </View>
-      <Divider style={{width: '100%'}} color="#60636C" />
+      <Divider style={{width: '100%'}} color={theme.gray400} />
       <View style={{width: '100%'}}>
         <View style={styles.dataContainer}>
           <CustomText style={{color: theme.mutedTextColor}}>
@@ -331,7 +331,7 @@ export default ({
           </View>
         )}
       </View>
-      <Divider style={{width: '100%'}} color="#60636C" />
+      <Divider style={{width: '100%'}} color={theme.gray400} />
       {/* {showWithdraw(validatorItem.withdrawableAmount) && (
         <Button
           loading={withdrawing}

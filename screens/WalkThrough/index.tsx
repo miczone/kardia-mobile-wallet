@@ -29,7 +29,7 @@ export default ({onSubmit}: {onSubmit: () => void}) => {
           <Image source={require('../../assets/walkthrough_1.png')} style={{width: 209, height: 216, flex: 1, resizeMode: 'contain', marginVertical: 100}} />
           <View style={{alignItems: 'flex-start', width: '100%', paddingHorizontal: 20}}>
             <CustomText style={{color: theme.textColor, fontSize: 40}}>{getLanguageString(language, 'EASY')}</CustomText>
-            <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 18, marginTop: 12}}>{getLanguageString(language, 'EASY_DESC')}</CustomText>
+            <CustomText style={{color: theme.gray600, fontSize: 18, marginTop: 12}}>{getLanguageString(language, 'EASY_DESC')}</CustomText>
           </View>
         </View>
       );
@@ -40,7 +40,7 @@ export default ({onSubmit}: {onSubmit: () => void}) => {
           <Image source={require('../../assets/walkthrough_2.png')} style={{width: 209, height: 216, flex: 1, resizeMode: 'contain', marginVertical: 100}} />
           <View style={{alignItems: 'flex-start', width: '100%', paddingHorizontal: 20}}>
             <CustomText style={{color: theme.textColor, fontSize: 40}}>{getLanguageString(language, 'INSTANT')}</CustomText>
-            <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 18, marginTop: 12}}>{getLanguageString(language, 'INSTANT_DESC')}</CustomText>
+            <CustomText style={{color: theme.gray600, fontSize: 18, marginTop: 12}}>{getLanguageString(language, 'INSTANT_DESC')}</CustomText>
           </View>
         </View>
       );
@@ -50,7 +50,7 @@ export default ({onSubmit}: {onSubmit: () => void}) => {
         <Image source={require('../../assets/walkthrough_3.png')} style={{width: 209, height: 216, flex: 1, resizeMode: 'contain', marginVertical: 100}} />
         <View style={{alignItems: 'flex-start', width: '100%', paddingHorizontal: 20}}>
           <CustomText style={{color: theme.textColor, fontSize: 40}}>{getLanguageString(language, 'SECURE')}</CustomText>
-          <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 18, marginTop: 12}}>{getLanguageString(language, 'SECURE_DESC')}</CustomText>
+          <CustomText style={{color: theme.gray600, fontSize: 18, marginTop: 12}}>{getLanguageString(language, 'SECURE_DESC')}</CustomText>
         </View>
       </View>
     );
@@ -81,7 +81,7 @@ export default ({onSubmit}: {onSubmit: () => void}) => {
           height: 6,
           borderRadius: 3,
           marginHorizontal: 2,
-          backgroundColor: 'rgba(255, 255, 255, 0.92)',
+          backgroundColor: theme.gray700,
         }}
         inactiveDotOpacity={0.4}
         inactiveDotScale={1}

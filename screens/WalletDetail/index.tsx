@@ -142,6 +142,8 @@ export default () => {
           name="chevron-left"
           onPress={saveWallet}
           backgroundColor="transparent"
+          color={theme.backBtnTextColor}
+          underlayColor={theme.backBtnUnderlayColor}
           style={{ padding: 0, marginBottom: 18 }}
         />
       </View>
@@ -258,7 +260,7 @@ export default () => {
                   value={name}
                   onChangeText={setName}
                   headlineStyle={{ marginTop: 16, fontWeight: 'normal', color: theme.textColor }}
-                  inputStyle={{ marginTop: 6, backgroundColor: 'rgba(96, 99, 108, 1)', color: theme.textColor, borderColor: 'rgba(154, 163, 178, 1)', borderWidth: 1.5 }}
+                  inputStyle={{ marginTop: 6, backgroundColor: theme.inputBgColor, color: theme.textColor, borderColor: theme.inputBorderColor, borderWidth: 1.5 }}
                 />
               </View>
             </TouchableWithoutFeedback>
@@ -287,7 +289,7 @@ export default () => {
                           padding: 12,
                           borderColor: item === cardAvatarID ? theme.textColor : 'transparent',
                           borderWidth: 2,
-                          shadowColor: 'rgba(0, 0, 0, 0.3)',
+                          shadowColor: 'rgba(0, 0, 0, 0.1)',
                           shadowOffset: {
                             width: 0,
                             height: -4,

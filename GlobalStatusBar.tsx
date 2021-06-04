@@ -7,7 +7,7 @@ const GlobalStatusBar = () => {
   const statusBarColor = useRecoilValue(statusBarColorAtom);
   return (
     <CustomStatusBar
-      barStyle="light-content"
+      barStyle="dark-content"
       backgroundColor={statusBarColor}
     />
   );

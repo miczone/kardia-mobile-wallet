@@ -128,7 +128,7 @@ export default ({visible, onClose, validatorItem, onSuccess}: {
     if (Platform.OS === 'android') {
       return {
         height: 340,
-        backgroundColor: theme.backgroundFocusColor,
+        backgroundColor: theme.modalBgColor,
         alignItems: 'center',
         justifyContent: 'flex-start',
         padding: 0,
@@ -137,7 +137,7 @@ export default ({visible, onClose, validatorItem, onSuccess}: {
       return {
         height: 320,
         justifyContent: 'flex-start',
-        backgroundColor: theme.backgroundFocusColor,
+        backgroundColor: theme.modalBgColor,
         alignItems: 'center',
         marginBottom: keyboardOffset,
         marginTop: -keyboardOffset,
@@ -166,7 +166,8 @@ export default ({visible, onClose, validatorItem, onSuccess}: {
               keyboardType="numeric"
               message={undelegateError}
               inputStyle={{
-                backgroundColor: 'rgba(96, 99, 108, 1)',
+                backgroundColor: theme.inputBgColor,
+                borderColor: theme.inputBorderColor,
                 color: theme.textColor,
               }}
               onChangeText={(newAmount) => {
@@ -196,7 +197,7 @@ export default ({visible, onClose, validatorItem, onSuccess}: {
               // )}
             />
           </View>
-          <Divider style={{width: '100%'}} />
+          <Divider style={{width: '100%', backgroundColor: theme.gray400}} />
           <Button
             disabled={submitting}
             title={getLanguageString(language, 'CANCEL')}

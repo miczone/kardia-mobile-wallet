@@ -60,11 +60,11 @@ const Welcome = () => {
               textAlign: 'center',
               fontWeight: 'bold',
               marginBottom: 4,
-              color: '#B4BDC9',
+              color: theme.textColor,
             }}>
             {getLanguageString(language, 'WELCOME')}
           </CustomText>
-          <CustomText style={{fontSize: 14, color: '#B4BDC9', textAlign: 'center'}}>
+          <CustomText style={{fontSize: 14, color: theme.gray600, textAlign: 'center'}}>
             {getLanguageString(language, 'GETTING_STARTED_DESCRIPTION')}
           </CustomText>
         </View>

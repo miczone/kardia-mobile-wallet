@@ -271,7 +271,7 @@ export default ({
   const getModalStyle = () => {
     if (Platform.OS === 'android') {
       return {
-        backgroundColor: theme.backgroundFocusColor,
+        backgroundColor: theme.modalBgColor,
         justifyContent: 'flex-start',
         height: 590,
         marginBottom: keyboardShown ? -180 : 0,
@@ -279,7 +279,7 @@ export default ({
       };
     } else {
       return {
-        backgroundColor: theme.backgroundFocusColor,
+        backgroundColor: theme.modalBgColor,
         justifyContent: 'flex-start',
         height: 560,
         marginBottom: keyboardOffset,
@@ -313,7 +313,8 @@ export default ({
             <TextInput
               message={amountError}
               inputStyle={{
-                backgroundColor: 'rgba(96, 99, 108, 1)',
+                backgroundColor: theme.inputBgColor,
+                borderColor: theme.inputBorderColor,
                 color: theme.textColor,
               }}
               // headline={getLanguageString(language, 'STAKING_AMOUNT')}
@@ -378,7 +379,7 @@ export default ({
                 </CustomText>
                 <CustomText
                   style={{
-                    color: 'rgba(252, 252, 252, 0.54)',
+                    color: theme.gray600,
                     fontSize: theme.defaultFontSize,
                   }}>
                   {validatorItem.commissionRate} %
@@ -386,7 +387,7 @@ export default ({
               </View>
             </View>
           </View>
-          <Divider style={{width: '100%', backgroundColor: '#60636C'}} />
+          <Divider style={{width: '100%', backgroundColor: theme.gray400}} />
           <View style={{width: '100%'}}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 6}}>
               <CustomText style={{color: theme.textColor, fontStyle: 'italic'}}>
@@ -431,7 +432,7 @@ export default ({
               </CustomText>
             </View>
           </View>
-          <Divider style={{width: '100%', backgroundColor: '#60636C'}} />
+          <Divider style={{width: '100%', backgroundColor: theme.gray400}} />
           <View style={{width: '100%'}}>
             <Button
               type="outline"

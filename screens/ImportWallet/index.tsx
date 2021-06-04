@@ -36,6 +36,8 @@ export default () => {
         style={{paddingLeft: 0}}
         name="chevron-left"
         onPress={() => navigation.goBack()}
+        color={theme.backBtnTextColor}
+        underlayColor={theme.backBtnUnderlayColor}
         backgroundColor="transparent"
       />
       <CustomText style={[styles.title, {color: theme.textColor}]}>
@@ -44,7 +46,7 @@ export default () => {
       <CustomText
         style={{
           fontSize: 15,
-          color: 'rgba(252, 252, 252, 0.54)',
+          color: theme.gray600,
           marginTop: 6,
           lineHeight: 22,
         }}>
@@ -74,7 +76,7 @@ export default () => {
                 style={{fontSize: 24, color: theme.textColor, fontWeight: 'bold'}}>
                 {getLanguageString(language, 'CREATE')}
               </CustomText>
-              <CustomText style={{fontSize: 15, color: 'rgba(252, 252, 252, 0.54)'}}>
+              <CustomText style={{fontSize: 15, color: theme.gray600}}>
                 {getLanguageString(language, 'CREATE_DESC')}
               </CustomText>
             </View>
@@ -96,7 +98,7 @@ export default () => {
               style={{fontSize: 24, color: theme.textColor, fontWeight: 'bold'}}>
               Import
             </CustomText>
-            <CustomText style={{fontSize: 15, color: 'rgba(252, 252, 252, 0.54)'}}>
+            <CustomText style={{fontSize: 15, color: theme.gray600}}>
               {getLanguageString(language, 'BY_PRIVATE_KEY')}
             </CustomText>
           </View>
@@ -117,7 +119,7 @@ export default () => {
             style={{fontSize: 24, color: theme.textColor, fontWeight: 'bold'}}>
             Import
           </CustomText>
-          <CustomText style={{fontSize: 15, color: 'rgba(252, 252, 252, 0.54)'}}>
+          <CustomText style={{fontSize: 15, color: theme.gray600}}>
             {getLanguageString(language, 'BY_SEED_PHRASE')}
           </CustomText>
         </View>

@@ -132,7 +132,7 @@ const Button = ({
     return (
       <LinearGradient
         start={{x: 0, y: 0}}
-        locations={[0, 0.2, 0.4, 0.6, 0.8]}
+        locations={[0, 1]}
         end={{x: 1, y: 1}}
         // style={{flex: 1}}
         style={[
@@ -143,11 +143,8 @@ const Button = ({
           style,
         ]}
         colors={[
-          'rgba(126, 219, 220, 0.3)',
-          'rgba(228, 175, 203, 0.3)',
-          'rgba(226, 194, 139, 0.3)',
-          'rgba(255, 255, 255, 0.3)',
-          'rgba(255, 255, 255, 1)',
+          theme.primary,
+          theme.primary,
         ]}>
         <TouchableOpacity
           onPress={() => {

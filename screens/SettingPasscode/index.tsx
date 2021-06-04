@@ -133,6 +133,8 @@ const SettingPasscode = () => {
         <ENIcon.Button
           name="chevron-left"
           onPress={() => navigation.goBack()}
+          color={theme.backBtnTextColor}
+          underlayColor={theme.backBtnUnderlayColor}
           backgroundColor="transparent"
         />
       </View>
@@ -140,7 +142,7 @@ const SettingPasscode = () => {
         <CustomText
           style={[
             styles.title,
-            {color: 'rgba(252, 252, 252, 0.54)', fontSize: 15},
+            {color: theme.textColor, fontSize: 15},
           ]}>
           {getLanguageString(language, 'ENTER_PASSCODE')}
         </CustomText>

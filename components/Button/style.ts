@@ -1,3 +1,4 @@
+import { theme } from './../../theme/light';
 import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
@@ -43,7 +44,7 @@ export const styles = StyleSheet.create({
   },
   outlineButton: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderColor: '#C9CED6',
+    borderColor: theme.gray700,
     borderWidth: 1,
   },
   outlineButtonText: {

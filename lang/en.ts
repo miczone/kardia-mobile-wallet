@@ -30,7 +30,7 @@ export const lang: Language = {
     IMPORT_YOUR_WALLET: 'Import Wallet',
     IMPORT_WALLET_DESCRIPTION:
       'Create or Import your wallets to start sending & receiving digital currency',
-    WELCOME: 'Welcome to Kardia Wallet',
+    WELCOME: 'Welcome to Fado Wallet',
     GETTING_STARTED_DESCRIPTION:
       'To get started, choose one of the following options',
     SUBMIT: 'Submit',
@@ -41,7 +41,7 @@ export const lang: Language = {
     SECOND: 'sec',
     CONFIRM_IMPORT: 'Are you sure you want to import a new wallet?',
     RESTART_APP_DESCRIPTION:
-      'Kardia Wallet will now restart to ensure everything works properly.',
+      'Fado Wallet will now restart to ensure everything works properly.',
     ARE_YOU_SURE: 'Are you sure?',
     CONFIRM_REMOVE_TITLE: 'Delete Wallet',
     CONFIRM_REMOVE_WALLET: 'Remove this wallet from the device. \n Are you sure?',

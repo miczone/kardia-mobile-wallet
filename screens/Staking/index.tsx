@@ -244,7 +244,7 @@ const StakingScreen = () => {
                 <AntIcon
                   name="plus"
                   size={20}
-                  color={'#000000'}
+                  color={theme.white}
                   style={{marginRight: 8}}
                 />
               }
@@ -275,7 +275,7 @@ const StakingScreen = () => {
         <>
         <Button
           type="primary"
-          icon={<AntIcon name="plus" size={24} />}
+          icon={<AntIcon name="plus" size={24} color={theme.white} />}
           size="small"
           onPress={() => toggleStakingModal()}
           style={styles.floatingButton}

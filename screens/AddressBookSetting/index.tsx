@@ -81,7 +81,7 @@ const AddressBookSetting = () => {
               <AntIcon
                 name="plus"
                 size={20}
-                color={'#000000'}
+                color={theme.white}
                 style={{marginRight: 8}}
               />
             }
@@ -149,7 +149,7 @@ const AddressBookSetting = () => {
                         style={[
                           styles.addressHash,
                           {
-                            color: 'rgba(252, 252, 252, 0.54)',
+                            color: theme.gray600,
                             fontSize: theme.defaultFontSize,
                           },
                         ]}>
@@ -166,7 +166,7 @@ const AddressBookSetting = () => {
       {addressBook.length !== 0 && (
         <Button
           type="primary"
-          icon={<AntIcon name="plus" size={24} />}
+          icon={<AntIcon name="plus" size={24} color={theme.white} />}
           size="small"
           onPress={() => setShowNewAddressModal(true)}
           style={styles.floatingButton}
