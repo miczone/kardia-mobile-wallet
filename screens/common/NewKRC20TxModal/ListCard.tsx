@@ -49,7 +49,7 @@ const ListCard = ({
             onPress={() => selectGasPrice(item.gasPrice)}
             style={{
               backgroundColor: active
-                ? 'rgba(20, 72, 255, 1)'
+                ? theme.red600
                 : theme.backgroundColor,
               paddingVertical: 8,
               paddingHorizontal: 12,
@@ -73,7 +73,7 @@ const ListCard = ({
                 borderRadius: 8,
                 padding: 8,
                 backgroundColor: active
-                  ? 'rgba(51, 96, 255, 1)'
+                  ? theme.red700
                   : 'rgba(58, 59, 60, 1)',
               }}>
               <Image source={item.image} style={{width: 20, height: 20}} />
@@ -82,14 +82,14 @@ const ListCard = ({
               <CustomText
                 style={{
                   textAlign: 'center',
-                  color: active ? theme.textColor : theme.ghostTextColor,
+                  color: active ? theme.white : theme.textColor,
                 }}>
                 {item.title}
               </CustomText>
               <CustomText
                 style={{
                   textAlign: 'center',
-                  color: active ? theme.textColor : theme.ghostTextColor,
+                  color: active ? theme.white : theme.textColor,
                 }}>
                 {item.time}
               </CustomText>

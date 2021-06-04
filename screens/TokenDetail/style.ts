@@ -35,7 +35,6 @@ export const styles = StyleSheet.create({
     // marginBottom: 16,
   },
   kaiCard: {
-    
     padding: 30,
     flex: 1,
     justifyContent: 'space-between',
@@ -48,7 +47,7 @@ export const styles = StyleSheet.create({
     height: 230,
     resizeMode: 'cover',
     position: 'absolute',
-    borderRadius: 32,
+    borderRadius: 0,
   },
   kaiCardText: {
     color: '#FFFFFF',
@@ -58,14 +57,13 @@ export const styles = StyleSheet.create({
   floatingButton: {
     position: 'absolute',
     right: 20,
-    bottom: 32,
+    bottom: 20,
     minWidth: 52,
     width: 52,
     minHeight: 52,
     height: 52,
     borderRadius: 26,
     paddingVertical: 0,
-    opacity:0.8
   },
   noTXContainer: {
     // flex: 1,

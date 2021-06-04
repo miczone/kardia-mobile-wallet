@@ -322,7 +322,7 @@ const TokenTxList = ({
       {txList.length > 0 && (
         <Button
           type="primary"
-          icon={<AntIcon name="plus" size={20}  color='white'/>}
+          icon={<AntIcon name="plus" size={20}  color={theme.white}/>}
           size="small"
           onPress={() => setShowNewTxModal(true)}
           style={styles.floatingButton}
