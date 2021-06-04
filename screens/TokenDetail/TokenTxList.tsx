@@ -269,12 +269,12 @@ const TokenTxList = ({
                           flex: 4,
                           paddingHorizontal: 14,
                         }}>
-                        <CustomText style={{color: theme.textColor ,fontSize: 16 , fontWeight : 'bold'}}>
+                        <CustomText style={{color: theme.textColor  , fontWeight : 'bold'}}>
                           {item.type === 'IN'
                             ? getLanguageString(language, 'TX_TYPE_RECEIVED')
                             : getLanguageString(language, 'TX_TYPE_SEND')}
                         </CustomText>
-                        <CustomText style={{color: theme.gray500, fontSize: 14 , fontWeight: 'bold'}}>
+                        <CustomText style={{color: theme.gray500, fontSize: 12 , fontWeight: 'bold'}}>
                           {truncate(item.transactionHash, 8, 10)}
                         </CustomText>
                       </View>
@@ -291,7 +291,7 @@ const TokenTxList = ({
                               fontWeight: '500',
                               fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined,
                               color: item.type  === 'IN' ? theme.successColor : theme.red300,
-                              fontSize: theme.defaultFontSize + 4
+                              fontSize: theme.defaultFontSize + 1
                             }
                             // item.type === 'IN'
                             //   ? {color: '#53B680'}
@@ -302,7 +302,7 @@ const TokenTxList = ({
                           {' '}
                           <CustomText style={{fontWeight: 'normal'}}>{tokenSymbol}</CustomText>
                         </CustomText>
-                        <CustomText style={{color: theme.gray500, fontSize: 14 ,fontWeight :'700'}}>
+                        <CustomText style={{color: theme.gray600, fontSize: 12 }}>
                           {format(item.date, 'hh:mm aa')}
                         </CustomText>
                       </View>

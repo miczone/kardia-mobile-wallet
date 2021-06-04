@@ -91,7 +91,7 @@ export const lang: Language = {
     BY_PRIVATE_KEY: 'by Private Key',
     BY_SEED_PHRASE: 'by Seed Phrase',
     // Transaction key
-    RECENT_TRANSACTION: 'Transactions',
+    RECENT_TRANSACTION: 'Transactions history',
     NO_TRANSACTION: 'No transaction',
     NO_TRANSACTION_SUB_TEXT: 'Hello!? Anybody home ??',
     NO_KRC20_TRANSACTION_SUB_TEXT: 'Looks like we don’t have any transaction for this token...yet',

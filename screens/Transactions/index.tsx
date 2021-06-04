@@ -279,6 +279,7 @@ const TransactionScreen = () => {
               <CustomText
                 style={{
                   marginHorizontal: 20,
+                  fontWeight: 'bold',
                   color: theme.textColor,
                 }}>
                 {format(new Date(txsByDate.date), 'E, dd/MM/yyyy', {locale: dateLocale})}
@@ -293,7 +294,7 @@ const TransactionScreen = () => {
                       marginHorizontal: 20,
                       marginVertical: 8,
                       borderRadius: 8,
-                      backgroundColor: theme.backgroundFocusColor,
+                      backgroundColor: theme.gray200,
                     }}>
                     <TouchableOpacity
                       style={{
@@ -312,7 +313,7 @@ const TransactionScreen = () => {
                           flex: 4,
                           paddingHorizontal: 4,
                         }}>
-                        <CustomText style={{color: '#FFFFFF', fontSize: theme.defaultFontSize + 1, fontWeight: '500'}}>
+                        <CustomText style={{color: theme.textColor, fontSize: theme.defaultFontSize + 1, fontWeight: 'bold'}}>
                           {item.type === 'IN'
                             ? getLanguageString(language, 'TX_TYPE_RECEIVED')
                             : getLanguageString(language, 'TX_TYPE_SEND')}
@@ -329,15 +330,15 @@ const TransactionScreen = () => {
                         <CustomText
                           style={[
                             styles.kaiAmount,
-                            {color: theme.textColor, fontSize: theme.defaultFontSize + 1}
+                            {color: item.type === 'IN' ? theme.successColor : theme.red400, fontSize: theme.defaultFontSize + 1}
                           ]}>
                           {/* {item.type === 'IN' ? '+' : '-'} */}
                           {parseKaiBalance(item.amount, true)}{' '}
-                          <CustomText style={{color: theme.mutedTextColor}}>
+                          <CustomText >
                             KAI
                           </CustomText>
                         </CustomText>
-                        <CustomText style={{color: theme.mutedTextColor, fontSize: theme.defaultFontSize}}>
+                        <CustomText style={{color: theme.gray700, fontSize: theme.defaultFontSize}}>
                           {format(new Date(item.date), 'hh:mm aa')}
                         </CustomText>
                       </View>
