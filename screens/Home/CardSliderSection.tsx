@@ -14,16 +14,22 @@ import numeral from 'numeral';
 import {weiToKAI} from '../../services/transaction/amount';
 import {ThemeContext} from '../../ThemeContext';
 import CustomText from '../../components/Text';
+import { filterByOwnerSelector } from '../../atoms/krc20';
+import { getSelectedWallet, getWallets } from '../../utils/local';
+import { getBalance } from '../../services/account';
+import { parseDecimals } from '../../utils/number';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
 const CardSliderSection = ({showQRModal}: {showQRModal: () => void}) => {
   // const navigation = useNavigation();
+
   const theme = useContext(ThemeContext);
   const [showNewTxModal, setShowNewTxModal] = useState(false);
   const carouselRef = useRef<Carousel<Wallet>>(null);
   const wallets = useRecoilValue(walletsAtom);
   const tokenInfo = useRecoilValue(tokenInfoAtom);
+  
   const [selectedWallet, setSelectedWallet] = useRecoilState(
     selectedWalletAtom,
   );
@@ -48,10 +54,10 @@ const CardSliderSection = ({showQRModal}: {showQRModal: () => void}) => {
             }}>
             <View>
               <CustomText allowFontScaling={false} style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: theme.defaultFontSize}}>
-                {getLanguageString(language, 'TOTAL_BALANCE').toUpperCase()}
+                {getLanguageString(language, 'TOTAL_BALANCE').toUpperCase()} 
               </CustomText>
               <CustomText allowFontScaling={false} style={Platform.OS === 'android' ? {fontSize: 24, color: theme.textColor, fontFamily: 'WorkSans-SemiBold'} : {fontSize: 24, color: theme.textColor, fontWeight: '500'}}>
-                $
+                $ 
                 {numeral(
                   tokenInfo.price *
                     (Number(weiToKAI(wallet.balance)) + wallet.staked + wallet.undelegating),

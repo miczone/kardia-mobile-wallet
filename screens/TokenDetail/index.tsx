@@ -39,12 +39,11 @@ const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
 
 
 const TokenDetail = () => {
+
   const theme = useContext(ThemeContext);
   const navigation = useNavigation();  
   const {params} = useRoute();  
  
-
-  
   const tokenAvatar = params ? (params as Record<string, any>).avatar : '';
   // const tokenBalance = params ? (params as Record<string, any>).balance : 0;
   const tokenSymbol = params ? (params as Record<string, any>).symbol : '';
@@ -81,8 +80,8 @@ const TokenDetail = () => {
    
     //Thông tin ví TOKEN : FADO
     const wallet = _wallets[_selectedWallet];
-
     const _balance = await getBalance(tokenAddress, wallet.address);
+    
     setTokenBalance(_balance);
   };
 
