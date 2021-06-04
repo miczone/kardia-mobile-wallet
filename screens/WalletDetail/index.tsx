@@ -174,10 +174,10 @@ export default () => {
                       alignItems: 'center',
                     }}>
                     <View>
-                      <CustomText style={{ color: 'rgba(252, 252, 252, 0.54)', fontSize: 10 }}>
+                      <CustomText style={{ color: theme.textColor, fontSize: 10 }}>
                         {getLanguageString(language, 'BALANCE').toUpperCase()}
                       </CustomText>
-                      <CustomText style={{ fontSize: 30, color: 'white' }}>
+                      <CustomText style={{ fontSize: 30, color: theme.textColor }}>
                         $
                         {numeral(
                         tokenInfo.price *
@@ -207,10 +207,10 @@ export default () => {
 
                   <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                     <View>
-                      <CustomText style={{ fontSize: 10, color: 'rgba(252, 252, 252, 0.54)' }}>
+                      <CustomText style={{ fontSize: 10, color: theme.textColor }}>
                         {getLanguageString(language, 'WALLET_CARD_NAME').toUpperCase()}
                       </CustomText>
-                      <CustomText style={{ fontSize: 15, color: 'rgba(252, 252, 252, 0.87)' }}>
+                      <CustomText style={{ fontSize: 15, color: theme.textColor }}>
                         {name?.toUpperCase()}
                       </CustomText>
                     </View>
@@ -264,47 +264,6 @@ export default () => {
                 />
               </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-              <CustomText style={{ marginTop: 16, marginBottom: 8, fontWeight: 'normal', color: theme.textColor, paddingHorizontal: 20 }}>{getLanguageString(language, 'WALLET_CARD_TYPE')}</CustomText>
-            </TouchableWithoutFeedback>
-            <View style={{ flex: 1 }}>
-              <ScrollView showsHorizontalScrollIndicator={false} horizontal ref={scrollRef}>
-                {[0, 1, 2, 3, 4, 5].map((item, index) => {
-                  return (
-                    <TouchableOpacity key={`card-${index}`} onPress={() => setCardAvatarID(index)}>
-                      <ImageBackground
-                        imageStyle={{
-                          resizeMode: 'cover',
-                          width: 189,
-                          height: 117,
-                          borderRadius: 12,
-                        }}
-                        style={{
-                          marginLeft: index === 0 ? 20 : 16,
-                          marginRight: index === 5 ? 20 : 0,
-                          width: 193,
-                          height: 121,
-                          borderRadius: 14,
-                          justifyContent: 'flex-end',
-                          padding: 12,
-                          borderColor: item === cardAvatarID ? theme.textColor : 'transparent',
-                          borderWidth: 2,
-                          shadowColor: 'rgba(0, 0, 0, 0.1)',
-                          shadowOffset: {
-                            width: 0,
-                            height: -4,
-                          },
-                          shadowOpacity: 2,
-                          shadowRadius: 4,
-                          elevation: 9,
-                        }} source={parseCardAvatar(item || 0)}>
-                        <CustomText style={{ fontSize: 14, color: theme.textColor }}>{parseCardAvatarColor(item || 0)}</CustomText>
-                      </ImageBackground>
-                    </TouchableOpacity>
-                  );
-                })}
-              </ScrollView>
-            </View>
           </View>
         </ScrollView>
         <View style={{marginBottom: 42, paddingHorizontal: 20 }}>

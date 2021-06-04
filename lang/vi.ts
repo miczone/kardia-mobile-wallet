@@ -18,6 +18,7 @@ export const lang: Language = {
     DELETE_NOW: 'Xoá ngay',
     DONE: 'Hoàn tất',
     BUY_KAI: 'Mua KAI',
+    BUY_FADO: 'Mua FADO',
     OK_TEXT: 'Hoàn tất',
     TOTAL_BALANCE: 'Tổng số dư',
     BALANCE: 'Số dư khả dụng',

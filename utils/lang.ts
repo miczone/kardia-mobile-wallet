@@ -98,6 +98,6 @@ export const parseCardAvatarColor = (cardAvatarID: number) => {
     case 5:
       return 'Violet';
     default:
-      return 'Dark Galaxy';
+      return 'Red Fado';
   }
 };

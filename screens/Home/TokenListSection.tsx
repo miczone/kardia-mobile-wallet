@@ -153,13 +153,17 @@ const TokenListSection = ({refreshTime}: {
                       </View>
             </View>
             <Button
-              title='Buy FADO'
+              title={getLanguageString(language, 'BUY_FADO')}
               onPress={() => Alert.alert('Coming soon')}
               // onPress={() => Linking.openURL(SIMPLEX_URL)}
               type="ghost"
               size="small"
               textStyle={Platform.OS === 'android' ? {color: '#000000', fontFamily: 'WorkSans-SemiBold'} : {color: '#000000', fontWeight: '500'}}
-              style={{paddingHorizontal: 16, paddingVertical: 8}}
+              style={{
+                paddingHorizontal: 16, 
+                paddingVertical: 8,
+                backgroundColor: theme.yellow500,
+              }}
             />
         </View>
       </View>

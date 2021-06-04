@@ -18,6 +18,7 @@ export const lang: Language = {
     DELETE_NOW: 'Delete Now',
     DONE: 'Done',
     BUY_KAI: 'Buy KAI',
+    BUY_FADO: 'Buy FADO',
     OK_TEXT: 'Ok! Got it',
     TOTAL_BALANCE: 'Total balance',
     BALANCE: 'Available balance',
