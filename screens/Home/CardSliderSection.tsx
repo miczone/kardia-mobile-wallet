@@ -33,37 +33,42 @@ const CardSliderSection = ({showQRModal}: {showQRModal: () => void}) => {
   const carouselRef = useRef<Carousel<Wallet>>(null);
   const wallets = useRecoilValue(walletsAtom);
   const tokenInfo = useRecoilValue(tokenInfoAtom);
+  const [fadoWalletToNumber ,setFadoWalletToNumber] = useState(0);
   
   const [selectedWallet, setSelectedWallet] = useRecoilState(
     selectedWalletAtom,
   );
 
   // Lấy ví địa chỉ ví hiện tại để lấy ra danh sách TOKEN
-  const tokenList = useRecoilValue(filterByOwnerSelector(wallets[selectedWallet].address))
+  
 
   const updateBalanceAll = async () => {
   
   const _wallets = await getWallets();
   const _selectedWallet = await getSelectedWallet();
-  const promiseArr = tokenList.map((i) => {
-    return getFadoBalance(i.address, _wallets[_selectedWallet].address);
+
+  if (!wallets || !wallets[selectedWallet]) return
+  const tokenList = useRecoilValue(filterByOwnerSelector(wallets[selectedWallet].address));
+
+  const promiseArr = await tokenList.map((i) => {
+    return  getFadoBalance(i.address, _wallets[_selectedWallet].address);
   });
   const balanceArr = await Promise.all(promiseArr);
+  const fadoWallet =  Number(parseDecimals(balance[0] * FADO_EXCHANGE_RATE, tokenList.slice(0,7)[0].decimals));
+  setFadoWalletToNumber(fadoWallet);
   
-    
   setBalance(balanceArr);
 }
 
 useEffect(() => {
   updateBalanceAll();
-}, [tokenList, selectedWallet]);
+}, [selectedWallet]);
 
   const language = useRecoilValue(languageAtom);
 
   const [snapTimeoutId, setSnapTimeoutId] = useState<any>()
 
-  const fadoWalletToNumber =  Number(parseDecimals(balance[0] * FADO_EXCHANGE_RATE, tokenList.slice(0,7)[0].decimals));
-  
+
   const renderWalletItem = ({item: wallet}: any) => (
     <View style={styles.kaiCardContainer}>
       <View style={styles.kaiCard}>

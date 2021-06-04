@@ -176,7 +176,8 @@ const HomeScreen = () => {
           }
         >
           {/* Thông tin của ví ở homescreen */}
-          <CardSliderSection showQRModal={() => setShowQRModal(true)} />
+          {(wallets !== undefined || !wallets[selectedWallet]) &&   <CardSliderSection showQRModal={() => setShowQRModal(true)} />}
+        
 
           <TokenListSection refreshTime={refreshTime} />
 
