@@ -1,3 +1,4 @@
+import { theme } from './../../theme/light';
 import {StyleSheet} from 'react-native';
 import {HEADER_HEIGHT} from '../../theme';
 
@@ -34,7 +35,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   kaiCardText: {
-    color: '#FFFFFF',
+    color: theme.textColor,
     fontSize: 16,
     marginRight: 8,
   },
