@@ -164,7 +164,7 @@ export default ({
         {isNewContact() && (
           <View style={{alignItems: 'flex-end', flex: 1}}>
             <Button
-              title={getLanguageString(language, 'SAVE_TO_ADDRESS_BOOK')}
+              title={getLanguageString(language, 'SAVE_TO_ADDRESS_BOOK')} 
               onPress={() => setShowAddAddressModal(true)}
               type="link"
               textStyle={{textDecorationLine: 'none', fontSize: 12}}
@@ -191,6 +191,8 @@ export default ({
     );
   }
 
+
+  // Lịch sử giao dịch FADO COIN DETAIL.
   return (
     <Modal
       visible={visible}

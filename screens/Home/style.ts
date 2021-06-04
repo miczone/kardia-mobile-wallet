@@ -93,9 +93,9 @@ export const styles = StyleSheet.create({
     height: 20,
   },
   tokenLogo: {
-    width: 30,
-    height: 30,
-    borderRadius: 25,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
   },
   noTXText: {
     padding: 15,

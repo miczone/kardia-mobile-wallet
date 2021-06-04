@@ -5,10 +5,10 @@ import {
   useRoute,
 } from '@react-navigation/native';
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {Image, TouchableOpacity, View, Dimensions} from 'react-native';
+import {Image, TouchableOpacity, View, Dimensions, ImageBackground} from 'react-native';
 import ENIcon from 'react-native-vector-icons/Entypo';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
-import {krc20ListAtom} from '../../atoms/krc20';
+import {filterByOwnerSelector, krc20ListAtom} from '../../atoms/krc20';
 import {languageAtom} from '../../atoms/language';
 import {DEFAULT_KRC20_TOKENS} from '../../config';
 import {getBalance} from '../../services/krc20';
@@ -29,13 +29,21 @@ import {showTabBarAtom} from '../../atoms/showTabBar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomText from '../../components/Text';
 import { selectedWalletAtom, walletsAtom } from '../../atoms/wallets';
+import { log } from 'react-native-reanimated';
+import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+import { HEADER_HEIGHT } from '../../theme';
 
-const {width: viewportWidth} = Dimensions.get('window');
+
+
+const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window');
+
 
 const TokenDetail = () => {
+
   const theme = useContext(ThemeContext);
-  const navigation = useNavigation();
-  const {params} = useRoute();
+  const navigation = useNavigation();  
+  const {params} = useRoute();  
+ 
   const tokenAvatar = params ? (params as Record<string, any>).avatar : '';
   // const tokenBalance = params ? (params as Record<string, any>).balance : 0;
   const tokenSymbol = params ? (params as Record<string, any>).symbol : '';
@@ -46,26 +54,34 @@ const TokenDetail = () => {
 
   const language = useRecoilValue(languageAtom);
 
+  const wallets = useRecoilValue(walletsAtom)
+  const selectedWallet = useRecoilValue(selectedWalletAtom)
+ 
+ 
+ 
   const [showAddressQR, setShowAddressQR] = useState(false);
   const [tokenBalance, setTokenBalance] = useState('0');
   const setTokenList = useSetRecoilState(krc20ListAtom);
 
   const setTabBarVisible = useSetRecoilState(showTabBarAtom);
-  const wallets = useRecoilValue(walletsAtom)
-  const selectedWallet = useRecoilValue(selectedWalletAtom)
+  const tabBarHeight = useBottomTabBarHeight();
 
   useFocusEffect(
     useCallback(() => {
-      setTabBarVisible(false);
+      setTabBarVisible(true);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []),
   );
 
+  // Fetch thông tin ví
   const fetchBalance = async () => {
     const _wallets = await getWallets();
     const _selectedWallet = await getSelectedWallet();
+   
+    //Thông tin ví TOKEN : FADO
     const wallet = _wallets[_selectedWallet];
     const _balance = await getBalance(tokenAddress, wallet.address);
+    
     setTokenBalance(_balance);
   };
 
@@ -103,16 +119,13 @@ const TokenDetail = () => {
     return (
       <View
         style={{
-          width: 48,
-          height: 48,
-
+          width: 60,
+          height: 60,
           borderRadius: 16,
           backgroundColor: 'transparent',
-
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-
           marginBottom: 12,
         }}>
         {avatar ? (
@@ -121,7 +134,7 @@ const TokenDetail = () => {
           <Image
             source={require('../../assets/logo.png')}
             style={styles.kaiLogo}
-          />
+        />
         )}
       </View>
     );
@@ -136,14 +149,7 @@ const TokenDetail = () => {
         tokenDecimals={tokenDecimals}
         tokenBalance={tokenBalance}
       />
-      <ENIcon.Button
-        style={{paddingHorizontal: 20}}
-        name="chevron-left"
-        onPress={() => navigation.goBack()}
-        color={theme.backBtnTextColor}
-        underlayColor={theme.backBtnUnderlayColor}
-        backgroundColor="transparent"
-      />
+      
       <View style={styles.kaiCardContainer}>
         <View style={styles.kaiCard}>
           <Image
@@ -156,6 +162,7 @@ const TokenDetail = () => {
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'flex-start',
+     
             }}>
             <View>{renderIcon(tokenAvatar)}</View>
           </View>
@@ -164,12 +171,13 @@ const TokenDetail = () => {
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'flex-end',
+            
             }}>
             <View>
-              <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 10, lineHeight: 16}}>
+              <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 10, lineHeight: 16 , fontWeight:'bold'}}>
                 {getLanguageString(language, 'CURRENT_BALANCE').toUpperCase()}
               </CustomText>
-              <CustomText style={{fontSize: 24, color: 'white', fontWeight: 'bold'}}>
+              <CustomText style={{fontSize: 24,  color: 'white', fontWeight: 'bold'}}>
                 {numeral(
                   parseDecimals(Number(tokenBalance), tokenDecimals),
                 ).format('0,0.00')}{' '}
@@ -202,6 +210,8 @@ const TokenDetail = () => {
           </View>
         </View>
       </View>
+
+{/* Lịch sử giao dịch của một token */}
       <View style={{flex: 3, width: '100%', paddingVertical: 12}}>
         <View
           style={{

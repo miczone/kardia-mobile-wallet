@@ -17,6 +17,7 @@ import AddVerifiedKRC20Tokens from './screens/AddVerifiedKRC20Tokens';
 import AddKRC20Tokens from './screens/AddKRC20Tokens';
 import SettingStackScreen from './SettingStack';
 import CreateWithMnemonicPhrase from './screens/CreateWithMnemonicPhrase';
+import TransactionScreen from './screens/Transactions';
 
 const HomeStack = createStackNavigator();
 
@@ -46,6 +47,7 @@ const HomeStackScreen = () => {
         name="TokenDetail"
         component={TokenDetail}
         options={{headerShown: false}}
+      
       />
       <HomeStack.Screen
         name="TokenTxDetail"
@@ -97,6 +99,11 @@ const HomeStackScreen = () => {
         component={SettingStackScreen}
         options={{headerShown: false}}
       />
+
+      <HomeStack.Screen 
+      name="TransactionList"
+      component={TransactionScreen}
+    />
     </HomeStack.Navigator>
   );
 };

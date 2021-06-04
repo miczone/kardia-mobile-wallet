@@ -142,6 +142,7 @@ export default ({
             {isNewContact()
               ? getLanguageString(language, 'NEW_CONTACT')
               : getFromAddressBook(addressBook, address)}
+              
           </CustomText>
           <CustomText style={{color: theme.gray600, fontSize: 12}}>
             {truncate(address, 10, 10)}

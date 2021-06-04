@@ -30,25 +30,26 @@ import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
 import { HEADER_HEIGHT } from '../../theme';
 import CustomText from '../../components/Text';
 import { SIMPLEX_URL } from '../../services/config';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window')
 
 const HomeScreen = () => {
   const [showQRModal, setShowQRModal] = useState(false);
-  const tokenInfo = useRecoilValue(tokenInfoAtom);
   const [showPasscodeRemindModal, setShowPasscodeRemindModal] = useState(false);
   const [inited, setInited] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [refreshTime, setRefreshTime] = useState(Date.now())
 
   const [wallets, setWallets] = useRecoilState(walletsAtom);
+  
   const [selectedWallet, setSelectedWallet] = useRecoilState(
     selectedWalletAtom,
   );
 
   const setTabBarVisible = useSetRecoilState(showTabBarAtom);
   const tabBarHeight = useBottomTabBarHeight();
-
+  const tokenInfo = useRecoilValue(tokenInfoAtom);
   const theme = useContext(ThemeContext);
   const language = useRecoilValue(languageAtom);
   const navigation = useNavigation();
@@ -100,6 +101,8 @@ const HomeScreen = () => {
   useFocusEffect(
     useCallback(() => {
       updateWalletBalance();
+
+      {/* BOTTOM TAB BAR NÈ */}
       setTabBarVisible(true);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []),
@@ -153,6 +156,8 @@ const HomeScreen = () => {
     <SafeAreaView style={{flex: 1, backgroundColor: theme.backgroundColor}}>
       <HomeHeader />
       <QRModal visible={showQRModal} onClose={() => setShowQRModal(false)} />
+
+      
       <ImageBackground
         source={require('../../assets/home_background.jpg')}
         imageStyle={{width: viewportWidth, height: viewportHeight, resizeMode: 'cover'}}
@@ -171,13 +176,17 @@ const HomeScreen = () => {
             />
           }
         >
+          {/* Thông tin của ví ở homescreen */}
           <CardSliderSection showQRModal={() => setShowQRModal(true)} />
+
           <TokenListSection refreshTime={refreshTime} />
-          <View
+
+          <TouchableOpacity
+          onPress={() => {navigation.navigate('TransactionList')}}
             style={{
-              paddingVertical: 24,
+              paddingVertical: 12,
               paddingHorizontal: 16,
-              backgroundColor: 'rgba(58, 59, 60, 0.42)',
+              backgroundColor: theme.backgroundFocusColor,
               borderRadius: 12,
               marginHorizontal: 20,
               flexDirection: 'row',
@@ -195,15 +204,12 @@ const HomeScreen = () => {
                 source={require('../../assets/logo_dark.png')}
               />
               <View>
-                <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 14}}>
-                  {getLanguageString(language, 'BALANCE').toUpperCase()}
-                </CustomText>
                 <CustomText style={{color: theme.textColor, fontSize: 18, marginVertical: 4, fontWeight: 'bold'}}>
                   {
                     numeral(Number(weiToKAI(_getBalance()))).format('0,0.00')}{' '}
                   <CustomText style={{color: theme.mutedTextColor, fontWeight: '500'}}>KAI</CustomText>
                 </CustomText>
-                <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 14}}>
+                <CustomText style={{color:theme.mutedTextColor, fontSize: 18, fontWeight: '500'}}>
                   $
                   {numeral(
                     tokenInfo.price *
@@ -211,6 +217,7 @@ const HomeScreen = () => {
                   ).format('0,0.00')}
                 </CustomText>
               </View>
+              
             </View>
             <Button
               title={getLanguageString(language, 'BUY_KAI')}
@@ -221,7 +228,7 @@ const HomeScreen = () => {
               textStyle={Platform.OS === 'android' ? {color: '#000000', fontFamily: 'WorkSans-SemiBold'} : {color: '#000000', fontWeight: '500'}}
               style={{paddingHorizontal: 16, paddingVertical: 8}}
             />
-          </View>
+          </TouchableOpacity>
         </ScrollView>
       </ImageBackground>
     </SafeAreaView>

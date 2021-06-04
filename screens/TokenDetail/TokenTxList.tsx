@@ -109,14 +109,14 @@ const TokenTxList = ({
             height: 32,
 
             borderRadius: 12,
-            backgroundColor: theme.backgroundColor,
+            backgroundColor: theme.white,
 
             // flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
 
-            // borderWidth: 1,
-            // borderColor: 'gray',
+            // borderWidth:1,
+            // borderColor: theme.gray500,
           }}>
           {type === 'IN' ? (
             <Image
@@ -134,14 +134,14 @@ const TokenTxList = ({
           <AntIcon
             name="checkcircle"
             size={14}
-            color={'green'}
-            style={{position: 'absolute', right: 0, bottom: 0}}
+            color={theme.green500}
+            style={{position: 'absolute', right: 0, bottom: 0 , opacity:0.8}}
           />
         ) : (
           <AntIcon
             name="closecircle"
             size={14}
-            color={'red'}
+            color={theme.primary}
             style={{position: 'absolute', right: 0, bottom: 0}}
           />
         )}
@@ -234,9 +234,10 @@ const TokenTxList = ({
               <CustomText
                 style={{
                   marginHorizontal: 20,
-                  color: theme.textColor,
+                  color: theme.gray900 ,
+                  fontWeight: 'bold',
                 }}>
-                {format(txsByDate.date, 'E, dd/MM/yyyy', {locale: dateLocale})}
+                {format(txsByDate.date, 'E, dd/MM/yyyy', {locale: dateLocale})}:
               </CustomText>
               {txsByDate.items.map((item: any, index: number) => {
                 return (
@@ -247,8 +248,8 @@ const TokenTxList = ({
                       paddingHorizontal: 16,
                       marginHorizontal: 20,
                       marginVertical: 8,
-                      borderRadius: 8,
-                      backgroundColor: theme.backgroundFocusColor,
+                      borderRadius: 12,
+                      backgroundColor: theme.gray100,
                     }}>
                     <TouchableOpacity
                       style={{
@@ -261,21 +262,23 @@ const TokenTxList = ({
                         setShowTxDetail(true);
                       }}>
                       {renderIcon(item.status, item.type)}
+
                       <View
                         style={{
                           flexDirection: 'column',
                           flex: 4,
                           paddingHorizontal: 14,
                         }}>
-                        <CustomText style={{color: '#FFFFFF'}}>
+                        <CustomText style={{color: theme.textColor ,fontSize: 16 , fontWeight : 'bold'}}>
                           {item.type === 'IN'
                             ? getLanguageString(language, 'TX_TYPE_RECEIVED')
                             : getLanguageString(language, 'TX_TYPE_SEND')}
                         </CustomText>
-                        <CustomText style={{color: '#DBDBDB', fontSize: 12}}>
+                        <CustomText style={{color: theme.gray500, fontSize: 14 , fontWeight: 'bold'}}>
                           {truncate(item.transactionHash, 8, 10)}
                         </CustomText>
                       </View>
+
                       <View
                         style={{
                           flex: 3,
@@ -287,8 +290,8 @@ const TokenTxList = ({
                             {
                               fontWeight: '500',
                               fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined,
-                              color: theme.textColor,
-                              fontSize: theme.defaultFontSize + 1
+                              color: item.type  === 'IN' ? theme.successColor : theme.red300,
+                              fontSize: theme.defaultFontSize + 4
                             }
                             // item.type === 'IN'
                             //   ? {color: '#53B680'}
@@ -297,9 +300,9 @@ const TokenTxList = ({
                           {/* {item.type === 'IN' ? '+' : '-'} */}
                           {formatNumberString(parseDecimals(Number(item.value), tokenDecimals), 8)}
                           {' '}
-                          <CustomText style={{fontWeight: 'normal', color: theme.mutedTextColor}}>{tokenSymbol}</CustomText>
+                          <CustomText style={{fontWeight: 'normal'}}>{tokenSymbol}</CustomText>
                         </CustomText>
-                        <CustomText style={{color: '#DBDBDB', fontSize: 12}}>
+                        <CustomText style={{color: theme.gray500, fontSize: 14 ,fontWeight :'700'}}>
                           {format(item.date, 'hh:mm aa')}
                         </CustomText>
                       </View>
@@ -319,7 +322,7 @@ const TokenTxList = ({
       {txList.length > 0 && (
         <Button
           type="primary"
-          icon={<AntIcon name="plus" size={24} />}
+          icon={<AntIcon name="plus" size={20}  color='white'/>}
           size="small"
           onPress={() => setShowNewTxModal(true)}
           style={styles.floatingButton}

@@ -7,8 +7,8 @@ export const styles = StyleSheet.create({
     // alignItems: 'center',
   },
   tokenLogo: {
-    width: 48,
-    height: 48,
+    width: 60,
+    height: 60,
     borderRadius: 25,
   },
   kaiLogo: {
@@ -35,10 +35,11 @@ export const styles = StyleSheet.create({
     // marginBottom: 16,
   },
   kaiCard: {
-    borderRadius: 8,
+    
     padding: 30,
     flex: 1,
     justifyContent: 'space-between',
+   
   },
   cardBackground: {
     flex: 1,
@@ -47,7 +48,7 @@ export const styles = StyleSheet.create({
     height: 230,
     resizeMode: 'cover',
     position: 'absolute',
-    borderRadius: 8,
+    borderRadius: 32,
   },
   kaiCardText: {
     color: '#FFFFFF',
@@ -57,13 +58,14 @@ export const styles = StyleSheet.create({
   floatingButton: {
     position: 'absolute',
     right: 20,
-    bottom: 52,
+    bottom: 32,
     minWidth: 52,
     width: 52,
     minHeight: 52,
     height: 52,
     borderRadius: 26,
     paddingVertical: 0,
+    opacity:0.8
   },
   noTXContainer: {
     // flex: 1,

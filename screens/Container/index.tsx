@@ -400,7 +400,6 @@ const AppContainer = () => {
       // Get selected wallet
       try {
         let _selectedWallet = await getSelectedWallet();
-        console.log(_selectedWallet);
         setSelectedWallet(_selectedWallet);
       } catch (error) {
         console.error(error);

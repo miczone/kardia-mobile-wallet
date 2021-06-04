@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import {useNavigation} from '@react-navigation/native';
 import React, {useContext, useEffect, useState} from 'react';
-import {ActivityIndicator, Image, TouchableOpacity, View} from 'react-native';
+import {ActivityIndicator, Alert, Image, Platform, TouchableOpacity, View} from 'react-native';
 import {ThemeContext} from '../../ThemeContext';
 // import List from '../../components/List';
 import {styles} from './style';
@@ -22,6 +22,7 @@ const TokenListSection = ({refreshTime}: {
 }) => {
   const navigation = useNavigation();
   const theme = useContext(ThemeContext);
+  
   const selectedWallet = useRecoilValue(selectedWalletAtom);
   const wallets = useRecoilValue(walletsAtom)
 
@@ -29,6 +30,8 @@ const TokenListSection = ({refreshTime}: {
   const [loading, setLoading] = useState(true);
   const [balance, setBalance] = useState<number[]>([]);
   // const tokenList = useRecoilValue(krc20ListAtom);
+
+  // Lấy ví địa chỉ ví hiện tại để lấy ra danh sách TOKEN
   const tokenList = useRecoilValue(filterByOwnerSelector(wallets[selectedWallet].address))
 
   const updateBalanceAll = async () => {
@@ -49,13 +52,13 @@ const TokenListSection = ({refreshTime}: {
 
   const renderIcon = (avatar: string) => {
     return (
-      <View style={{flex: 0.3, marginRight: 12}}>
+      <View style={{ marginRight: 8 }}>
         <View
           style={{
-            width: 30,
-            height: 30,
+            width: 40,
+            height: 40,
 
-            borderRadius: 15,
+            borderRadius: 20,
             backgroundColor: 'white',
 
             flexDirection: 'row',
@@ -78,71 +81,81 @@ const TokenListSection = ({refreshTime}: {
     );
   };
 
+
+  //PHAN TOKEN LIST O DUOI, CU THE LA FADO COIN
   const renderTokenList = () => {
+    
+    
     return tokenList.slice(0, 7).map((item, index) => {
       return <View
         key={item.name}
         style={{
-          padding: 15,
+          padding: 14,
+          paddingLeft:12,
           marginHorizontal: 20,
           borderRadius: 8,
           marginVertical: 6,
-          backgroundColor: theme.backgroundFocusColor,
+          backgroundColor: 'rgba(58, 59, 60, 0.42)'
         }}>
-        <TouchableOpacity
+        <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            flex: 1,
+            flex: 1
           }}
-          onPress={() => {
-            navigation.navigate('Home', {
-              screen: 'TokenDetail',
-              initial: false,
-              params: {
-                tokenAddress: item.address,
-                name: item.name,
-                symbol: item.symbol,
-                avatar: item.avatar,
-                decimals: item.decimals,
-                // balance: balance[index],
-              },
-            });
-          }}>
+          >
           {renderIcon(item.avatar || '')}
-          <View
-            style={{
-              flex: 1,
+          {/* TODO CUSTOME VIEW CHO ĐẸP ĐẸP */}
+            <View
+              style={{
+              flex:1,
               flexDirection: 'column',
-              justifyContent: 'center',
+              justifyContent: 'flex-start',
               alignItems: 'flex-start',
               height: '100%',
-            }}>
-            <CustomText
-              allowFontScaling={false}
-              style={{
-                color: '#FFFFFF',
-                fontWeight: 'bold',
-                fontSize: 16,
-              }}>
-              {item.symbol}
-            </CustomText>
-          </View>
-          <View
-            style={{
-              flex: 1,
-              // flexDirection: 'row',
-              alignItems: 'flex-end',
-              justifyContent: 'center',
-            }}>
-            <CustomText style={[styles.kaiAmount, {color: theme.textColor}]}>
-              {formatNumberString(parseDecimals(balance[index], item.decimals), 2)}
-            </CustomText>
-            <CustomText style={{color: theme.ghostTextColor}}>
-              {item.symbol}
-            </CustomText>
-          </View>
-        </TouchableOpacity>
+                }}>
+                      <CustomText allowFontScaling={false}  
+                                  style={{ 
+                                    color: 'rgba(252, 252, 252, 0.54)', 
+                                    fontSize: 14,
+                                    marginBottom: 5}}>
+                            {getLanguageString(language, 'BALANCE').toUpperCase()}
+                      </CustomText>
+                      <View
+                          style={{
+                            width:'100%',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems:'center',
+                            
+                          }}>
+                          <View>
+                            <CustomText style={{color: theme.textColor, fontSize: 18,  fontWeight: 'bold' ,marginRight: 5}}>
+                              {formatNumberString(parseDecimals(balance[index], item.decimals), 2)}{' '} 
+                              <CustomText style={{color: theme.mutedTextColor, fontWeight: '500' , fontSize: 18}}>
+                                {item.symbol}
+                              </CustomText>
+                            </CustomText>
+
+                            <CustomText style={{color: theme.mutedTextColor, fontWeight: '500' , fontSize: 18}}>
+                              <CustomText style={{color: theme.mutedTextColor, fontWeight: '500' , fontSize: 18}}>
+                              $
+                              </CustomText>
+                              {formatNumberString(parseDecimals(balance[index] * 0.023, item.decimals), 2)} 
+                            </CustomText>
+                          </View>
+                      </View>
+            </View>
+            <Button
+              title='Buy FADO'
+              onPress={() => Alert.alert('Coming soon')}
+              // onPress={() => Linking.openURL(SIMPLEX_URL)}
+              type="ghost"
+              size="small"
+              textStyle={Platform.OS === 'android' ? {color: '#000000', fontFamily: 'WorkSans-SemiBold'} : {color: '#000000', fontWeight: '500'}}
+              style={{paddingHorizontal: 16, paddingVertical: 8}}
+            />
+        </View>
       </View>
     })
   }

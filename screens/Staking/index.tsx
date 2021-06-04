@@ -129,10 +129,10 @@ const StakingScreen = () => {
       try {
         const {validators} = await getAllValidator();
         setValidatorList(validators);
-        setLoading(false);
+       
       } catch (error) {
         console.error(error);
-        setLoading(false);
+      
       }
     })();
   }, []);
