@@ -215,41 +215,43 @@ const TransactionScreen = () => {
         />
       </View> */}
       {groupByDate(txList, 'date').length === 0 && (
-        <View style={styles.noTXContainer}>
-          <Image
-            style={{width: 87, height: 66, marginBottom: 23, marginTop: 70}}
-            source={require('../../assets/no_tx_butterfly.png')}
-          />
-          <Image
-            style={{width: 170, height: 140}}
-            source={require('../../assets/no_tx_box.png')}
-          />
-          <CustomText style={[styles.noTXText, {color: theme.textColor}]}>
-            {getLanguageString(language, 'NO_TRANSACTION')}
-          </CustomText>
-          <CustomText style={{color: theme.mutedTextColor, fontSize: 15, marginBottom: 32}}>
-            {getLanguageString(language, 'NO_TRANSACTION_SUB_TEXT')}
-          </CustomText>
-          <Button
-            type="primary"
-            onPress={() => setShowNewTxModal(true)}
-            title={getLanguageString(language, 'SEND_NOW')}
-            textStyle={{
-              fontWeight: '500',
-              fontSize: theme.defaultFontSize + 4,
-              fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined
-            }}
-            style={{width: 248}}
-            icon={
-              <AntIcon
-                name="plus"
-                size={20}
-                color={'#000000'}
-                style={{marginRight: 8}}
-              />
-            }
-          />
-        </View>
+        <ScrollView >
+          <View style={styles.noTXContainer}>
+            <Image
+              style={{width: 87, height: 66, marginBottom: 10, marginTop: 32}}
+              source={require('../../assets/no_tx_butterfly.png')}
+            />
+            <Image
+              style={{width: 170, height: 140}}
+              source={require('../../assets/no_tx_box.png')}
+            />
+            <CustomText style={[styles.noTXText, {color: theme.textColor}]}>
+              {getLanguageString(language, 'NO_TRANSACTION')}
+            </CustomText>
+            <CustomText style={{color: theme.mutedTextColor, fontSize: 15, marginBottom: 22}}>
+              {getLanguageString(language, 'NO_TRANSACTION_SUB_TEXT')}
+            </CustomText>
+            <Button
+              type="primary"
+              onPress={() => setShowNewTxModal(true)}
+              title={getLanguageString(language, 'SEND_NOW')}
+              textStyle={{
+                fontWeight: '500',
+                fontSize: theme.defaultFontSize + 4,
+                fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined
+              }}
+              style={{width: 248}}
+              icon={
+                <AntIcon
+                  name="plus"
+                  size={20}
+                  color={'#000000'}
+                  style={{marginRight: 8}}
+                />
+              }
+            />
+          </View>
+        </ScrollView>
       )}
       <ScrollView 
         showsVerticalScrollIndicator={false}
