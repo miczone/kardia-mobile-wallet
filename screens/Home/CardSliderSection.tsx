@@ -17,7 +17,8 @@ import CustomText from '../../components/Text';
 import { filterByOwnerSelector } from '../../atoms/krc20';
 import { getSelectedWallet, getWallets } from '../../utils/local';
 import { getBalance } from '../../services/account';
-import { parseDecimals } from '../../utils/number';
+import {getBalance as getFadoBalance} from '../../services/krc20';
+import { formatNumberString, parseDecimals } from '../../utils/number';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
@@ -26,6 +27,8 @@ const CardSliderSection = ({showQRModal}: {showQRModal: () => void}) => {
 
   const theme = useContext(ThemeContext);
   const [showNewTxModal, setShowNewTxModal] = useState(false);
+  const [balance, setBalance] = useState<number[]>([]);
+
   const carouselRef = useRef<Carousel<Wallet>>(null);
   const wallets = useRecoilValue(walletsAtom);
   const tokenInfo = useRecoilValue(tokenInfoAtom);
@@ -33,93 +36,109 @@ const CardSliderSection = ({showQRModal}: {showQRModal: () => void}) => {
   const [selectedWallet, setSelectedWallet] = useRecoilState(
     selectedWalletAtom,
   );
+
+  // Lấy ví địa chỉ ví hiện tại để lấy ra danh sách TOKEN
+  const tokenList = useRecoilValue(filterByOwnerSelector(wallets[selectedWallet].address))
+
+  const updateBalanceAll = async () => {
+    console.log("HELLO");
+    
+  const _wallets = await getWallets();
+  const _selectedWallet = await getSelectedWallet();
+  const promiseArr = tokenList.map((i) => {
+    return getFadoBalance(i.address, _wallets[_selectedWallet].address);
+  });
+  const balanceArr = await Promise.all(promiseArr);
+  
+    
+  setBalance(balanceArr);
+}
+
+useEffect(() => {
+  updateBalanceAll();
+}, [tokenList, selectedWallet]);
+
   const language = useRecoilValue(languageAtom);
 
   const [snapTimeoutId, setSnapTimeoutId] = useState<any>()
 
-  const renderWalletItem = ({item: wallet}: any) => {
-    return (
-      <View style={styles.kaiCardContainer}>
-        <View style={styles.kaiCard}>
-          <Image
-            style={[styles.cardBackground, {width: viewportWidth - 40}]}
-            source={parseCardAvatar(wallet.cardAvatarID)}
-            // source={require('../../assets/test.jpg')}
-          />
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            {/* <View>
-              <CustomText allowFontScaling={false} style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: theme.defaultFontSize}}>
-                {getLanguageString(language, 'TOTAL_BALANCE').toUpperCase()} 
-              </CustomText>
-              <CustomText allowFontScaling={false} style={Platform.OS === 'android' ? {fontSize: 24, color: theme.textColor, fontFamily: 'WorkSans-SemiBold'} : {fontSize: 24, color: theme.textColor, fontWeight: '500'}}>
-                $ 
-                {numeral(
-                  tokenInfo.price *
-                    (Number(weiToKAI(wallet.balance)) + wallet.staked + wallet.undelegating),
-                ).format('0,0.00')}
-              </CustomText>
-            </View> */}
-            {/* <IconButton
-              onPress={() => setRemoveIndex(selectedWallet)}
-              name="trash"
-              color={theme.textColor}
-              size={20}
-            /> */}
-          </View>
+  const fadoWalletToNumber =  Number(parseDecimals(balance[0] * 0.023, tokenList.slice(0,7)[0].decimals));
+  
+  const renderWalletItem = ({item: wallet}: any) => (
+    <View style={styles.kaiCardContainer}>
+      <View style={styles.kaiCard}>
+        <Image
+          style={[styles.cardBackground, { width: viewportWidth - 40 }]}
+          source={parseCardAvatar(wallet.cardAvatarID)} />
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+          <View>
+          <CustomText allowFontScaling={false} style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: theme.defaultFontSize}}>
+            {getLanguageString(language, 'TOTAL_BALANCE').toUpperCase()}
+          </CustomText>
+          <CustomText allowFontScaling={false} style={Platform.OS === 'android' ? {fontSize: 24, color: theme.textColor, fontFamily: 'WorkSans-SemiBold'} : {fontSize: 24, color: theme.textColor, fontWeight: '500'}}>
+            $
+            { numeral( tokenInfo.price *(Number(weiToKAI(wallet.balance)) + wallet.staked + wallet.undelegating) + (fadoWalletToNumber) ).format('0,0.00')} 
+          </CustomText>
+        </View>
+          {/* <IconButton
+          onPress={() => setRemoveIndex(selectedWallet)}
+          name="trash"
+          color={theme.textColor}
+          size={20}
+        /> */}
+        </View>
 
-          <View style={{flexDirection: 'row', alignItems: 'flex-end', flex: 1}}>
-            <CustomText allowFontScaling={false} style={styles.kaiCardText}>
-              {truncate(
-                wallet.address,
-                viewportWidth >= 432 ? 14 : 10,
-                viewportWidth >= 432 ? 14 : 12,
-              )}
+        <View style={{ flexDirection: 'row', alignItems: 'flex-end', flex: 1 }}>
+          <CustomText allowFontScaling={false} style={styles.kaiCardText}>
+            {truncate(
+              wallet.address,
+              viewportWidth >= 432 ? 14 : 10,
+              viewportWidth >= 432 ? 14 : 12
+            )}
+          </CustomText>
+        </View>
+
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+          <View>
+            <CustomText style={{ fontSize: theme.defaultFontSize, color: 'rgba(252, 252, 252, 0.54)' }}>
+              {getLanguageString(language, 'WALLET_CARD_NAME').toUpperCase()}
+            </CustomText>
+            <CustomText style={Platform.OS === 'android' ? { fontSize: 15, color: 'rgba(252, 252, 252, 0.87)', fontFamily: 'WorkSans-SemiBold' } : { fontSize: 15, color: 'rgba(252, 252, 252, 0.87)', fontWeight: '500' }}>
+              {wallet.name ? wallet.name.toUpperCase() : getLanguageString(language, 'NEW_WALLET').toUpperCase()}
             </CustomText>
           </View>
-
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end'}}>
-            <View>
-              <CustomText style={{fontSize: theme.defaultFontSize, color: 'rgba(252, 252, 252, 0.54)'}}>
-                {getLanguageString(language, 'WALLET_CARD_NAME').toUpperCase()}
-              </CustomText>
-              <CustomText style={Platform.OS === 'android' ? {fontSize: 15, color: 'rgba(252, 252, 252, 0.87)', fontFamily: 'WorkSans-SemiBold'} : {fontSize: 15, color: 'rgba(252, 252, 252, 0.87)', fontWeight: '500'}}>
-                {wallet.name ? wallet.name.toUpperCase() : getLanguageString(language,'NEW_WALLET').toUpperCase()}
-              </CustomText>
-            </View>
-            <TouchableOpacity
-              onPress={() => showQRModal()}
-              style={{
-                width: 52,
-                height: 52,
-                borderRadius: 26,
-                backgroundColor: '#FFFFFF',
-                alignItems: 'center',
-                justifyContent: 'center',
-                shadowColor: 'rgba(0, 0, 0, 0.3)',
-                shadowOffset: {
-                  width: 0,
-                  height: 4,
-                },
-                shadowOpacity: 2,
-                shadowRadius: 4,
-                elevation: 9,
-              }}>
-              <Image
-                source={require('../../assets/icon/qr_dark.png')}
-                style={{width: 30, height: 30, marginRight: 2, marginTop: 2}}
-              />
-              {/* <Icon size={30} name="qrcode" /> */}
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity
+            onPress={() => showQRModal()}
+            style={{
+              width: 52,
+              height: 52,
+              borderRadius: 26,
+              backgroundColor: '#FFFFFF',
+              alignItems: 'center',
+              justifyContent: 'center',
+              shadowColor: 'rgba(0, 0, 0, 0.3)',
+              shadowOffset: {
+                width: 0,
+                height: 4,
+              },
+              shadowOpacity: 2,
+              shadowRadius: 4,
+              elevation: 9,
+            }}>
+            <Image
+              source={require('../../assets/icon/qr_dark.png')}
+              style={{ width: 30, height: 30, marginRight: 2, marginTop: 2 }} />
+            {/* <Icon size={30} name="qrcode" /> */}
+          </TouchableOpacity>
         </View>
       </View>
-    );
-  };
+    </View>
+  );
 
   useEffect(() => {
     // (async () => {
