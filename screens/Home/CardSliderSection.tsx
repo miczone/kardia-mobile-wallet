@@ -84,10 +84,10 @@ const CardSliderSection = ({showQRModal}: {showQRModal: () => void}) => {
 
           <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end'}}>
             <View>
-              <CustomText style={{fontSize: theme.defaultFontSize, color: 'rgba(252, 252, 252, 0.54)'}}>
+              <CustomText style={{fontSize: theme.defaultFontSize, color: theme.textColor}}>
                 {getLanguageString(language, 'WALLET_CARD_NAME').toUpperCase()}
               </CustomText>
-              <CustomText style={Platform.OS === 'android' ? {fontSize: 15, color: 'rgba(252, 252, 252, 0.87)', fontFamily: 'WorkSans-SemiBold'} : {fontSize: 15, color: 'rgba(252, 252, 252, 0.87)', fontWeight: '500'}}>
+              <CustomText style={Platform.OS === 'android' ? {fontSize: 15, color: theme.textColor, fontFamily: 'WorkSans-SemiBold'} : {fontSize: 15, color: theme.textColor, fontWeight: '500'}}>
                 {wallet.name ? wallet.name.toUpperCase() : getLanguageString(language,'NEW_WALLET').toUpperCase()}
               </CustomText>
             </View>

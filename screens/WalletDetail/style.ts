@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { theme } from '../../theme/light';
 
 export const styles = StyleSheet.create({
   container: {
@@ -7,7 +8,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   kaiCardText: {
-    color: '#FFFFFF',
+    color: theme.textColor,
     fontSize: 16,
     marginRight: 8,
   },
