@@ -327,7 +327,8 @@ const NewTxModal = ({
                 message={errorAddress}
                 value={address}
                 inputStyle={{
-                  backgroundColor: 'rgba(96, 99, 108, 1)',
+                  backgroundColor: theme.inputBgColor,
+                  borderColor: theme.inputBorderColor,
                   color: theme.textColor,
                 }}
                 placeholder={getLanguageString(language, 'CREATE_TX_ADDRESS_PLACEHOLDER')}
@@ -340,7 +341,7 @@ const NewTxModal = ({
               style={{
                 // flex: 1,
                 padding: 15,
-                borderColor: 'rgba(255, 255, 255, 0.1)',
+                borderColor: theme.gray300,
                 height: 44,
                 width: 44,
                 borderWidth: 1.5,
@@ -350,7 +351,7 @@ const NewTxModal = ({
                 marginHorizontal: 8,
               }}>
               <Image
-                source={require('../../../assets/icon/scan_qr_dark.png')}
+                source={require('../../../assets/icon/scan_qr.png')}
                 style={{width: 18, height: 18}}
               />
             </TouchableOpacity>
@@ -359,7 +360,7 @@ const NewTxModal = ({
               style={{
                 // flex: 1,
                 padding: 15,
-                borderColor: 'rgba(255, 255, 255, 0.1)',
+                borderColor: theme.gray300,
                 height: 44,
                 width: 44,
                 borderWidth: 1.5,
@@ -368,7 +369,7 @@ const NewTxModal = ({
                 justifyContent: 'center',
               }}>
               <Image
-                source={require('../../../assets/icon/address_book_dark.png')}
+                source={require('../../../assets/icon/address_book.png')}
                 style={{width: 18, height: 18}}
               />
             </TouchableOpacity>
@@ -388,7 +389,8 @@ const NewTxModal = ({
               keyboardType="numeric"
               message={errorAmount}
               inputStyle={{
-                backgroundColor: 'rgba(96, 99, 108, 1)',
+                backgroundColor: theme.inputBgColor,
+                borderColor: theme.inputBorderColor,
                 color: theme.textColor,
               }}
               onChangeText={(newAmount) => {

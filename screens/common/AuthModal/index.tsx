@@ -171,7 +171,7 @@ export default ({
         style={styles.otpContainer}
         inputStyles={{
           ...styles.otpInput,
-          ...{backgroundColor: theme.backgroundColor},
+          ...{backgroundColor: theme.inputBgColor, color: theme.textColor},
         }}
         secureTextEntry={true}
         ref={otpRef}

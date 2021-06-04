@@ -26,7 +26,6 @@ import { statusBarColorAtom } from '../../atoms/statusBar';
 import CustomTextInput from '../../components/TextInput';
 
 const TransactionScreen = () => {
-  console.log('TransactionScreen')
   const theme = useContext(ThemeContext);
   // const navigation = useNavigation();
 
@@ -358,7 +357,7 @@ const TransactionScreen = () => {
       {txList.length > 0 && (
         <Button
           type="primary"
-          icon={<AntIcon name="plus" size={24} />}
+          icon={<AntIcon name="plus" size={24} color={theme.white} />}
           size="small"
           onPress={() => setShowNewTxModal(true)}
           style={styles.floatingButton}
