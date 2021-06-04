@@ -96,7 +96,7 @@ export default ({
           flexDirection: 'row',
           padding: 12,
           marginTop: 4,
-          backgroundColor: theme.backgroundColor,
+          backgroundColor: theme.inputBgColor,
           borderRadius: 8,
           alignItems: 'center',
           justifyContent: 'flex-start',
@@ -106,10 +106,10 @@ export default ({
           source={parseCardAvatar(wallets[selectedWallet].cardAvatarID || 0)}
         />
         <View>
-          <CustomText style={{color: '#FFFFFF', fontWeight: 'bold'}}>
+          <CustomText style={{color: theme.textColor, fontWeight: 'bold'}}>
             {wallets[selectedWallet].name || getLanguageString(language, 'NEW_WALLET')}
           </CustomText>
-          <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 12}}>
+          <CustomText style={{color: theme.textColor, fontSize: 12}}>
             {truncate(address, 10, 10)}
           </CustomText>
         </View>
@@ -152,12 +152,12 @@ export default ({
         )}
         </View>
         <View>
-          <CustomText style={{color: '#FFFFFF', fontWeight: 'bold'}}>
+          <CustomText style={{color: theme.textColor, fontWeight: 'bold'}}>
             {isNewContact()
               ? getLanguageString(language, 'NEW_CONTACT')
               : getFromAddressBook(addressBook, address)}
           </CustomText>
-          <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 12}}>
+          <CustomText style={{color: theme.textColor, fontSize: 12}}>
             {truncate(address, 10, 10)}
           </CustomText>
         </View>
@@ -198,7 +198,7 @@ export default ({
       visible={visible}
       onClose={onClose}
       showCloseButton={false}
-      contentStyle={{backgroundColor: theme.backgroundFocusColor, height: 530}}>
+      contentStyle={{backgroundColor: theme.modalBgColor, height: 530}}>
       <View style={[styles.container]}>
         <View
           style={{
