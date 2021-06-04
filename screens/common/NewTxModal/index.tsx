@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   TouchableWithoutFeedback,
   View,
@@ -30,6 +30,7 @@ import {theme} from '../../../theme/dark';
 import AuthModal from '../AuthModal';
 import {useNavigation} from '@react-navigation/native';
 import CustomText from '../../../components/Text';
+import { ThemeContext } from '../../../ThemeContext';
 
 const MAX_AMOUNT = 5000000000;
 
@@ -41,6 +42,7 @@ const NewTxModal = ({
   onClose: () => void;
 }) => {
   const navigation = useNavigation();
+  const theme = useContext(ThemeContext);
   const [wallets, setWallets] = useRecoilState(walletsAtom);
   const selectedWallet = useRecoilValue(selectedWalletAtom);
   const [address, setAddress] = useState('');
@@ -188,14 +190,14 @@ const NewTxModal = ({
         paddingHorizontal: 0,
         // flex: 0.65,
         height: keyboardShown ? 440 : 500,
-        backgroundColor: 'rgba(58, 59, 60, 1)',
+        backgroundColor: theme.modalBgColor,
       };
     } else {
       return {
         paddingHorizontal: 0,
         // flex: 0.65,
         height: keyboardShown ? 440 : 500,
-        backgroundColor: 'rgba(58, 59, 60, 1)',
+        backgroundColor: theme.modalBgColor,
         marginBottom: keyboardOffset,
         marginTop: -keyboardOffset,
       };
@@ -246,7 +248,7 @@ const NewTxModal = ({
         contentStyle={{
           height: 300,
           justifyContent: 'flex-start',
-          backgroundColor: theme.backgroundFocusColor,
+          backgroundColor: theme.modalBgColor,
         }}
         onClose={() => setShowConfirmModal(false)}>
         <CustomText style={[styles.confirmTitle, {color: theme.textColor}]}>
@@ -325,7 +327,8 @@ const NewTxModal = ({
                 message={errorAddress}
                 value={address}
                 inputStyle={{
-                  backgroundColor: 'rgba(96, 99, 108, 1)',
+                  backgroundColor: theme.inputBgColor,
+                  borderColor: theme.inputBorderColor,
                   color: theme.textColor,
                 }}
                 placeholder={getLanguageString(language, 'CREATE_TX_ADDRESS_PLACEHOLDER')}
@@ -338,7 +341,7 @@ const NewTxModal = ({
               style={{
                 // flex: 1,
                 padding: 15,
-                borderColor: 'rgba(255, 255, 255, 0.1)',
+                borderColor: theme.gray300,
                 height: 44,
                 width: 44,
                 borderWidth: 1.5,
@@ -348,7 +351,7 @@ const NewTxModal = ({
                 marginHorizontal: 8,
               }}>
               <Image
-                source={require('../../../assets/icon/scan_qr_dark.png')}
+                source={require('../../../assets/icon/scan_qr.png')}
                 style={{width: 18, height: 18}}
               />
             </TouchableOpacity>
@@ -357,7 +360,7 @@ const NewTxModal = ({
               style={{
                 // flex: 1,
                 padding: 15,
-                borderColor: 'rgba(255, 255, 255, 0.1)',
+                borderColor: theme.gray300,
                 height: 44,
                 width: 44,
                 borderWidth: 1.5,
@@ -366,7 +369,7 @@ const NewTxModal = ({
                 justifyContent: 'center',
               }}>
               <Image
-                source={require('../../../assets/icon/address_book_dark.png')}
+                source={require('../../../assets/icon/address_book.png')}
                 style={{width: 18, height: 18}}
               />
             </TouchableOpacity>
@@ -386,7 +389,8 @@ const NewTxModal = ({
               keyboardType="numeric"
               message={errorAmount}
               inputStyle={{
-                backgroundColor: 'rgba(96, 99, 108, 1)',
+                backgroundColor: theme.inputBgColor,
+                borderColor: theme.inputBorderColor,
                 color: theme.textColor,
               }}
               onChangeText={(newAmount) => {

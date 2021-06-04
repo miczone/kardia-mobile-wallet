@@ -121,7 +121,7 @@ export default () => {
               style={{color: theme.textColor, fontSize: 32, marginRight: 12}}>
               {formatNumberString(txObj.amount)}
             </CustomText>
-            <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 18}}>
+            <CustomText style={{color: theme.textColor, fontSize: 18}}>
               KAI
             </CustomText>
           </View>
@@ -139,7 +139,7 @@ export default () => {
               style={{color: theme.textColor, fontSize: 32, marginRight: 12}}>
               {parseDecimals(txObj.value, tokenDecimals)}
             </CustomText>
-            <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 18}}>
+            <CustomText style={{color: theme.textColor, fontSize: 18}}>
               {tokenSymbol}
             </CustomText>
           </View>
@@ -157,7 +157,7 @@ export default () => {
               style={{color: theme.textColor, fontSize: 32, marginRight: 12}}>
               {formatNumberString(claimAmount, 6)}
             </CustomText>
-            <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 18}}>
+            <CustomText style={{color: theme.textColor, fontSize: 18}}>
               KAI
             </CustomText>
           </View>
@@ -175,7 +175,7 @@ export default () => {
               style={{color: theme.textColor, fontSize: 32, marginRight: 12}}>
               {formatNumberString(withdrawAmount)}
             </CustomText>
-            <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 18}}>
+            <CustomText style={{color: theme.textColor, fontSize: 18}}>
               KAI
             </CustomText>
           </View>
@@ -193,7 +193,7 @@ export default () => {
               style={{color: theme.textColor, fontSize: 32, marginRight: 12}}>
               {formatNumberString(undelegateAmount)}
             </CustomText>
-            <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 18}}>
+            <CustomText style={{color: theme.textColor, fontSize: 18}}>
               KAI
             </CustomText>
           </View>
@@ -211,7 +211,7 @@ export default () => {
               style={{color: theme.textColor, fontSize: 32, marginRight: 12}}>
               {formatNumberString(dexAmount, 2)}
             </CustomText>
-            <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 18}}>
+            <CustomText style={{color: theme.textColor, fontSize: 18}}>
               {tokenSymbol}
             </CustomText>
           </View>
@@ -229,7 +229,7 @@ export default () => {
               style={{color: theme.textColor, fontSize: 32, marginRight: 12}}>
               {formatNumberString(txObj.amount)}
             </CustomText>
-            <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 18}}>
+            <CustomText style={{color: theme.textColor, fontSize: 18}}>
               KAI
             </CustomText>
           </View>

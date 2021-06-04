@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   TouchableWithoutFeedback,
   View,
@@ -35,6 +35,7 @@ import AuthModal from '../AuthModal';
 import {useNavigation} from '@react-navigation/native';
 import CustomText from '../../../components/Text';
 import { getRecomendedGasPrice } from '../../../services/transaction';
+import { ThemeContext } from '../../../ThemeContext';
 
 // const MAX_AMOUNT = 5000000000;
 
@@ -54,6 +55,7 @@ const NewKRC20TxModal = ({
   tokenAvatar: string;
 }) => {
   const navigation = useNavigation();
+  const theme = useContext(ThemeContext);
   const wallets = useRecoilValue(walletsAtom);
   const selectedWallet = useRecoilValue(selectedWalletAtom);
   const [address, setAddress] = useState('');
@@ -211,14 +213,14 @@ const NewKRC20TxModal = ({
         paddingHorizontal: 0,
         // flex: 0.65,
         height: 500,
-        backgroundColor: 'rgba(58, 59, 60, 1)',
+        backgroundColor: theme.modalBgColor,
       };
     } else {
       return {
         paddingHorizontal: 0,
         // flex: 0.65,
         height: 500,
-        backgroundColor: 'rgba(58, 59, 60, 1)',
+        backgroundColor: theme.modalBgColor,
         marginBottom: keyboardOffset - (keyboardShown ? 100 : 0),
         marginTop: -keyboardOffset - (keyboardShown ? 100 : 0),
       };
@@ -345,7 +347,8 @@ const NewKRC20TxModal = ({
                 message={errorAddress}
                 value={address}
                 inputStyle={{
-                  backgroundColor: 'rgba(96, 99, 108, 1)',
+                  backgroundColor: theme.inputBgColor,
+                  borderColor: theme.inputBorderColor,
                   color: theme.textColor,
                 }}
                 // headline={getLanguageString(language, 'CREATE_TX_ADDRESS')}
@@ -356,7 +359,7 @@ const NewKRC20TxModal = ({
               style={{
                 // flex: 1,
                 padding: 15,
-                borderColor: 'rgba(255, 255, 255, 0.1)',
+                borderColor: theme.gray300,
                 height: 44,
                 width: 44,
                 borderWidth: 1.5,
@@ -366,7 +369,7 @@ const NewKRC20TxModal = ({
                 marginHorizontal: 8,
               }}>
               <Image
-                source={require('../../../assets/icon/scan_qr_dark.png')}
+                source={require('../../../assets/icon/scan_qr.png')}
                 style={{width: 18, height: 18}}
               />
             </TouchableOpacity>
@@ -375,7 +378,7 @@ const NewKRC20TxModal = ({
               style={{
                 // flex: 1,
                 padding: 15,
-                borderColor: 'rgba(255, 255, 255, 0.1)',
+                borderColor: theme.gray300,
                 height: 44,
                 width: 44,
                 borderWidth: 1.5,
@@ -384,7 +387,7 @@ const NewKRC20TxModal = ({
                 justifyContent: 'center',
               }}>
               <Image
-                source={require('../../../assets/icon/address_book_dark.png')}
+                source={require('../../../assets/icon/address_book.png')}
                 style={{width: 18, height: 18}}
               />
             </TouchableOpacity>
@@ -404,7 +407,8 @@ const NewKRC20TxModal = ({
               keyboardType="numeric"
               message={errorAmount}
               inputStyle={{
-                backgroundColor: 'rgba(96, 99, 108, 1)',
+                backgroundColor: theme.inputBgColor,
+                borderColor: theme.inputBorderColor,
                 color: theme.textColor,
               }}
               onChangeText={(newAmount) => {
