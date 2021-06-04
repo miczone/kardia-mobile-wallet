@@ -36,20 +36,20 @@ const {width: viewportWidth, height: viewportHeight} = Dimensions.get('window')
 
 const HomeScreen = () => {
   const [showQRModal, setShowQRModal] = useState(false);
-  const tokenInfo = useRecoilValue(tokenInfoAtom);
   const [showPasscodeRemindModal, setShowPasscodeRemindModal] = useState(false);
   const [inited, setInited] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [refreshTime, setRefreshTime] = useState(Date.now())
 
   const [wallets, setWallets] = useRecoilState(walletsAtom);
+  
   const [selectedWallet, setSelectedWallet] = useRecoilState(
     selectedWalletAtom,
   );
 
   const setTabBarVisible = useSetRecoilState(showTabBarAtom);
   const tabBarHeight = useBottomTabBarHeight();
-
+  const tokenInfo = useRecoilValue(tokenInfoAtom);
   const theme = useContext(ThemeContext);
   const language = useRecoilValue(languageAtom);
   const navigation = useNavigation();
@@ -178,7 +178,9 @@ const HomeScreen = () => {
         >
           {/* Thông tin của ví ở homescreen */}
           <CardSliderSection showQRModal={() => setShowQRModal(true)} />
+
           <TokenListSection refreshTime={refreshTime} />
+
           <TouchableOpacity
           onPress={() => {navigation.navigate('TransactionList')}}
             style={{
@@ -202,13 +204,20 @@ const HomeScreen = () => {
                 source={require('../../assets/logo_dark.png')}
               />
               <View>
-               
                 <CustomText style={{color: theme.textColor, fontSize: 18, marginVertical: 4, fontWeight: 'bold'}}>
                   {
                     numeral(Number(weiToKAI(_getBalance()))).format('0,0.00')}{' '}
                   <CustomText style={{color: theme.mutedTextColor, fontWeight: '500'}}>KAI</CustomText>
                 </CustomText>
+                <CustomText style={{color:theme.mutedTextColor, fontSize: 18, fontWeight: '500'}}>
+                  $
+                  {numeral(
+                    tokenInfo.price *
+                      Number(weiToKAI(_getBalance())),
+                  ).format('0,0.00')}
+                </CustomText>
               </View>
+              
             </View>
             <Button
               title={getLanguageString(language, 'BUY_KAI')}

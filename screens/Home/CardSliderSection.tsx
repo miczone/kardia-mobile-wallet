@@ -52,7 +52,7 @@ const CardSliderSection = ({showQRModal}: {showQRModal: () => void}) => {
               justifyContent: 'space-between',
               alignItems: 'center',
             }}>
-            <View>
+            {/* <View>
               <CustomText allowFontScaling={false} style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: theme.defaultFontSize}}>
                 {getLanguageString(language, 'TOTAL_BALANCE').toUpperCase()} 
               </CustomText>
@@ -63,7 +63,7 @@ const CardSliderSection = ({showQRModal}: {showQRModal: () => void}) => {
                     (Number(weiToKAI(wallet.balance)) + wallet.staked + wallet.undelegating),
                 ).format('0,0.00')}
               </CustomText>
-            </View>
+            </View> */}
             {/* <IconButton
               onPress={() => setRemoveIndex(selectedWallet)}
               name="trash"

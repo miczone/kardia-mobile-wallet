@@ -139,7 +139,7 @@ const TokenListSection = ({refreshTime}: {
 
                             <CustomText style={{color: theme.mutedTextColor, fontWeight: '500' , fontSize: 18}}>
                               <CustomText style={{color: theme.mutedTextColor, fontWeight: '500' , fontSize: 18}}>
-                               $
+                              $
                               </CustomText>
                               {formatNumberString(parseDecimals(balance[index] * 0.023, item.decimals), 2)} 
                             </CustomText>
