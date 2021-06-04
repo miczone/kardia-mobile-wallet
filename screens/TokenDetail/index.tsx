@@ -119,16 +119,13 @@ const TokenDetail = () => {
     return (
       <View
         style={{
-          width: 48,
-          height: 48,
-
+          width: 60,
+          height: 60,
           borderRadius: 16,
           backgroundColor: 'transparent',
-
           flexDirection: 'row',
           justifyContent: 'center',
           alignItems: 'center',
-
           marginBottom: 12,
         }}>
         {avatar ? (
@@ -137,7 +134,7 @@ const TokenDetail = () => {
           <Image
             source={require('../../assets/logo.png')}
             style={styles.kaiLogo}
-          />
+        />
         )}
       </View>
     );
@@ -165,6 +162,7 @@ const TokenDetail = () => {
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'flex-start',
+     
             }}>
             <View>{renderIcon(tokenAvatar)}</View>
           </View>
@@ -173,12 +171,13 @@ const TokenDetail = () => {
               flexDirection: 'row',
               justifyContent: 'space-between',
               alignItems: 'flex-end',
+            
             }}>
             <View>
-              <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 10, lineHeight: 16}}>
+              <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 10, lineHeight: 16 , fontWeight:'bold'}}>
                 {getLanguageString(language, 'CURRENT_BALANCE').toUpperCase()}
               </CustomText>
-              <CustomText style={{fontSize: 24, color: 'white', fontWeight: 'bold'}}>
+              <CustomText style={{fontSize: 24,  color: 'white', fontWeight: 'bold'}}>
                 {numeral(
                   parseDecimals(Number(tokenBalance), tokenDecimals),
                 ).format('0,0.00')}{' '}
