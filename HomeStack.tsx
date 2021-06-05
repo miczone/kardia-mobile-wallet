@@ -18,6 +18,7 @@ import AddKRC20Tokens from './screens/AddKRC20Tokens';
 import SettingStackScreen from './SettingStack';
 import CreateWithMnemonicPhrase from './screens/CreateWithMnemonicPhrase';
 import TransactionScreen from './screens/Transactions';
+import SuccessTx from './screens/SuccessTx';
 
 const HomeStack = createStackNavigator();
 
@@ -104,6 +105,8 @@ const HomeStackScreen = () => {
       name="TransactionList"
       component={TransactionScreen}
     />
+
+      <HomeStack.Screen name="SuccessTx" component={SuccessTx} />
     </HomeStack.Navigator>
   );
 };

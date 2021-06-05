@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
     height: 230,
     resizeMode: 'cover',
     position: 'absolute',
-    borderRadius: 0,
+    borderRadius: 22,
   },
   kaiCardText: {
     color: '#FFFFFF',

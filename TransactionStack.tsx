@@ -53,17 +53,7 @@ const TransactionStackScreen = () => {
         gestureEnabled: true,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
-      <TransactionStack.Screen
-        name="TransactionList"
-        component={TransactionScreen}
-      />
-      {/* <TransactionStack.Screen name="CreateTx" component={CreateTxScreen} /> */}
-      <TransactionStack.Screen
-        name="TransactionDetail"
-        component={TransactionDetail}
-      />
-      <TransactionStack.Screen name="SuccessTx" component={SuccessTx} />
-      
+  
       {/*Chuyển sang route này để switch main thành Fado Coin */}
       <TransactionStack.Screen 
       name="TokenDetail" 

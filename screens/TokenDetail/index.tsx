@@ -174,10 +174,10 @@ const TokenDetail = () => {
             
             }}>
             <View>
-              <CustomText style={{color: theme.textColor, fontSize: 10, lineHeight: 16 , fontWeight:'bold'}}>
+              <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 10, lineHeight: 16 , fontWeight:'bold'}}>
                 {getLanguageString(language, 'CURRENT_BALANCE').toUpperCase()}
               </CustomText>
-              <CustomText style={{fontSize: 24,  color:  theme.textColor, fontWeight: 'bold'}}>
+              <CustomText style={{fontSize: 24,  color: 'white', fontWeight: 'bold'}}>
                 {numeral(
                   parseDecimals(Number(tokenBalance), tokenDecimals),
                 ).format('0,0.00')}{' '}
@@ -211,6 +211,7 @@ const TokenDetail = () => {
         </View>
       </View>
 
+{/* Lịch sử giao dịch của một token */}
       <View style={{flex: 3, width: '100%', paddingVertical: 12}}>
         <View
           style={{

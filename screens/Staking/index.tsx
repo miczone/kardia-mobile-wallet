@@ -26,6 +26,7 @@ import CustomText from '../../components/Text';
 import { formatNumberString } from '../../utils/number';
 import NewStakingModal from '../common/NewStakingModal';
 import { log } from 'react-native-reanimated';
+import { FADO_STAKING_VALIDATOR } from '../../fado.config';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
@@ -140,7 +141,7 @@ const StakingScreen = () => {
   //THEN SET THE STAKE ITEM = FADO SJS
   const toggleStakingModal = () =>{
     validatorList.map((validator) => {
-      if(validator.name === "FADO JSC"){
+      if(validator.name === FADO_STAKING_VALIDATOR){
         setValidatorItem(validator);
       }
     })
