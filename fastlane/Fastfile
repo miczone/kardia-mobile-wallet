@@ -35,13 +35,25 @@ platform :ios do
   end
 
   lane :prod do
-    build_prod
+    # build_prod
+
+    APP_VERSION = get_version_number(
+      xcodeproj: "./ios/KardiaChainWallet.xcodeproj",
+      target: "KardiaChainWallet"
+    )
 
     # Deploy to firebase app distribution to test
-    firebase_app_distribution(
-      app: "1:1097658756982:ios:17b7a72ddc6ff6a3621457",
-      release_notes: "new prod release",
-      ipa_path:'./fastlane/build/FadoWalletProd.ipa',
+    # firebase_app_distribution(
+    #   app: "1:1097658756982:ios:17b7a72ddc6ff6a3621457",
+    #   release_notes: "new ios prod test release #{APP_VERSION}",
+    #   ipa_path: "./fastlane/build/FadoWalletProd.ipa",
+    #   group: "Fado",
+    # )
+
+    # Commit release
+    git_commit(
+      path: "*",
+      message: "new ios prod test release #{APP_VERSION}",
     )
   end
 end
