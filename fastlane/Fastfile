@@ -79,7 +79,7 @@ platform :android do
   end
 
   lane :prod do
-    # build_prod
+    build_prod
 
     firebase_app_distribution(
       app: "1:1097658756982:android:31584eda47b373a4621457",
