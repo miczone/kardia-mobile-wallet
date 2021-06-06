@@ -1,0 +1,47 @@
+platform :ios do
+  private_lane :build_prod do
+    increment_version_number_in_plist(
+      xcodeproj: "./ios/KardiaChainWallet.xcodeproj",
+      target: "KardiaChainWallet",
+    )
+
+    update_app_identifier(
+      xcodeproj: "./ios/KardiaChainWallet.xcodeproj",
+      plist_path: 'KardiaChainWallet/Info.plist', # Path to info plist file, relative to xcodeproj
+      app_identifier: "com.fadowallet.app" # The App Identifier
+    )
+
+    update_project_provisioning(
+      xcodeproj: "./ios/KardiaChainWallet.xcodeproj",
+      profile: "./fastlane/FadoWalletProdProfile.mobileprovision",
+      code_signing_identity: "iPhone Distribution: Pham Tan Dat (Z9BL6FV726)"
+    )
+
+    # Change the Display Name of your app
+    update_info_plist( 
+      xcodeproj: "./ios/KardiaChainWallet.xcodeproj",
+      plist_path: 'KardiaChainWallet/Info.plist',
+      display_name: "Fado Wallet",
+    )
+
+    # Build 
+    # gym(
+    #   scheme: "KardiaChainWallet",
+    #   workspace: "./ios/KardiaChainWallet.xcworkspace",
+    #   export_method: "ad-hoc",
+    #   output_directory:'./fastlane/build',
+    #   output_name: "FadoWalletProd.ipa",
+    # )
+  end
+
+  lane :prod do
+    build_prod
+
+    # Deploy to firebase app distribution to test
+    firebase_app_distribution(
+      app: "1:1097658756982:ios:17b7a72ddc6ff6a3621457",
+      release_notes: "new prod release",
+      ipa_path:'./fastlane/build/FadoWalletProd.ipa',
+    )
+  end
+end
