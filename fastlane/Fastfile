@@ -24,7 +24,7 @@ platform :ios do
       display_name: "Fado Wallet",
     )
 
-    # Build 
+    # Build .ipa file
     gym(
       scheme: "FadoWallet",
       workspace: "./ios/FadoWallet.xcworkspace",
@@ -47,7 +47,7 @@ platform :ios do
       app: "1:1097658756982:ios:17b7a72ddc6ff6a3621457",
       release_notes: "new ios prod test release #{APP_VERSION}",
       ipa_path: "./fastlane/build/FadoWalletProd.ipa",
-      groups: "fado, ios",
+      groups: "fado,ios",
     )
 
     # Commit release
@@ -59,3 +59,41 @@ platform :ios do
     push_to_git_remote()
   end
 end
+
+platform :android do
+  private_lane :build_prod do
+    increment_version_code(
+      gradle_file_path: './android/app/build.gradle'
+    )
+
+    # build .apk file
+    build_android_app(
+      project_dir: './android',
+      task: "assemble",
+      build_type: "Release",
+    )
+
+    # move .apk file to build folder
+    APK_LOCATION = "#{lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]}"
+    sh("mv #{APK_LOCATION} ./build/FadoWalletProd.apk")
+  end
+
+  lane :prod do
+    # build_prod
+
+    firebase_app_distribution(
+      app: "1:1097658756982:android:31584eda47b373a4621457",
+      release_notes: "new android prod test release",
+      apk_path:'./fastlane/build/FadoWalletProd.apk',
+      groups: 'fado,android',
+    )
+
+    # Commit release
+    git_commit(
+      path: "*",
+      message: "new android prod test release",
+    )
+
+    push_to_git_remote()
+  end
+end 
