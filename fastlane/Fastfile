@@ -25,13 +25,13 @@ platform :ios do
     )
 
     # Build 
-    # gym(
-    #   scheme: "KardiaChainWallet",
-    #   workspace: "./ios/KardiaChainWallet.xcworkspace",
-    #   export_method: "ad-hoc",
-    #   output_directory:'./fastlane/build',
-    #   output_name: "FadoWalletProd.ipa",
-    # )
+    gym(
+      scheme: "KardiaChainWallet",
+      workspace: "./ios/KardiaChainWallet.xcworkspace",
+      export_method: "ad-hoc",
+      output_directory:'./fastlane/build',
+      output_name: "FadoWalletProd.ipa",
+    )
   end
 
   lane :prod do
