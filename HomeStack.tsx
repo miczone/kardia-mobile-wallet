@@ -102,9 +102,12 @@ const HomeStackScreen = () => {
       />
 
       <HomeStack.Screen 
-      name="TransactionList"
-      component={TransactionScreen}
-    />
+        name="TransactionList"
+        component={TransactionScreen}
+        options={{
+          headerTitle: "",
+        }}
+      />
 
       <HomeStack.Screen name="SuccessTx" component={SuccessTx} />
     </HomeStack.Navigator>

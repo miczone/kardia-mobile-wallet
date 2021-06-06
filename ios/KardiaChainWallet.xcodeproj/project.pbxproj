@@ -387,7 +387,6 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = Z9BL6FV726;
 						LastSwiftMigration = 1120;
 						ProvisioningStyle = Manual;
 					};
@@ -877,10 +876,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Pham Tan Dat (Z9BL6FV726)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 102;
-				DEVELOPMENT_TEAM = Z9BL6FV726;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = KardiaChainWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -893,7 +892,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.fadowallet.app;
 				PRODUCT_NAME = "KardiaChain Wallet";
 				PROVISIONING_PROFILE = "cb1eb5a7-3fd8-436f-89bd-d50121207007";
-				PROVISIONING_PROFILE_SPECIFIER = FadoWalletProdProfile;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -906,11 +905,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Pham Tan Dat (Z9BL6FV726)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pham Tan Dat (Z9BL6FV726)";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 102;
-				DEVELOPMENT_TEAM = Z9BL6FV726;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = KardiaChainWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
@@ -922,7 +921,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.fadowallet.app;
 				PRODUCT_NAME = "KardiaChain Wallet";
 				PROVISIONING_PROFILE = "cb1eb5a7-3fd8-436f-89bd-d50121207007";
-				PROVISIONING_PROFILE_SPECIFIER = FadoWalletProdProfile;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

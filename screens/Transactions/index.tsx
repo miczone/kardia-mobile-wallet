@@ -245,7 +245,7 @@ const TransactionScreen = () => {
                 <AntIcon
                   name="plus"
                   size={20}
-                  color={'#000000'}
+                  color={theme.white}
                   style={{marginRight: 8}}
                 />
               }

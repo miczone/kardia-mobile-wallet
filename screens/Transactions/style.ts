@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     height: SEARCH_INPUT_HEIGHT,
   },
   headline: {
-    fontSize: 36,
+    fontSize: 30,
     // fontWeight: 'bold',
   },
   header: {
