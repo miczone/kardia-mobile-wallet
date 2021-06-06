@@ -387,6 +387,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = Z9BL6FV726;
 						LastSwiftMigration = 1120;
 						ProvisioningStyle = Manual;
 					};
@@ -840,7 +841,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cb1eb5a7-3fd8-436f-89bd-d50121207007";
+				PROVISIONING_PROFILE = "6fcf59a0-2fa2-4932-aea6-3242fc7818a2";
 				PROVISIONING_PROFILE_SPECIFIER = FadoWalletProdProfile;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FadoWallet.app/FadoWallet";
 			};
@@ -864,7 +865,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cb1eb5a7-3fd8-436f-89bd-d50121207007";
+				PROVISIONING_PROFILE = "6fcf59a0-2fa2-4932-aea6-3242fc7818a2";
 				PROVISIONING_PROFILE_SPECIFIER = FadoWalletProdProfile;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FadoWallet.app/FadoWallet";
 			};
@@ -876,10 +877,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Pham Tan Dat (Z9BL6FV726)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 102;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z9BL6FV726;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FadoWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -891,8 +892,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fadowallet.app;
 				PRODUCT_NAME = "KardiaChain Wallet";
-				PROVISIONING_PROFILE = "cb1eb5a7-3fd8-436f-89bd-d50121207007";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6fcf59a0-2fa2-4932-aea6-3242fc7818a2";
+				PROVISIONING_PROFILE_SPECIFIER = FadoWalletProdProfile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -905,11 +906,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Pham Tan Dat (Z9BL6FV726)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pham Tan Dat (Z9BL6FV726)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 102;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = Z9BL6FV726;
 				INFOPLIST_FILE = FadoWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
@@ -920,8 +921,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fadowallet.app;
 				PRODUCT_NAME = "KardiaChain Wallet";
-				PROVISIONING_PROFILE = "cb1eb5a7-3fd8-436f-89bd-d50121207007";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "6fcf59a0-2fa2-4932-aea6-3242fc7818a2";
+				PROVISIONING_PROFILE_SPECIFIER = FadoWalletProdProfile;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -950,7 +951,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.FadoWallet-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cb1eb5a7-3fd8-436f-89bd-d50121207007";
+				PROVISIONING_PROFILE = "6fcf59a0-2fa2-4932-aea6-3242fc7818a2";
 				PROVISIONING_PROFILE_SPECIFIER = FadoWalletProdProfile;
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -981,7 +982,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.FadoWallet-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cb1eb5a7-3fd8-436f-89bd-d50121207007";
+				PROVISIONING_PROFILE = "6fcf59a0-2fa2-4932-aea6-3242fc7818a2";
 				PROVISIONING_PROFILE_SPECIFIER = FadoWalletProdProfile;
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -1011,7 +1012,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.FadoWallet-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cb1eb5a7-3fd8-436f-89bd-d50121207007";
+				PROVISIONING_PROFILE = "6fcf59a0-2fa2-4932-aea6-3242fc7818a2";
 				PROVISIONING_PROFILE_SPECIFIER = FadoWalletProdProfile;
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FadoWallet-tvOS.app/FadoWallet-tvOS";
@@ -1041,7 +1042,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.FadoWallet-tvOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cb1eb5a7-3fd8-436f-89bd-d50121207007";
+				PROVISIONING_PROFILE = "6fcf59a0-2fa2-4932-aea6-3242fc7818a2";
 				PROVISIONING_PROFILE_SPECIFIER = FadoWalletProdProfile;
 				SDKROOT = appletvos;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FadoWallet-tvOS.app/FadoWallet-tvOS";
