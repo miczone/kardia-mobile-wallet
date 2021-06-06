@@ -21,6 +21,11 @@ or alternatively using `brew install fastlane`
 fastlane ios prod
 ```
 
+### ios test
+```
+fastlane ios test
+```
+
 
 ----
 

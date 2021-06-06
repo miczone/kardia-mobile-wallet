@@ -879,7 +879,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Pham Tan Dat (Z9BL6FV726)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z9BL6FV726;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FadoWallet/Info.plist;
@@ -909,7 +909,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Pham Tan Dat (Z9BL6FV726)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Pham Tan Dat (Z9BL6FV726)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 102;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z9BL6FV726;
 				INFOPLIST_FILE = FadoWallet/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
