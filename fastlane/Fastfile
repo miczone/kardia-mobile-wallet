@@ -43,12 +43,12 @@ platform :ios do
     )
 
     # Deploy to firebase app distribution to test
-    # firebase_app_distribution(
-    #   app: "1:1097658756982:ios:17b7a72ddc6ff6a3621457",
-    #   release_notes: "new ios prod test release #{APP_VERSION}",
-    #   ipa_path: "./fastlane/build/FadoWalletProd.ipa",
-    #   group: "Fado",
-    # )
+    firebase_app_distribution(
+      app: "1:1097658756982:ios:17b7a72ddc6ff6a3621457",
+      release_notes: "new ios prod test release #{APP_VERSION}",
+      ipa_path: "./fastlane/build/FadoWalletProd.ipa",
+      groups: "fado",
+    )
 
     # Commit release
     git_commit(
