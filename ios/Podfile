@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'KardiaChainWallet' do
+target 'FadoWallet' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
@@ -22,7 +22,7 @@ target 'KardiaChainWallet' do
 
   pod 'TouchID', :path => '../node_modules/react-native-touch-id'
 
-  target 'KardiaChainWalletTests' do
+  target 'FadoWalletTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -44,10 +44,10 @@ target 'KardiaChainWallet' do
   end
 end
 
-target 'KardiaChainWallet-tvOS' do
-  # Pods for KardiaChainWallet-tvOS
+target 'FadoWallet-tvOS' do
+  # Pods for FadoWallet-tvOS
 
-  target 'KardiaChainWallet-tvOSTests' do
+  target 'FadoWallet-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end

@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "KardiaChainWallet-tvOS.app"
-               BlueprintName = "KardiaChainWallet-tvOS"
-               ReferencedContainer = "container:KardiaChainWallet.xcodeproj">
+               BuildableName = "FadoWallet-tvOS.app"
+               BlueprintName = "FadoWallet-tvOS"
+               ReferencedContainer = "container:FadoWallet.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "KardiaChainWallet-tvOSTests.xctest"
-               BlueprintName = "KardiaChainWallet-tvOSTests"
-               ReferencedContainer = "container:KardiaChainWallet.xcodeproj">
+               BuildableName = "FadoWallet-tvOSTests.xctest"
+               BlueprintName = "FadoWallet-tvOSTests"
+               ReferencedContainer = "container:FadoWallet.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "KardiaChainWallet-tvOS.app"
-            BlueprintName = "KardiaChainWallet-tvOS"
-            ReferencedContainer = "container:KardiaChainWallet.xcodeproj">
+            BuildableName = "FadoWallet-tvOS.app"
+            BlueprintName = "FadoWallet-tvOS"
+            ReferencedContainer = "container:FadoWallet.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "KardiaChainWallet-tvOS.app"
-            BlueprintName = "KardiaChainWallet-tvOS"
-            ReferencedContainer = "container:KardiaChainWallet.xcodeproj">
+            BuildableName = "FadoWallet-tvOS.app"
+            BlueprintName = "FadoWallet-tvOS"
+            ReferencedContainer = "container:FadoWallet.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

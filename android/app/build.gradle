@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.kardiawallet"
+        applicationId "com.fadowallet"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 53
