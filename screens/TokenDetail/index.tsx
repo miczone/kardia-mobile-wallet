@@ -70,6 +70,12 @@ const TokenDetail = () => {
     useCallback(() => {
       setTabBarVisible(true);
       // eslint-disable-next-line react-hooks/exhaustive-deps
+
+      return () => {
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+        navigation.navigate('HomeScreen');
+      };
     }, []),
   );
 
