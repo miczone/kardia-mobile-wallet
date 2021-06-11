@@ -25,8 +25,9 @@ import { showTabBarAtom } from '../../atoms/showTabBar';
 import CustomText from '../../components/Text';
 import { formatNumberString } from '../../utils/number';
 import NewStakingModal from '../common/NewStakingModal';
-import { log } from 'react-native-reanimated';
+
 import { FADO_STAKING_VALIDATOR } from '../../fado.config';
+import { getFadoBalance } from '../../services/fadostaking/index';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
@@ -123,7 +124,6 @@ const StakingScreen = () => {
     }, new BigNumber(0));
     return rs.dividedBy(new BigNumber(10 ** 18)).toFixed()
   };
-
   //CALL API AND GET THE LIST , 
   useEffect(() => {
     (async () => {
@@ -250,7 +250,7 @@ const StakingScreen = () => {
                 />
               }
             />
-
+                                                              <CustomText>TEST BAL</CustomText>
               {/* Toggle FADO JSC */}
              <NewStakingModal
                 validatorItem={validatorItem}
@@ -281,6 +281,7 @@ const StakingScreen = () => {
           onPress={() => toggleStakingModal()}
           style={styles.floatingButton}
         />
+      
         <NewStakingModal
                 validatorItem={validatorItem}
                 visible={validatorItem !== undefined}

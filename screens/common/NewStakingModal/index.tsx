@@ -15,7 +15,7 @@ import {styles} from './style';
 import {weiToKAI} from '../../../services/transaction/amount';
 import Button from '../../../components/Button';
 import {BLOCK_TIME, MIN_DELEGATE} from '../../../config';
-import {getSelectedWallet, getWallets} from '../../../utils/local';
+import { getSelectedWallet, getWallets, getTokenList } from '../../../utils/local';
 import {delegateAction, getAllValidator} from '../../../services/staking';
 import {getLatestBlock} from '../../../services/blockchain';
 import AuthModal from '../AuthModal';
@@ -23,6 +23,8 @@ import {useNavigation} from '@react-navigation/native';
 import { getBalance } from '../../../services/account';
 import { selectedWalletAtom, walletsAtom } from '../../../atoms/wallets';
 import CustomText from '../../../components/Text';
+import { getFadoBalance } from '../../../services/fadostaking/index';
+import { log } from 'react-native-reanimated';
 
 export default ({
   validatorItem,
@@ -42,6 +44,7 @@ export default ({
   const [totalStakedAmount, setTotalStakedAmount] = useState('');
   const [delegating, setDelegating] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [fadoBalance, setFadoBalance] = useState(0);
 
   const theme = useContext(ThemeContext);
 
@@ -52,6 +55,7 @@ export default ({
     (async () => {
       try {
         const {totalStaked} = await getAllValidator();
+        getFadoBal();
         setTotalStakedAmount(totalStaked);
         // setValidatorList(validators);
         // setLoading(false);
@@ -155,6 +159,7 @@ export default ({
     return wallets[selectedWallet].balance;
   }
 
+  // FADO JSC COMMISSION RATE
   const getSelectedCommission = () => {
     const formatted = numeral(validatorItem.commissionRate).format('0,0.00');
     return formatted === 'NaN' ? '0 %' : `${formatted} %`;
@@ -287,6 +292,13 @@ export default ({
       };
     }
   };
+// O DAY NE 
+// STAKING FADO AMOUNT !
+const getFadoBal = async  () => {
+  const bal = await getFadoBalance(wallets[selectedWallet].address); 
+  console.log("Bal " + bal);
+  setFadoBalance(bal);
+};
 
   return (
     <Modal
@@ -306,7 +318,7 @@ export default ({
               </CustomText>
               <TouchableOpacity onPress={() => setAmount(parseDecimals(_getBalance(), 18).toString())}>
                 <CustomText style={{color: theme.urlColor}}>
-                  {parseKaiBalance(_getBalance())} KAI
+                 { fadoBalance } FADO
                 </CustomText>
               </TouchableOpacity>
             </View>
