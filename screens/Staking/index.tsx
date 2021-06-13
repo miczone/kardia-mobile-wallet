@@ -25,9 +25,9 @@ import { showTabBarAtom } from '../../atoms/showTabBar';
 import CustomText from '../../components/Text';
 import { formatNumberString } from '../../utils/number';
 import NewStakingModal from '../common/NewStakingModal';
-
 import { FADO_STAKING_VALIDATOR } from '../../fado.config';
-import { getFadoBalance } from '../../services/fadostaking/index';
+import { getFadoTokenBalance, getFadoTotalStakedAmount, getKRC20TokenFado } from '../../services/fadostaking';
+import { FADO_STAKE_SMC, FADO_TOKEN_SMC } from '../../services/fadostaking/config';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
@@ -53,6 +53,9 @@ const StakingScreen = () => {
   const [validatorItem, setValidatorItem] = useState<Validator>();
   
 
+  const [fadoBalance, setFadoBalance] = useState(0);
+  const [fadoTotalStakedAmount, setFadoTotalStakedAmoutn] = useState(0);
+
   const getStakingData = async () => {
     const localWallets = await getWallets();
     const localSelectedWallet = await getSelectedWallet();
@@ -67,6 +70,13 @@ const StakingScreen = () => {
         localWallets[localSelectedWallet].address,
       );
       setCurrentStaking(_staking);
+
+      const test1 = await getFadoTokenBalance(FADO_STAKE_SMC);
+      const test2 = await getFadoTotalStakedAmount(FADO_STAKE_SMC);
+    const test3 = await getKRC20TokenFado(FADO_TOKEN_SMC , wallets[localSelectedWallet].address);
+    console.log(test3);
+    
+
       if (loading === true) {
         setLoading(false);
       }
@@ -78,8 +88,12 @@ const StakingScreen = () => {
     }
   };
 
+const getCurrentValid = async () =>{
+}
+
   useFocusEffect(
     useCallback(() => {
+      getCurrentValid();
       getStakingData();
       setTabBarVisible(true);
       // TODO: Update after designer finish
@@ -250,7 +264,9 @@ const StakingScreen = () => {
                 />
               }
             />
-                                                              <CustomText>TEST BAL</CustomText>
+            <CustomText>TEST:</CustomText>
+
+                          
               {/* Toggle FADO JSC */}
              <NewStakingModal
                 validatorItem={validatorItem}
@@ -262,6 +278,7 @@ const StakingScreen = () => {
           </View>
         }
         //END LIST EMPTY
+
         render={(item, index) => {
           return (
             <StakingItem

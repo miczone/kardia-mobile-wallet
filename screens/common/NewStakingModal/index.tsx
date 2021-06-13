@@ -23,9 +23,6 @@ import {useNavigation} from '@react-navigation/native';
 import { getBalance } from '../../../services/account';
 import { selectedWalletAtom, walletsAtom } from '../../../atoms/wallets';
 import CustomText from '../../../components/Text';
-import { getFadoBalance } from '../../../services/fadostaking/index';
-import { log } from 'react-native-reanimated';
-
 export default ({
   validatorItem,
   visible,
@@ -55,7 +52,9 @@ export default ({
     (async () => {
       try {
         const {totalStaked} = await getAllValidator();
-        getFadoBal();
+    
+        
+        
         setTotalStakedAmount(totalStaked);
         // setValidatorList(validators);
         // setLoading(false);
@@ -293,12 +292,6 @@ export default ({
     }
   };
 // O DAY NE 
-// STAKING FADO AMOUNT !
-const getFadoBal = async  () => {
-  const bal = await getFadoBalance(wallets[selectedWallet].address); 
-  console.log("Bal " + bal);
-  setFadoBalance(bal);
-};
 
   return (
     <Modal

@@ -25,7 +25,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {getLanguageString} from '../../utils/lang';
 import {languageAtom} from '../../atoms/language';
 import CustomText from '../../components/Text';
-import { getFadoBalance } from '../../services/fadostaking';
+
 
 const parseValidatorItemForList = (item: Validator) => {
   return {
