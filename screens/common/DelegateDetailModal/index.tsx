@@ -241,14 +241,15 @@ export default ({
       </View>
       <Divider style={{width: '100%'}} color={theme.gray400} />
       <View style={{width: '100%'}}>
-        <View style={styles.dataContainer}>
+        {/* <View style={styles.dataContainer}>
           <CustomText style={{color: theme.mutedTextColor}}>
             {getLanguageString(language, 'ESTIMATED_APR')}
           </CustomText>
           <CustomText style={[{color: theme.textColor, fontWeight: '500'}]}>
             {numeral(estimatedAPR).format('0,0.00')}{' '}%
           </CustomText>
-        </View>
+        </View> */}
+
         <View style={styles.dataContainer}>
           <CustomText style={{color: theme.mutedTextColor}}>
             {getLanguageString(language, 'COMMISSION_RATE')}
@@ -257,6 +258,7 @@ export default ({
             {getSelectedCommission()}
           </CustomText>
         </View>
+
         <View style={styles.dataContainer}>
           <CustomText style={{color: theme.mutedTextColor}}>
             {getLanguageString(language, 'TOTAL_STAKED_AMOUNT')}
@@ -265,6 +267,7 @@ export default ({
             {getSelectedStakedAmount(6)}
           </CustomText>
         </View>
+
         {showButton(validatorItem.stakedAmount) && (
           <View style={[styles.dataContainer, {justifyContent: 'flex-end'}]}>
             <TouchableOpacity onPress={() => setShowUndelegateModal(true)}>
@@ -277,6 +280,13 @@ export default ({
         
         <View style={styles.dataContainer}>
           <CustomText style={{color: theme.mutedTextColor}}>
+            {getLanguageString(language, 'TRANSACTION_BONUS')}
+          </CustomText>
+        
+        </View>
+
+        {/* <View style={styles.dataContainer}>
+          <CustomText style={{color: theme.mutedTextColor}}>
             {getLanguageString(language, 'CLAIMABLE')}
           </CustomText>
           <CustomText style={[{color: theme.textColor, fontWeight: '500'}]}>
@@ -284,6 +294,7 @@ export default ({
             KAI
           </CustomText>
         </View>
+
         <View style={[styles.dataContainer, {justifyContent: 'flex-end'}]}>
           {showButton(weiToKAI(validatorItem.claimableRewards)) && (
             claiming ? (
@@ -297,6 +308,7 @@ export default ({
             )
           )}
         </View>
+
         <View style={styles.dataContainer}>
           <CustomText style={{color: theme.mutedTextColor}}>
             {getLanguageString(language, 'UNBONDED')}
@@ -306,6 +318,7 @@ export default ({
             KAI
           </CustomText>
         </View>
+
         <View style={styles.dataContainer}>
           <CustomText style={{color: theme.mutedTextColor}}>
             {getLanguageString(language, 'WITHDRAWABLE')}
@@ -329,7 +342,7 @@ export default ({
               </TouchableOpacity>
             )}
           </View>
-        )}
+        )} */}
       </View>
       <Divider style={{width: '100%'}} color={theme.gray400} />
       {/* {showWithdraw(validatorItem.withdrawableAmount) && (

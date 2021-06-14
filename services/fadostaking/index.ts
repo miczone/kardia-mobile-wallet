@@ -1,8 +1,10 @@
 import KardiaClient from 'kardia-js-sdk';
 import { FADO_TOKEN_ADDRESS } from '../../fado.config';
-import FADO_ABI from './fadoStakingABI.json';
+import FADO_STAKING_ABI from './fadoStakingABI.json';
+import FADO_TOKEN_ABI from './fadoTokenKRCABI.json';
 import { RPC_ENDPOINT } from '../config';
 import { weiToKAI } from '../transaction/amount';
+import { FADO_STAKE_SMC, FADO_TOKEN_SMC } from './config';
 
 const kardiaClient = new KardiaClient({endpoint: RPC_ENDPOINT});
 const kardiaContract = kardiaClient.contract;
@@ -10,7 +12,7 @@ const kardiaContract = kardiaClient.contract;
 
 export const getFadoTokenBalance = async (smcAddess : string) => {
   try {
-    kardiaContract.updateAbi(FADO_ABI);
+    kardiaContract.updateAbi(FADO_STAKING_ABI);
     const rs = await kardiaContract.invokeContract('getBalance', []).call(smcAddess);
 
     return rs
@@ -20,28 +22,9 @@ export const getFadoTokenBalance = async (smcAddess : string) => {
   }
 }
 
-export const getKRC20TokenFado = async (smcAddess : string , walletAdderess: string) => {
-  try {
-    const kardiaKrc20 = kardiaClient.krc20;
-   // Fetch KRC20 token's data from smart contract
-await kardiaKrc20.getFromAddress('KRC20_TOKEN_ADDRESS');
-
-const balance = await kardiaKrc20.balanceOf('YOUR_WALLET_ADDRESS');
-// `balance` will be your wallet's balance, but with token's `decimals` padding.
-// To get real ballance, use the following code
-
-const decimals = await kardiaKrc20.getDecimals();
-const parsedBalance = balance / 10 ** decimals;
-return parsedBalance;
-  } catch (error) {
-    console.log(error + " " + walletAdderess);
-    return 0;
-  }
-}
-
 export const getFadoTotalStakedAmount = async ( smcAddress: string ) =>{
   try {
-    kardiaContract.updateAbi(FADO_ABI);
+    kardiaContract.updateAbi(FADO_STAKING_ABI);
     const rs = await kardiaContract
     .invokeContract('totalStakedAmount', [],).call(smcAddress);
  
@@ -53,6 +36,25 @@ export const getFadoTotalStakedAmount = async ( smcAddress: string ) =>{
   }
 };
 
-export const stakeFadoToken = async (smcAddress: string ) => {
-  
+export const stakeFadoToken = async ( stakeAmount: number , wallet: Wallet) => {
+      kardiaContract.updateAbi(FADO_TOKEN_ABI);
+      const approveStatus = await kardiaContract.invokeContract('approve', [FADO_STAKE_SMC , stakeAmount]).call(FADO_TOKEN_SMC);
+      try {
+          if(approveStatus === true) {
+            kardiaContract.updateAbi(FADO_STAKING_ABI);
+            if(wallet !== undefined && wallet.privateKey !== undefined ){
+              console.log("start stake");
+              
+              const txtAddress = kardiaContract.invokeContract('stake', [stakeAmount]).send(wallet.privateKey, FADO_STAKE_SMC);
+              return txtAddress;
+            }
+            return null;
+          }
+          return null;
+            }catch (error) {
+  console.log(error);
+  return null;
+}
+     
+      
 }

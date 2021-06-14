@@ -26,7 +26,7 @@ import CustomText from '../../components/Text';
 import { formatNumberString } from '../../utils/number';
 import NewStakingModal from '../common/NewStakingModal';
 import { FADO_STAKING_VALIDATOR } from '../../fado.config';
-import { getFadoTokenBalance, getFadoTotalStakedAmount, getKRC20TokenFado } from '../../services/fadostaking';
+import { getFadoTokenBalance, getFadoTotalStakedAmount, stakeFadoToken } from '../../services/fadostaking';
 import { FADO_STAKE_SMC, FADO_TOKEN_SMC } from '../../services/fadostaking/config';
 
 const {width: viewportWidth} = Dimensions.get('window');
@@ -70,12 +70,6 @@ const StakingScreen = () => {
         localWallets[localSelectedWallet].address,
       );
       setCurrentStaking(_staking);
-
-      const test1 = await getFadoTokenBalance(FADO_STAKE_SMC);
-      const test2 = await getFadoTotalStakedAmount(FADO_STAKE_SMC);
-    const test3 = await getKRC20TokenFado(FADO_TOKEN_SMC , wallets[localSelectedWallet].address);
-    console.log(test3);
-    
 
       if (loading === true) {
         setLoading(false);
@@ -160,6 +154,16 @@ const getCurrentValid = async () =>{
       }
     })
   };
+
+  const stakeFado = async () => {
+   const txtAddress = await stakeFadoToken(1000, wallets[selectedWallet]);
+   console.log("response: " + txtAddress);
+   
+  }
+
+  // useEffect(() => {
+  //   stakeFado();
+  // }, [])
 
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>

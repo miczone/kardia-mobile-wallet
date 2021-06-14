@@ -145,6 +145,7 @@ export const lang: Language = {
     UNBONDED: 'KAI đang khóa chờ rút',
     CLAIM_REWARD: 'Rút thưởng',
     UNDELEGATE: 'Rút tiền stake',
+    TRANSACTION_BONUS: 'Lãi trả về trên giao dịch',
     WITHDRAW: 'Rút về ví',
     SUCCESS: 'Thành công',
     DELEGATE_SUCCESS: 'Bạn đã đầu tư vào',
