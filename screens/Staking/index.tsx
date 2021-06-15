@@ -26,7 +26,6 @@ import CustomText from '../../components/Text';
 import { formatNumberString } from '../../utils/number';
 import NewStakingModal from '../common/NewStakingModal';
 import { FADO_STAKING_VALIDATOR } from '../../fado.config';
-import { allowance, getFadoTokenBalance, getFadoTotalStakedAmount, stakeFadoToken } from '../../services/fadostaking';
 import { FADO_STAKE_SMC, FADO_TOKEN_SMC } from '../../services/fadostaking/config';
 import FadoNewStakingModal from '../common/FadoNewStakingModal';
 
@@ -61,9 +60,8 @@ const StakingScreen = () => {
     const localWallets = await getWallets();
     const localSelectedWallet = await getSelectedWallet();
 
-    //TEST
-    await stakeFadoToken(50 , localWallets[localSelectedWallet]);
-    await allowance(localWallets[selectedWallet].address , FADO_STAKE_SMC);
+    //TEST FADO STAKING HERE
+
 
 
     if (
