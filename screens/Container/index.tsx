@@ -370,7 +370,7 @@ const AppContainer = () => {
         return;
       }
 
-      const compareResult = compareVersion(INFO_DATA.version, serverStatus.appVersion)
+      const compareResult = 'OK';
       setAppStatus(compareResult)
 
       if (compareResult !== 'OK') {
