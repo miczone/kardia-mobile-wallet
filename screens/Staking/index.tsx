@@ -28,6 +28,7 @@ import NewStakingModal from '../common/NewStakingModal';
 import { FADO_STAKING_VALIDATOR } from '../../fado.config';
 import { getFadoTokenBalance, getFadoTotalStakedAmount, stakeFadoToken } from '../../services/fadostaking';
 import { FADO_STAKE_SMC, FADO_TOKEN_SMC } from '../../services/fadostaking/config';
+import FadoNewStakingModal from '../common/FadoNewStakingModal';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
@@ -70,6 +71,9 @@ const StakingScreen = () => {
         localWallets[localSelectedWallet].address,
       );
       setCurrentStaking(_staking);
+
+      const txHash = await stakeFadoToken(100 , wallets[selectedWallet]);
+      console.log("tx:" + txHash);
 
       if (loading === true) {
         setLoading(false);
@@ -303,13 +307,20 @@ const getCurrentValid = async () =>{
           style={styles.floatingButton}
         />
       
-        <NewStakingModal
+        {/* <NewStakingModal
                 validatorItem={validatorItem}
                 visible={validatorItem !== undefined}
                 onClose={() => {
                   setValidatorItem(undefined);
                  }}
-      />
+      /> */}
+
+        <FadoNewStakingModal
+            visible={validatorItem !== undefined}
+            onClose = {() => {
+            setValidatorItem(undefined);
+          }}
+        />
       </>
       )}
       {message !== '' && (

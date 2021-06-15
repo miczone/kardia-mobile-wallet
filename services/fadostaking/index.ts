@@ -54,7 +54,15 @@ export const stakeFadoToken = async ( stakeAmount: number , wallet: Wallet) => {
             }catch (error) {
   console.log(error);
   return null;
+}      
 }
-     
-      
+
+export const stakerInfo = async (stakerAddress: string ) => {
+    kardiaContract.updateAbi(FADO_STAKING_ABI);
+
+    if(stakerAddress !== undefined){
+      const resObj = await kardiaContract.invokeContract('stakerInfo', [stakerAddress]).call(FADO_STAKE_SMC);
+      return resObj
+  }
+    return '';
 }

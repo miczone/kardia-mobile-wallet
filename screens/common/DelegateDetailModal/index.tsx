@@ -20,6 +20,7 @@ import CustomText from '../../../components/Text';
 import { getLatestBlock } from '../../../services/blockchain';
 import { formatNumberString, getDigit } from '../../../utils/number';
 import { BLOCK_TIME } from '../../../config';
+import { stakerInfo } from '../../../services/fadostaking';
 
 const showButton = (value: any) => {
   return numeral(value).format('0,0.00') !== '0.00'
@@ -44,11 +45,21 @@ export default ({
   const [totalStakedAmount, setTotalStakedAmount] = useState('');
   const [estimatedAPR, setEstimatedAPR] = useState('');
 
-  useEffect(() => {
+
+  useEffect(() => {  
     (async () => {
+      const wallets = await getWallets();
+      const selectedWallet = await getSelectedWallet();
       try {
-        const {totalStaked} = await getAllValidator();
-        setTotalStakedAmount(totalStaked);
+        if(wallets !== undefined && wallets[selectedWallet].address !== ''){
+          console.log("Here");
+          
+          const totalStake = await stakerInfo(wallets[selectedWallet].address);
+          console.log(totalStake.stakedAmount);
+          
+          setTotalStakedAmount(totalStake.stakedAmount);
+        }
+        
         // setValidatorList(validators);
         // setLoading(false);
       } catch (error) {
