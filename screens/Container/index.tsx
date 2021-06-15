@@ -370,8 +370,12 @@ const AppContainer = () => {
         return;
       }
 
+<<<<<<< HEAD
       const compareResult = "OK";
       
+=======
+      const compareResult = 'OK';
+>>>>>>> cf1002186253b62f49a8e7aa40ecb3bac3f29946
       setAppStatus(compareResult)
 
       if (compareResult !== 'OK') {
