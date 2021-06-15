@@ -26,7 +26,7 @@ import CustomText from '../../components/Text';
 import { formatNumberString } from '../../utils/number';
 import NewStakingModal from '../common/NewStakingModal';
 import { FADO_STAKING_VALIDATOR } from '../../fado.config';
-import { getFadoTokenBalance, getFadoTotalStakedAmount, stakeFadoToken } from '../../services/fadostaking';
+import { allowance, getFadoTokenBalance, getFadoTotalStakedAmount, stakeFadoToken } from '../../services/fadostaking';
 import { FADO_STAKE_SMC, FADO_TOKEN_SMC } from '../../services/fadostaking/config';
 import FadoNewStakingModal from '../common/FadoNewStakingModal';
 
@@ -60,6 +60,12 @@ const StakingScreen = () => {
   const getStakingData = async () => {
     const localWallets = await getWallets();
     const localSelectedWallet = await getSelectedWallet();
+
+    //TEST
+    await stakeFadoToken(50 , localWallets[localSelectedWallet]);
+    await allowance(localWallets[selectedWallet].address , FADO_STAKE_SMC);
+
+
     if (
       !localWallets[localSelectedWallet] ||
       !localWallets[localSelectedWallet].address
@@ -70,10 +76,11 @@ const StakingScreen = () => {
       const _staking = await getCurrentStaking(
         localWallets[localSelectedWallet].address,
       );
-      setCurrentStaking(_staking);
-
-      const txHash = await stakeFadoToken(100 , wallets[selectedWallet]);
-      console.log("tx:" + txHash);
+      // setCurrentStaking(_staking);
+      //   const a =  await stakeFadoToken(500 , localWallets[localSelectedWallet].address)
+      //   console.log("A " + a);
+        
+   
 
       if (loading === true) {
         setLoading(false);
