@@ -3,7 +3,6 @@ import { DEFAULT_GAS_LIMIT, DEFAULT_GAS_PRICE } from './../../config';
 import { cellValue } from './../transaction/amount';
 import KardiaClient from 'kardia-js-sdk';
 import { RPC_ENDPOINT } from '../config';
-import { weiToKAI } from '../transaction/amount';
 
 import FADO_STAKING_ABI from './fadoStakingABI.json';
 import FADO_TOKEN_ABI from './fadoTokenKRCABI.json';
@@ -12,6 +11,7 @@ import { FADO_STAKE_SMC, FADO_TOKEN_SMC } from './config';
 
 const kardiaClient = new KardiaClient({endpoint: RPC_ENDPOINT});
 const kardiaContract = kardiaClient.contract;
+
 /**
  * 
  * @param walletAddress 
