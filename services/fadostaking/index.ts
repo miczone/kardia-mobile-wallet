@@ -93,6 +93,24 @@ export const withDrawAll = async (wallet: Wallet, withDrawAmount: number) => {
   }
 }
 
+
+export const claimFadoReward = async (wallet: Wallet) => {
+  kardiaContract.updateAbi(FADO_STAKING_ABI);
+
+  try {
+    const txAddress = await kardiaContract.invokeContract('claimReward', []).send(wallet.privateKey!, FADO_STAKE_SMC, {
+      from: wallet.address,
+      gas: DEFAULT_GAS_LIMIT,
+      gasPrice: DEFAULT_GAS_PRICE,
+    });
+
+    console.log({txAddress});
+    return txAddress;
+    
+  } catch (error) {
+  }
+}
+
 /**
  * 
  * @param wallet,@param smcAddr

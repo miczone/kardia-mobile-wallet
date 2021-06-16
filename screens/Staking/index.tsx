@@ -361,7 +361,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { languageAtom } from '../../atoms/language';
 import { showTabBarAtom } from '../../atoms/showTabBar';
 import { statusBarColorAtom } from '../../atoms/statusBar';
-import { getStakerInfo, stakeFadoToken, withDrawAll } from '../../services/fadostaking';
+import { claimFadoReward, getStakerInfo, stakeFadoToken, withDrawAll } from '../../services/fadostaking';
 import { ThemeContext } from '../../ThemeContext';
 import { getSelectedWallet, getWallets } from '../../utils/local';
 import {styles} from './style';
@@ -409,8 +409,8 @@ const FadoStakingScreen = (props: Props) => {
       //  const stakerInfo =  await getStakerInfo(wallets[selectedWallets].address);
       //  const totalWithdrawAmount = stakerInfo.stakedAmount;
       //  console.log({totalWithdrawAmount});
-       
       // //  await withDrawAll(wallets[selectedWallets], 30);
+       await claimFadoReward(wallets[selectedWallets]);
 
       } catch (error) {
         console.error({error} + '-' + wallets[selectedWallets].address);
