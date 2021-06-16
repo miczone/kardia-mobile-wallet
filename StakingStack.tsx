@@ -10,6 +10,7 @@ import {getLanguageString} from './utils/lang';
 import {useRecoilValue} from 'recoil';
 import {languageAtom} from './atoms/language';
 import {ThemeContext} from './ThemeContext';
+import FadoStakingScreen from './screens/Staking';
 
 const StakingStack = createStackNavigator();
 
@@ -31,7 +32,7 @@ const StakingStackScreen = () => {
       }}>
       <StakingStack.Screen
         name="StakingList"
-        component={StakingScreen}
+        component={FadoStakingScreen}
         options={{headerShown: false}}
       />
       <StakingStack.Screen
