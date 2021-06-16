@@ -6,7 +6,7 @@ export const getTokenInfo = async (): Promise<KAITokenInfo> => {
       method: 'GET',
     };
     const response = await requestWithTimeOut(
-      fetch(`https://backend.kardiachain.io/api/v1/dashboard/token`, options),
+      fetch(`${ENDPOINT}/dashboard/token`, options),
       10 * 1000,
     );
     const responseJSON = await response.json();

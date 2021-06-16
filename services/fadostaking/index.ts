@@ -21,12 +21,12 @@ export const stakeFadoToken = async ( stakeAmount: number , wallet: Wallet) => {
 
   kardiaContract.updateAbi(FADO_TOKEN_ABI);
   try{         
-    const approveInvocation = kardiaContract.invokeContract('approve', [FADO_STAKE_SMC , convertAMount]);
+    const approveInvocation = await kardiaContract.invokeContract('approve', [FADO_STAKE_SMC , convertAMount]);
     // Test fail thu switch lại
     const estimatedGas = await approveInvocation.estimateGas(approveInvocation.getDefaultTxPayload)
     const approveStatus = await approveInvocation.send(wallet.privateKey!, FADO_TOKEN_SMC,{
       from: wallet.address,
-      gas: estimatedGas,
+      gas: DEFAULT_GAS_LIMIT,
       gasPrice: DEFAULT_GAS_PRICE,
     });
     await  allowance(wallet, FADO_STAKE_SMC);
@@ -35,9 +35,9 @@ export const stakeFadoToken = async ( stakeAmount: number , wallet: Wallet) => {
     kardiaContract.updateAbi(FADO_STAKING_ABI);
     const stakeInvocation = await kardiaContract.invokeContract('stake', [convertAMount])
     const stakeEstimateGas = await stakeInvocation.estimateGas(stakeInvocation.getDefaultTxPayload)
-    const txtAddress = await stakeInvocation.send(wallet.privateKey! , FADO_STAKE_SMC , {
+    const txtAddress = await stakeInvocation.send(wallet.privateKey!, FADO_STAKE_SMC, {
       from: wallet.address,
-      gas: stakeEstimateGas,
+      gas: DEFAULT_GAS_LIMIT,
       gasPrice: DEFAULT_GAS_PRICE,
     })
 
@@ -45,7 +45,6 @@ export const stakeFadoToken = async ( stakeAmount: number , wallet: Wallet) => {
       }
       catch (error){
         console.log(error);
-        console.log(wallet.privateKey);
         return null;
       }      
 }
