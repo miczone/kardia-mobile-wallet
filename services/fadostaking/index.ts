@@ -68,6 +68,22 @@ export const stakeFadoToken = async ( stakeAmount: number , wallet: Wallet) => {
       }      
 }
 
+export const withDrawAll = async (wallet: Wallet, withDrawAmount: number) => {
+  const convertAMount = cellValue(withDrawAmount);
+  kardiaContract.updateAbi(FADO_STAKING_ABI);
+
+  try {
+    const txAddress = await kardiaContract.invokeContract('withdraw',[convertAMount]).send(wallet.privateKey!, FADO_STAKE_SMC, {
+      from: wallet.address,
+      gas: DEFAULT_GAS_LIMIT,
+      gasPrice: DEFAULT_GAS_PRICE,
+    });
+
+    console.log({txAddress});
+  } catch (error) {
+    console.log({error});
+  }
+}
 
 /**
  * 
@@ -76,8 +92,6 @@ export const stakeFadoToken = async ( stakeAmount: number , wallet: Wallet) => {
  * This function get back the approved amount that was call in 'approve' 
  */
 const allowance = async (wallet: Wallet, smcAddr: string) => {
-  console.log("HELLO");
-  
   kardiaContract.updateAbi(FADO_TOKEN_ABI);
   const numberAllowance = await kardiaContract.invokeContract('allowance', [wallet.address, smcAddr]).call(FADO_TOKEN_SMC);
 
