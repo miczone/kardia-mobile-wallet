@@ -12,12 +12,17 @@ import { FADO_STAKE_SMC, FADO_TOKEN_SMC } from './config';
 
 const kardiaClient = new KardiaClient({endpoint: RPC_ENDPOINT});
 const kardiaContract = kardiaClient.contract;
-
+/**
+ * 
+ * @param walletAddress 
+ * @returns allocate, reward, stakeAmount
+ */
 export const getStakerInfo = async (walletAddress: string) => {
   kardiaContract.updateAbi(FADO_STAKING_ABI);
-  const response = await kardiaContract.invokeContract('stakerInfo', [walletAddress]).call(FADO_STAKE_SMC);
+  const stakerInfo = await kardiaContract.invokeContract('stakerInfo', [walletAddress]).call(FADO_STAKE_SMC);
 
-  console.log({response});
+  console.log({stakeFadoToken});
+  return stakerInfo
 }
 
 /**
