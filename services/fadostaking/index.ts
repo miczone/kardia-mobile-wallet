@@ -68,6 +68,13 @@ export const stakeFadoToken = async ( stakeAmount: number , wallet: Wallet) => {
       }      
 }
 
+
+/**
+ * 
+ * @param wallet 
+ * @param withDrawAmount 
+ * @returns transaction address
+ */
 export const withDrawAll = async (wallet: Wallet, withDrawAmount: number) => {
   const convertAMount = cellValue(withDrawAmount);
   kardiaContract.updateAbi(FADO_STAKING_ABI);
@@ -80,6 +87,7 @@ export const withDrawAll = async (wallet: Wallet, withDrawAmount: number) => {
     });
 
     console.log({txAddress});
+    return txAddress;
   } catch (error) {
     console.log({error});
   }
