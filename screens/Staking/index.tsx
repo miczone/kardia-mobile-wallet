@@ -28,6 +28,7 @@ import NewStakingModal from '../common/NewStakingModal';
 import { FADO_STAKING_VALIDATOR } from '../../fado.config';
 import { FADO_STAKE_SMC, FADO_TOKEN_SMC } from '../../services/fadostaking/config';
 import FadoNewStakingModal from '../common/FadoNewStakingModal';
+import { stakeFadoToken } from '../../services/fadostaking';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
@@ -60,25 +61,20 @@ const StakingScreen = () => {
     const localWallets = await getWallets();
     const localSelectedWallet = await getSelectedWallet();
 
-    //TEST FADO STAKING HERE
-
-
-
     if (
       !localWallets[localSelectedWallet] ||
       !localWallets[localSelectedWallet].address
     ) {
       return;
     }
+
     try {
       const _staking = await getCurrentStaking(
         localWallets[localSelectedWallet].address,
       );
-      // setCurrentStaking(_staking);
-      //   const a =  await stakeFadoToken(500 , localWallets[localSelectedWallet].address)
-      //   console.log("A " + a);
-        
-   
+
+        // Test here
+        await stakeFadoToken(50, localWallets[localSelectedWallet]);
 
       if (loading === true) {
         setLoading(false);
@@ -277,9 +273,7 @@ const getCurrentValid = async () =>{
                 />
               }
             />
-            <CustomText>TEST:</CustomText>
-
-                          
+                         
               {/* Toggle FADO JSC */}
              <NewStakingModal
                 validatorItem={validatorItem}
