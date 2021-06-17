@@ -163,7 +163,7 @@ export const lang: Language = {
     CHOOSE_VALIDATOR: 'Uỷ quyền',
     STAKING_AMOUNT: 'Số lượng',
     STAKING_AMOUNT_NOT_ENOUGHT: 'Ví hiện tại không đủ KAI',
-    AT_LEAST_MIN_DELEGATE: 'Cần đầu tư ít nhất {{MIN_KAI}} KAI',
+    AT_LEAST_MIN_DELEGATE: 'Cần đầu tư ít nhất {{MIN_FADO}} FADO',
     DELEGATE: 'Uỷ quyền',
     ESTIMATED_EARNING: 'Lợi nhuận ước tính (30 ngày)',
     ESTIMATED_APR: 'APR ước tính',

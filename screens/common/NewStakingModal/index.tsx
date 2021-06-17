@@ -327,6 +327,8 @@ export default ({
               keyboardType="numeric"
               value={amount}
               onChangeText={(newAmount) => {
+                console.log({newAmount});
+                
                 const digitOnly = getDigit(newAmount, true);
 
                 if (digitOnly === '') {
@@ -344,8 +346,9 @@ export default ({
                   }
 
                   formatedValue = formatNumberString(numParts) + '.' + decimalParts
-
-                  setAmount(formatedValue);
+                  console.log({amount});
+                  
+                  setAmount('10');
                 }
                 // isNumber(digitOnly) && setAmount(digitOnly);
               }}

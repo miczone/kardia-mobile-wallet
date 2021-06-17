@@ -169,7 +169,7 @@ export const lang: Language = {
     CHOOSE_VALIDATOR: 'Choose a Validator',
     STAKING_AMOUNT: 'Staking Amount',
     STAKING_AMOUNT_NOT_ENOUGHT: 'Not enough KAI to stake.',
-    AT_LEAST_MIN_DELEGATE: 'Must delegate at least {{MIN_KAI}} KAI',
+    AT_LEAST_MIN_DELEGATE: 'Must delegate at least {{MIN_FADO}} FADO',
     DELEGATE: 'Delegate Now',
     ESTIMATED_EARNING: 'Estimated return in 30 days',
     ESTIMATED_APR: 'Estimated APR',

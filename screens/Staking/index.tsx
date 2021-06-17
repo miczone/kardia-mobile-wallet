@@ -53,7 +53,10 @@ const StakingScreen = () => {
   const [validatorList, setValidatorList] = useState<Validator[]>([]);
   const [validatorItem, setValidatorItem] = useState<Validator>();
   const [stakerInfo, setStakerInfo] = useState();
+  const [visible, setVisible] = useState(false);
 
+  console.log({visible});
+  
   const getStakingData = async () => {
     const localWallets = await getWallets();
     const localSelectedWallet = await getSelectedWallet();
@@ -142,24 +145,32 @@ const StakingScreen = () => {
 
   //Toggle Modal with Validator = FADO, 
   const toggleStakingModal = () =>{
-    validatorList.map((validator) => {
-      if(validator.name === FADO_STAKING_VALIDATOR){
-        setValidatorItem(validator);
-      }
-    })
+    // validatorList.map((validator) => {
+    //   if(validator.name === FADO_STAKING_VALIDATOR){
+    //     setValidatorItem(validator);
+    //   }
+    // })
+    console.log({visible});
+    
+    setVisible(true);
   };
 
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
       <View style={styles.header}>
-        <CustomText style={[styles.headline, {color: theme.white}]}>
+        <CustomText style={[styles.headline, {color: theme.primary}]}>
           {getLanguageString(language, 'STAKING_TITLE')}
         </CustomText>
       </View>
 
       {!stakerInfo  &&
         <View style={styles.emptyStake}> 
-          <CustomText style={{color: theme.textColor, fontSize: 24, fontWeight: 'bold', textAlign: 'center',marginBottom: 8, marginTop: 100}}>
+          <Image
+              style={{width: 200, height: 172}}
+              source={require('../../assets/icon/no_staking.png')}
+          />
+
+          <CustomText style={{color: theme.textColor, fontSize: 24, fontWeight: 'bold', textAlign: 'center',marginBottom: 8}}>
             {getLanguageString(language, 'NO_STAKING')}
           </CustomText>
 
@@ -277,6 +288,13 @@ const StakingScreen = () => {
         /> */}
       {/* </> */}
       {/* )} */}
+      <FadoNewStakingModal
+          visible={visible}
+          onClose={() => {
+          setVisible(false);
+          }}
+      /> 
+
       {message !== '' && (
       <AlertModal
           type={messageType as any}
@@ -323,13 +341,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 18,
-    backgroundColor: 'red',
     marginHorizontal: -20,
   },
   headline:{
     fontSize: 36,
     textAlign: 'center',
-    color: 'red'
+    fontWeight: 'bold'
   },
   emptyStake:{
     justifyContent:'center',

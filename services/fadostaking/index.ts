@@ -1,6 +1,6 @@
 
 import { DEFAULT_GAS_LIMIT, DEFAULT_GAS_PRICE } from './../../config';
-import { cellValue } from './../transaction/amount';
+import { cellValue, weiToKAI } from './../transaction/amount';
 import KardiaClient from 'kardia-js-sdk';
 import { RPC_ENDPOINT } from '../config';
 
@@ -8,6 +8,10 @@ import FADO_STAKING_ABI from './fadoStakingABI.json';
 import FADO_TOKEN_ABI from './fadoTokenKRCABI.json';
 import FADO_REWARD_ABI from "./fadoRewardABI.json";
 import { FADO_STAKE_SMC, FADO_TOKEN_SMC } from './config';
+import { parseDecimals, parseKaiBalance } from '../../utils/number';
+import BigNumber from 'bignumber.js';
+import { getBalance } from '../krc20';
+import { FADO_TOKEN_ADDRESS } from '../../fado.config';
 
 const kardiaClient = new KardiaClient({endpoint: RPC_ENDPOINT});
 const kardiaContract = kardiaClient.contract;
@@ -26,6 +30,21 @@ export const getStakerInfo = async (walletAddress: string) => {
     return stakerInfo;
   } catch (error) {
     console.log({error});
+  }
+}
+
+export const getFadoBalance = async (walletAdress: string) => {
+  kardiaContract.updateAbi(FADO_STAKING_ABI);
+  try {
+    const balance = await getBalance(FADO_TOKEN_ADDRESS, walletAdress);
+    // const balance = await kardiaContract.invokeContract('getBalance' , []).call(FADO_STAKE_SMC);
+    // const convertBal = weiToKAI(balance) ;
+    // console.log({convertBal});
+    
+    return balance;
+  } catch (error) {
+    console.log({error});
+    
   }
 }
 
