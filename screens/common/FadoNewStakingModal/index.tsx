@@ -48,6 +48,8 @@ const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp)
   //Reset Func, clear all current stake 
   const resetState = () => {
     setAmount('0');
+    setAmountError('');
+    setShowAuthModal(false);
     setDelegating(false);
   }
   // end **resetState** 

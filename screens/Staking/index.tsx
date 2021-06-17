@@ -31,6 +31,8 @@ import FadoNewStakingModal from '../common/FadoNewStakingModal';
 import { getStakerInfo} from '../../services/fadostaking';
 import IconButton from '../../components/IconButton';
 import theme, { HEADER_HEIGHT } from '../../theme';
+import TextAvatar from '../../components/TextAvatar';
+import FadoStakingItem from './fadoStakingItem';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
@@ -52,6 +54,7 @@ const StakingScreen = () => {
   //@luannm
   const [validatorList, setValidatorList] = useState<Validator[]>([]);
   const [validatorItem, setValidatorItem] = useState<Validator>();
+
   const [stakerInfo, setStakerInfo] = useState();
   const [visible, setVisible] = useState(false);
 
@@ -75,10 +78,10 @@ const StakingScreen = () => {
       //   console.log({_staking});
       
       // Get staker info
-      // const stakerInfoConst = await getStakerInfo(localWallets[localSelectedWallet].address);
-      // if (stakerInfoConst !== undefined) {
-      //   setStakerInfo(stakerInfoConst);
-      // }
+      const stakerInfoConst = await getStakerInfo(localWallets[localSelectedWallet].address);
+      if (stakerInfoConst !== undefined) {
+        setStakerInfo(stakerInfoConst);
+      }
       if (loading === true) {
         setLoading(false);
       }
@@ -200,10 +203,77 @@ const StakingScreen = () => {
         </View>
       }
 
-      {stakerInfo && 
+      {stakerInfo ?
         <View>
-          <CustomText>Welcome</CustomText>
-        </View>
+           <ImageBackground
+          source={require('../../assets/staking_background.png')}
+          imageStyle={{
+            resizeMode: 'cover',
+            width: viewportWidth - 40,
+            height: 172,
+            borderRadius: 12,
+          }}
+          style={{
+            width: viewportWidth - 40,
+            height: 172,
+            borderRadius: 12,
+            alignItems: 'center',
+            justifyContent: 'flex-end',
+            paddingVertical: 32,
+          }}>
+
+          <CustomText
+            allowFontScaling={false}
+            style={[
+              styles.sectionTitle,
+              {color: theme.textColor, textAlign: 'center', fontWeight: '500'},
+              {fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined}
+            ]}>
+            {getLanguageString(language, 'TOTAL_EARNING')}
+          </CustomText>
+
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <CustomText style={[styles.totalSaving, Platform.OS === 'android' ? {color: theme.textColor, fontFamily: 'WorkSans-SemiBold'} : {color: theme.textColor, fontWeight: '500'}]}>
+             0
+            </CustomText>
+            <CustomText style={{fontSize: theme.defaultFontSize + 6, color: 'rgba(252, 252, 252, 0.54)', fontWeight: '500', fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined}}>
+              FADO
+            </CustomText>
+          </View>
+        </ImageBackground>
+        </View> : null
+      }
+
+      {stakerInfo &&
+      <View>
+         <CustomText
+          style={[
+            styles.sectionTitle,
+            {
+              color: theme.textColor,
+              // paddingHorizontal: 14,
+              paddingVertical: 20,
+            },
+          ]}>
+          {getLanguageString(language, 'YOUR_INVESTMENTS')}
+        </CustomText>
+      </View>
+      }
+
+      {stakerInfo && 
+             <FadoStakingItem  />
+      }
+
+      {stakerInfo &&
+        <>
+          <Button
+            type="primary"
+            icon={<AntIcon name="plus" size={24} color={theme.white} />}
+            size="small"
+            onPress={() => toggleStakingModal()}
+            style={styles.floatingButton}
+          />
+        </>
       }
 
       {/* {currentStaking.length > 0 && (
@@ -356,6 +426,33 @@ const styles = StyleSheet.create({
     // padding: 15,
     fontSize: 15,
     // fontStyle: 'italic',
+  },
+  sectionTitle: {
+    fontSize: 20,
+    // fontWeight: 'bold',
+  },
+  floatingButton:{
+    position: 'absolute',
+    right: 20,
+    bottom: 52,
+    minWidth: 52,
+    width: 52,
+    minHeight: 52,
+    height: 52,
+    borderRadius: 26,
+    paddingVertical: 0,
+  },
+  totalSaving:{
+    textAlign: 'center',
+    fontSize: 32,
+    paddingVertical: 14,
+    marginRight: 12,
+  },
+  validatorName: {
+    fontSize: 18,
+    // fontStyle: 'italic',
+    fontWeight: 'bold',
+    // marginBottom: 18,
   },
 })
 
