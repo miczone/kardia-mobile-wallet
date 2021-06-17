@@ -253,8 +253,7 @@ const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp)
                   }
 
                   formatedValue = formatNumberString(numParts) + '.' + decimalParts
-                  
-                  
+                                  
                   setAmount(formatedValue);
                 }
                 // isNumber(digitOnly) && setAmount(digitOnly);
