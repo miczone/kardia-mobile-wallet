@@ -82,9 +82,13 @@ export const stakeFadoToken = async ( stakeAmount: number , wallet: Wallet) => {
       gas: DEFAULT_GAS_LIMIT,
       gasPrice: DEFAULT_GAS_PRICE,
     })
-
-    console.log({txtAddress});
+    if (txtAddress.status === 0) {
+      throw new Error(`Delegate TX Fail: ${txtAddress.transactionHash}`);
       }
+      else {
+        return txtAddress;
+      }
+    }
       catch (error){
         console.log(error);
         return null;

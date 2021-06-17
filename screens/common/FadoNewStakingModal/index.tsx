@@ -24,7 +24,7 @@ import { getBalance } from '../../../services/account';
 import { selectedWalletAtom, walletsAtom } from '../../../atoms/wallets';
 import CustomText from '../../../components/Text';
 import { theme } from '../../../theme/light';
-import { getFadoBalance } from '../../../services/fadostaking';
+import { getFadoBalance, stakeFadoToken } from '../../../services/fadostaking';
 import BigNumber from 'bignumber.js';
 
 
@@ -37,6 +37,8 @@ validatorItem? : Validator,
 
 const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp) => {
   const language = useRecoilValue(languageAtom);
+  const navigation = useNavigation();
+
   const [delegating, setDelegating] = useState(false);
   const [fadoBalance, setFadoBalance] = useState(0);
   const [amount, setAmount] = useState('0');
@@ -62,6 +64,20 @@ const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp)
       );
       return false;
     }
+
+    const wallets = await getWallets();
+    const selectedWallet = await getSelectedWallet();
+    const balance = await getBalance(wallets[selectedWallet].address)
+    if (
+      Number(getDigit(amount)) >
+      Number(weiToKAI(balance))
+    ) {
+      setAmountError(getLanguageString(language, 'STAKING_AMOUNT_NOT_ENOUGHT'));
+      return false;
+    }
+    console.log("ABC");
+    
+    return true;
   }
 
   const _getBalance = async () => {
@@ -142,40 +158,28 @@ const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp)
 
   const stakeHanlder = async () => {
     setAmountError('');
-    try {
+    try{
+      setDelegating(true);
       const wallets = await getWallets();
       const selectedWallet = await getSelectedWallet();
-      // const balance = await getBalance(wallets[selectedWallet].address)
-      // if (
-      //   Number(getDigit(amount)) >
-      //   Number(weiToKAI(balance))
-      // ) {
-      //   setAmountError(
-      //     getLanguageString(language, 'STAKING_AMOUNT_NOT_ENOUGHT'),
-      //   );
-      //   return;
-      // }
-      // setDelegating(true);
-      // const rs = await delegateAction(
-      //   validatorItem.smcAddress,
-      //   wallets[selectedWallet],
-      //   Number(getDigit(amount)),
-      // );
-      // if (rs.status === 0) {
-      //   setDelegating(false);
-      // } else {
-      //   setDelegating(false);
-      //   navigation.navigate('Transaction', {
-      //     screen: 'SuccessTx',
-      //     params: {
-      //       txHash: rs,
-      //       type: 'delegate',
-      //       validatorItem: validatorItem,
-      //     },
-      //   });
-      //   resetState();
-      //   onClose();
-      // }
+
+      const rs = await stakeFadoToken(Number(getDigit(amount)), wallets[selectedWallet]);
+
+      if (rs.status === 0) {
+        setDelegating(false);
+      } else {
+        setDelegating(false);
+        navigation.navigate('Transaction', {
+          screen: 'SuccessTx',
+          params: {
+            txHash: rs,
+            type: 'delegate',
+            validatorItem: validatorItem,
+          },
+        });
+        resetState();
+        onClose();
+      }
     } catch (err) {
       console.error(err);
       setDelegating(false);
@@ -353,7 +357,10 @@ const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp)
               type="primary"
               title={getLanguageString(language, 'DELEGATE')}
               onPress={async () => {
+                
                 if (await validateInputAmout()) {
+                  
+                  
                   setShowAuthModal(true);
                 
                 }
