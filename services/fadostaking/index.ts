@@ -19,9 +19,17 @@ const kardiaContract = kardiaClient.contract;
  */
 export const getStakerInfo = async (walletAddress: string) => {
   kardiaContract.updateAbi(FADO_STAKING_ABI);
+  try {
+    const stakerInfo = await kardiaContract.invokeContract('stakerInfo', [walletAddress]).call(FADO_STAKE_SMC);
+
+    console.log({stakerInfo});
+    return stakerInfo;
+  } catch (error) {
+    console.log({error});
+    
+  }
   const stakerInfo = await kardiaContract.invokeContract('stakerInfo', [walletAddress]).call(FADO_STAKE_SMC);
 
-  console.log({stakeFadoToken});
   return stakerInfo
 }
 
