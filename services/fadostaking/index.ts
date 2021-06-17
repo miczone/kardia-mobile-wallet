@@ -26,11 +26,7 @@ export const getStakerInfo = async (walletAddress: string) => {
     return stakerInfo;
   } catch (error) {
     console.log({error});
-    
   }
-  const stakerInfo = await kardiaContract.invokeContract('stakerInfo', [walletAddress]).call(FADO_STAKE_SMC);
-
-  return stakerInfo
 }
 
 /**

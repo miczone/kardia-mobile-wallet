@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useCallback, useContext, useEffect, useState} from 'react';
-import {Dimensions, ImageBackground, View, Image, Platform} from 'react-native';
+import {Dimensions, ImageBackground, View, Image, Platform, StyleSheet} from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import {useFocusEffect} from '@react-navigation/native';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
@@ -11,7 +11,7 @@ import List from '../../components/List';
 import {getAllValidator, getCurrentStaking, mapValidatorRole} from '../../services/staking';
 import {ThemeContext} from '../../ThemeContext';
 import {getLanguageString} from '../../utils/lang';
-import {styles} from './style';
+// import {styles} from './style';
 import StakingItem from './StakingItem';
 import AlertModal from '../../components/AlertModal';
 import {useNavigation} from '@react-navigation/native';
@@ -30,6 +30,7 @@ import { FADO_STAKE_SMC, FADO_TOKEN_SMC } from '../../services/fadostaking/confi
 import FadoNewStakingModal from '../common/FadoNewStakingModal';
 import { getStakerInfo} from '../../services/fadostaking';
 import IconButton from '../../components/IconButton';
+import theme, { HEADER_HEIGHT } from '../../theme';
 
 const {width: viewportWidth} = Dimensions.get('window');
 
@@ -47,9 +48,12 @@ const StakingScreen = () => {
   const [loading, setLoading] = useState(true);
   const [currentStaking, setCurrentStaking] = useState<Staking[]>([]);
   const [undelegatingIndex, setUndelegatingIndex] = useState(-1);
+  
+  //@luannm
   const [validatorList, setValidatorList] = useState<Validator[]>([]);
   const [validatorItem, setValidatorItem] = useState<Validator>();
-  
+  const [stakerInfo, setStakerInfo] = useState();
+
   const getStakingData = async () => {
     const localWallets = await getWallets();
     const localSelectedWallet = await getSelectedWallet();
@@ -68,10 +72,10 @@ const StakingScreen = () => {
       //   console.log({_staking});
       
       // Get staker info
-      const stakerInfo = await getStakerInfo(localWallets[localSelectedWallet].address);
-      console.log({stakerInfo});
-      
-
+      // const stakerInfoConst = await getStakerInfo(localWallets[localSelectedWallet].address);
+      // if (stakerInfoConst !== undefined) {
+      //   setStakerInfo(stakerInfoConst);
+      // }
       if (loading === true) {
         setLoading(false);
       }
@@ -147,12 +151,49 @@ const StakingScreen = () => {
 
   return (
     <SafeAreaView style={[styles.container, {backgroundColor: theme.backgroundColor}]}>
-      
       <View style={styles.header}>
-        <CustomText style={[styles.headline, {color: theme.textColor}]}>
+        <CustomText style={[styles.headline, {color: theme.white}]}>
           {getLanguageString(language, 'STAKING_TITLE')}
         </CustomText>
       </View>
+
+      {!stakerInfo  &&
+        <View style={styles.emptyStake}> 
+          <CustomText style={{color: theme.textColor, fontSize: 24, fontWeight: 'bold', textAlign: 'center',marginBottom: 8, marginTop: 100}}>
+            {getLanguageString(language, 'NO_STAKING')}
+          </CustomText>
+
+          <CustomText style={[styles.noStakingText, {color: theme.mutedTextColor, textAlign: 'center', marginBottom: 32, lineHeight: 26}]}>
+           {getLanguageString(language, 'NO_STAKING_ITEM')}
+          </CustomText>
+          
+          <Button
+              type="primary"
+              onPress={() => toggleStakingModal()}
+              title={getLanguageString(language, 'STAKE_NOW')}
+              textStyle={{
+                fontWeight: '500', 
+                fontSize: theme.defaultFontSize + 3,
+                fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined
+              }}
+              style={{width: 248}}
+              icon={
+                <AntIcon
+                  name="plus"
+                  size={20}
+                  color={theme.white}
+                  style={{marginRight: 8}}
+                />
+              }
+            />
+        </View>
+      }
+
+      {stakerInfo && 
+        <View>
+          <CustomText>Welcome</CustomText>
+        </View>
+      }
 
       {/* {currentStaking.length > 0 && (
         <ImageBackground
@@ -270,6 +311,36 @@ const StakingScreen = () => {
 
 export default StakingScreen;
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // paddingHorizontal: 15,
+    paddingHorizontal: 20,
+  },
+  header:{
+    height: HEADER_HEIGHT,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 18,
+    backgroundColor: 'red',
+    marginHorizontal: -20,
+  },
+  headline:{
+    fontSize: 36,
+    textAlign: 'center',
+    color: 'red'
+  },
+  emptyStake:{
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  noStakingText: {
+    // padding: 15,
+    fontSize: 15,
+    // fontStyle: 'italic',
+  },
+})
 
 
 // import { useFocusEffect, useNavigation } from '@react-navigation/native';
