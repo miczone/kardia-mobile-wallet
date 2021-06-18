@@ -140,11 +140,11 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
           justifyContent: 'space-between',
           width: '100%',
         }}>
-          <View
+        <View
           style={{
-            alignItems: 'center',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
+          alignItems: 'center',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
           }}>
           {/* <TextAvatar
             text={'FADO'}
@@ -158,69 +158,66 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
             }}
             textStyle={{fontSize: 16}}
           /> */}
-          <View style={{
-            width: 40,
-            height: 40,
-
-            borderRadius: 20,
-            backgroundColor: 'white',
-
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-
-            borderWidth: 1,
-            borderColor: theme.red700,
-            marginRight: 10
+        <View style={{
+          width: 40,
+          height: 40,
+          borderRadius: 20,
+          backgroundColor: 'white',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderWidth: 1,
+          borderColor: theme.red700,
+          marginRight: 10
           }}> 
-            <Image source={{uri: FADO_TOKEN_AVATAR}} style={styles.tokenLogo} />
-          </View>
+          <Image source={{uri: FADO_TOKEN_AVATAR}} style={styles.tokenLogo} />
+        </View>
          
 
-          <View>
-            <CustomText style={[styles.validatorName, {color: theme.white}]}>
-            {stakerInfo?.name ? stakerInfo.name : 'Fado'}
-            </CustomText>
-          </View>
-          </View>
+        <View>
+          <CustomText style={[styles.validatorName, {color: theme.white}]}>
+          {stakerInfo?.name ? stakerInfo.name : 'Fado'}
+          </CustomText>
+        </View>
+      </View>
 
         <View style={{alignItems: 'flex-end', justifyContent: 'space-between'}}>
-          <View style={{justifyContent: 'center'}}>
-            <CustomText
-              allowFontScaling={false}
-              style={{
-                fontWeight: 'bold',
-                color: theme.white,
-                fontSize: theme.defaultFontSize + 4,
-              
-              }}>
-                <CustomText style={{
-                
+          <View style={{alignItems: 'flex-end', marginBottom: 4}}>
+            <CustomText style={{
                 color: theme.white,
                 fontSize: theme.defaultFontSize + 2 ,
-              
-              }}> {getLanguageString(language, 'INTEREST')}:</CustomText> {Number(parseDecimals(reward, 18)).toFixed(4)}
-            </CustomText>
-          </View>
+                marginBottom: -2,
+              }}> 
+              {getLanguageString(language, 'INTEREST')}:
+            </CustomText> 
 
-          <View style={{justifyContent: 'center'}}>
             <CustomText
               allowFontScaling={false}
               style={{
-                color: theme.white,
-                fontSize: theme.defaultFontSize + 4,
-                fontWeight: 'bold',
-              }}>
-                <CustomText style={{
-              
-                color: theme.white,
-                fontSize: theme.defaultFontSize + 2,
-              
-              }}>{getLanguageString(language, 'FADOSTAKED')}:</CustomText> {Number(parseDecimals(totalStakedAmount, 18)).toFixed(4)}
+              fontWeight: 'bold',
+              color: theme.white,
+              fontSize: theme.defaultFontSize + 4 }}>
+              {Number(parseDecimals(reward, 18)).toFixed(4)}
             </CustomText>
           </View>
 
-
+          <View style={{alignItems: 'flex-end'}}>
+          <CustomText style={{
+              color: theme.white,
+              fontSize: theme.defaultFontSize + 2,
+              marginBottom: -2,
+            }}>
+              {getLanguageString(language, 'FADOSTAKED')}:
+            </CustomText> 
+            <CustomText
+              allowFontScaling={false}
+              style={{
+              color: theme.white,
+              fontSize: theme.defaultFontSize + 4,
+              fontWeight: 'bold',}}>
+              {Number(parseDecimals(totalStakedAmount, 18)).toFixed(4)}
+            </CustomText>
+          </View>
         </View>
       </View>
 
