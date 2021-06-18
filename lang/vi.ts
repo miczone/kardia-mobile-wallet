@@ -147,6 +147,7 @@ export const lang: Language = {
     UNDELEGATE: 'Rút tiền stake',
     TRANSACTION_BONUS: 'Lãi trả về trên giao dịch',
     WITHDRAW: 'Rút về ví',
+    CLAIM: 'Rút lãi',
     SUCCESS: 'Thành công',
     DELEGATE_SUCCESS: 'Bạn đã đầu tư vào',
     CLAIM_SUCCESS: '{{KAI_AMOUNT}} KAI đã được rút thành công',

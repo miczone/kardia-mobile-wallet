@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useContext, useEffect, useState} from 'react';
 import numeral from 'numeral';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {ThemeContext} from '../../ThemeContext';
 
 import {weiToKAI} from '../../services/transaction/amount';
@@ -10,7 +10,7 @@ import {
   getValidatorCommissionRate,
 } from '../../services/staking';
 import {useRecoilValue} from 'recoil';
-import {getLanguageString} from '../../utils/lang';
+import {getLanguageString, parseError} from '../../utils/lang';
 import {languageAtom} from '../../atoms/language';
 import TextAvatar from '../../components/TextAvatar';
 import DelegateDetailModal from '../common/DelegateDetailModal';
@@ -20,6 +20,11 @@ import { formatNumberString, getDigit, parseDecimals } from '../../utils/number'
 import { BLOCK_TIME } from '../../config';
 import { useNavigation } from '@react-navigation/native';
 import UndelegateModal from '../common/UndelegateModal';
+import Divider from '../../components/Divider';
+import { Text } from 'react-native';
+import { theme } from '../../theme/light';
+import { claimFadoReward } from '../../services/fadostaking';
+import { getSelectedWallet, getWallets } from '../../utils/local';
 
 interface Prop {
 stakerInfo : StakerInfo
@@ -33,6 +38,7 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
   const [showFull, setShowFull] = useState(false);
   const [commissionRate, setCommissionRate] = useState(0);
   const [showUndelegateModal, setShowUndelegateModal] = useState(false);
+  const [claiming, setClaiming] = useState(false);
   const [totalStakedAmount, setTotalStakedAmount] = useState(0);
   const [reward, setReward] = useState(0);
   
@@ -78,14 +84,45 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
     );
   }
 
+  const claimHandler = async () => {
+    try {
+      setClaiming(true);
+
+      const wallets = await getWallets();
+      const selectedWallet = await getSelectedWallet();
+
+      const rs = await claimFadoReward(wallets[selectedWallet]);
+
+      setClaiming(false);
+      navigation.navigate('Transaction', {
+        screen: 'SuccessTx',
+        params: {
+          type: 'claim',
+          txHash: rs,
+         
+          claimAmount: weiToKAI(stakerInfo.reward),
+        },
+      });
+     
+    } catch (err) {
+      console.error(err);
+      setClaiming(false);
+      if (err.message) {
+        Alert.alert(parseError(err.message, language));
+      } else {
+        Alert.alert(getLanguageString(language, 'GENERAL_ERROR'));
+      }
+    }
+  };
+
   return (
     <View
       style={{
         paddingHorizontal: 16,
         paddingVertical: 12,
         marginVertical: 2,
-        backgroundColor: theme.gray100,
-        borderRadius: 7,
+        backgroundColor: theme.primary,
+        borderRadius: 12,
         alignItems: 'center',
         justifyContent: 'space-between',
       }}>
@@ -122,7 +159,7 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
           />
 
           <View>
-            <CustomText style={[styles.validatorName, {color: theme.textColor}]}>
+            <CustomText style={[styles.validatorName, {color: theme.white}]}>
             {stakerInfo?.name ? stakerInfo.name : 'Fado'}
             </CustomText>
           </View>
@@ -134,8 +171,8 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
               allowFontScaling={false}
               style={{
                 fontWeight: 'bold',
-                color: theme.textColor,
-                fontSize: theme.defaultFontSize + 1,
+                color: theme.white,
+                fontSize: theme.defaultFontSize + 2,
               }}>
 
             {Number(parseDecimals(reward, 18)).toFixed(4)}
@@ -146,25 +183,42 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
             <CustomText
               allowFontScaling={false}
               style={{
-                color: theme.gray500,
-                fontSize: theme.defaultFontSize,
+                color: theme.white,
+                fontSize: theme.defaultFontSize + 1,
               }}>
             {parseDecimals(totalStakedAmount, 18)}
             </CustomText>
           </View>
 
-          {showButton(totalStakedAmount) && (
-              <View style={[styles.dataContainer, {justifyContent: 'center'}]}>
-                <TouchableOpacity onPress={() => setShowUndelegateModal(true)}>
-                  <CustomText style={[{color: theme.urlColor}]}>
-                {getLanguageString(language, 'UNDELEGATE')}
-                  </CustomText>
-                </TouchableOpacity>
-              </View>
-        )}
-        
+
         </View>
       </View>
+
+      <Divider style={{width: '100%', backgroundColor: theme.white}} />
+      
+      <View style= {{flexDirection: 'row' , width: '100%', justifyContent:'flex-end'}}>
+        
+      {showButton(totalStakedAmount) && (
+                <View style={[styles.dataContainer, {justifyContent: 'center'}]}>
+                  <TouchableOpacity onPress={() => setShowUndelegateModal(true)}>
+                    <CustomText style={[{color: theme.black}]}>
+                  {getLanguageString(language, 'WITHDRAW')}
+                    </CustomText>
+                  </TouchableOpacity>
+                </View>
+              )}      
+              
+       {showButton(totalStakedAmount) && (
+                <View style={[styles.dataContainer, {justifyContent: 'center'}]}>
+                  <TouchableOpacity onPress={claimHandler}>
+                    <CustomText style={[{color: theme.black}]}>
+                  {getLanguageString(language, 'CLAIM')}
+                    </CustomText>
+                  </TouchableOpacity>
+                </View>
+              )}    
+      </View>
+        
     </View>
   );
 };
@@ -173,12 +227,16 @@ export default FadoStakingItem;
 
 const styles = StyleSheet.create({
   dataContainer:{
-  
+  marginStart: 20,
+  borderRadius: 6,
+  backgroundColor: theme.yellow500,
+  padding: 6,
   },
 
   validatorName:{
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: 'bold',
+  
     // marginBottom: 18,
   }
 })

@@ -58,8 +58,6 @@ const StakingScreen = () => {
   const [stakerInfo, setStakerInfo] = useState<StakerInfo>();
   const [visible, setVisible] = useState(false);
 
-  console.log({visible});
-  
   const getStakingData = async () => {
     const localWallets = await getWallets();
     const localSelectedWallet = await getSelectedWallet();
@@ -154,7 +152,6 @@ const StakingScreen = () => {
     //     setValidatorItem(validator);
     //   }
     // })
-    console.log({visible});
     
     setVisible(true);
   };
@@ -207,12 +204,13 @@ const StakingScreen = () => {
       {stakerInfo ?
         <View>
            <ImageBackground
-          source={require('../../assets/staking_background.png')}
+          source={require('../../assets/card_background.png')}
           imageStyle={{
             resizeMode: 'cover',
             width: viewportWidth - 40,
             height: 172,
             borderRadius: 12,
+            opacity:0.5,
           }}
           style={{
             width: viewportWidth - 40,
@@ -237,7 +235,7 @@ const StakingScreen = () => {
             <CustomText style={[styles.totalSaving, Platform.OS === 'android' ? {color: theme.textColor, fontFamily: 'WorkSans-SemiBold'} : {color: theme.textColor, fontWeight: '500'}]}>
              {Number(parseDecimals((stakerInfo.stakedAmount + stakerInfo.reward), 18)).toFixed(4)}
             </CustomText>
-            <CustomText style={{fontSize: theme.defaultFontSize + 6, color: '#fff', fontWeight: '500', fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined}}>
+            <CustomText style={{fontSize: theme.defaultFontSize + 6, color: theme.gray600, fontWeight: '500', fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined}}>
               FADO 
             </CustomText>
           </View>

@@ -150,6 +150,7 @@ export const lang: Language = {
     UNBONDED: 'Unbonded KAI',
     CLAIM_REWARD: 'Claim',
     UNDELEGATE: 'Undelegate',
+    CLAIM: 'Claim rewards',
     TRANSACTION_BONUS: 'Estimated return per transaction',
     WITHDRAW: 'Withdraw',
     SUCCESS: 'Success',
