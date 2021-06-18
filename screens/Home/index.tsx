@@ -243,7 +243,7 @@ const HomeScreen = () => {
                 <CustomText style={{color:theme.gray600, fontSize: 13, fontWeight: '500'}}>
                   $
                   {numeral(
-                    
+                    tokenInfo.price *
                       Number(weiToKAI(_getBalance())),
                   ).format('0,0.00')}
                 </CustomText>
