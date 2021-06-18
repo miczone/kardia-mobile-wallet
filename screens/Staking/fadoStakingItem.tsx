@@ -16,7 +16,7 @@ import TextAvatar from '../../components/TextAvatar';
 import DelegateDetailModal from '../common/DelegateDetailModal';
 import CustomText from '../../components/Text';
 import { getLatestBlock } from '../../services/blockchain';
-import { formatNumberString, getDigit } from '../../utils/number';
+import { formatNumberString, getDigit, parseDecimals } from '../../utils/number';
 import { BLOCK_TIME } from '../../config';
 import { useNavigation } from '@react-navigation/native';
 import UndelegateModal from '../common/UndelegateModal';
@@ -138,7 +138,7 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
                 fontSize: theme.defaultFontSize + 1,
               }}>
 
-            {reward}
+            {parseDecimals(reward, 18)}
             </CustomText>
           </View>
 
@@ -149,7 +149,7 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
                 color: theme.gray500,
                 fontSize: theme.defaultFontSize,
               }}>
-            {totalStakedAmount}
+            {parseDecimals(totalStakedAmount, 18)}
             </CustomText>
           </View>
 

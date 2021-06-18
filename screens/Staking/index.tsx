@@ -23,7 +23,7 @@ import UndelegateModal from './UndelegateModal';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { showTabBarAtom } from '../../atoms/showTabBar';
 import CustomText from '../../components/Text';
-import { formatNumberString } from '../../utils/number';
+import { formatNumberString, parseDecimals } from '../../utils/number';
 import NewStakingModal from '../common/NewStakingModal';
 import { FADO_STAKING_VALIDATOR } from '../../fado.config';
 import { FADO_STAKE_SMC, FADO_TOKEN_SMC } from '../../services/fadostaking/config';
@@ -234,10 +234,10 @@ const StakingScreen = () => {
 
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <CustomText style={[styles.totalSaving, Platform.OS === 'android' ? {color: theme.textColor, fontFamily: 'WorkSans-SemiBold'} : {color: theme.textColor, fontWeight: '500'}]}>
-             {stakerInfo.stakedAmount}
+             {parseDecimals((stakerInfo.stakedAmount + stakerInfo.reward), 18)}
             </CustomText>
             <CustomText style={{fontSize: theme.defaultFontSize + 6, color: 'rgba(252, 252, 252, 0.54)', fontWeight: '500', fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined}}>
-              FADO
+              FADO 
             </CustomText>
           </View>
         </ImageBackground>
