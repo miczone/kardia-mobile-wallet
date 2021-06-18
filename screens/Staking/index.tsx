@@ -233,7 +233,8 @@ const StakingScreen = () => {
 
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <CustomText style={[styles.totalSaving, Platform.OS === 'android' ? {color: theme.textColor, fontFamily: 'WorkSans-SemiBold'} : {color: theme.textColor, fontWeight: '500'}]}>
-             {Number(parseDecimals((stakerInfo.stakedAmount + stakerInfo.reward), 18)).toFixed(4)}
+             {Number(Number(parseDecimals((stakerInfo.stakedAmount ), 18)).toFixed(4)) + Number(Number(parseDecimals((stakerInfo.reward), 18)).toFixed(4))}
+             
             </CustomText>
             <CustomText style={{fontSize: theme.defaultFontSize + 6, color: theme.gray600, fontWeight: '500', fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined}}>
               FADO 

@@ -144,7 +144,12 @@ const HomeScreen = () => {
 
   const _getBalance = () => {
     if (!wallets[selectedWallet]) return 0;
+    
+    
     return wallets[selectedWallet].balance;
+
+    
+    
   }
 
   const onRefresh = async () => {

@@ -120,7 +120,7 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
     <View
       style={{
         paddingHorizontal: 20,
-        paddingVertical: 30,
+        paddingVertical: 20,
         marginVertical: 2,
         backgroundColor: theme.primary,
         borderRadius: 12,
@@ -216,7 +216,7 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
                 color: theme.white,
                 fontSize: theme.defaultFontSize + 2,
               
-              }}>{getLanguageString(language, 'FADOSTAKED')}:</CustomText> {parseDecimals(totalStakedAmount, 18)}
+              }}>{getLanguageString(language, 'FADOSTAKED')}:</CustomText> {Number(parseDecimals(totalStakedAmount, 18)).toFixed(4)}
             </CustomText>
           </View>
 
