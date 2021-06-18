@@ -19,12 +19,11 @@ import { getLatestBlock } from '../../services/blockchain';
 import { formatNumberString, getDigit } from '../../utils/number';
 import { BLOCK_TIME } from '../../config';
 
-const FadoStakingItem = ({
-  stakerInfo,
- 
-}: {
-  stakerInfo?: any,
-}) => {
+interface Prop {
+stakerInfo : StakerInfo
+}
+
+const FadoStakingItem = ({stakerInfo}: Prop) => {
   const theme = useContext(ThemeContext);
 
   const [showFull, setShowFull] = useState(false);
@@ -35,26 +34,28 @@ const FadoStakingItem = ({
 
   const language = useRecoilValue(languageAtom);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       // const {totalStaked} = await getAllValidator();
-  //       // setTotalStakedAmount(totalStaked);
-  //       // setValidatorList(validators);
-  //       // setLoading(false);
-  //     } catch (error) {
-  //       console.error(error);
-  //       // setLoading(false);
-  //     }
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      try {
+        setTotalStakedAmount(stakerInfo.stakedAmount);
+        setReward(stakerInfo.reward);
+        // const {totalStaked} = await getAllValidator();
+        // setTotalStakedAmount(totalStaked);
+        // setValidatorList(validators);
+        // setLoading(false);
+      } catch (error) {
+        console.error(error);
+        // setLoading(false);
+      }
+    })();
+  }, []);
 
-  // const getSelectedStakedAmount = () => {
-  //   const formatted = numeral(weiToKAI(stakerInfo.stakedAmount)).format(
-  //     '0,0.00',
-  //   );
-  //   return formatted === 'NaN' ? '0 KAI' : `${formatted} KAI`;
-  // };
+  const getSelectedStakedAmount = () => {
+    const formatted = numeral(weiToKAI(stakerInfo.stakedAmount)).format(
+      '0,0.00',
+    );
+    return formatted === 'NaN' ? '0 KAI' : `${formatted} KAI`;
+  };
 
   return (
     <View
@@ -101,13 +102,13 @@ const FadoStakingItem = ({
 
           <View>
             <CustomText style={[styles.validatorName, {color: theme.textColor}]}>
-            {stakerInfo.name}
+            {stakerInfo?.name ? stakerInfo.name : 'Fado'}
             </CustomText>
           </View>
           </View>
 
         <View style={{alignItems: 'flex-end', justifyContent: 'space-between'}}>
-          {/* <View style={{justifyContent: 'center'}}>
+          <View style={{justifyContent: 'center'}}>
             <CustomText
               allowFontScaling={false}
               style={{
@@ -129,7 +130,7 @@ const FadoStakingItem = ({
               }}>
             {totalStakedAmount}
             </CustomText>
-          </View> */}
+          </View>
         </View>
       </View>
     </View>

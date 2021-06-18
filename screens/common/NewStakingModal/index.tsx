@@ -52,9 +52,7 @@ export default ({
     (async () => {
       try {
         const {totalStaked} = await getAllValidator();
-    
-        
-        
+           
         setTotalStakedAmount(totalStaked);
         // setValidatorList(validators);
         // setLoading(false);
