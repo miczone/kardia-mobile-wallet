@@ -40,7 +40,7 @@ const QRModal = ({
       showCloseButton={false}
       contentStyle={{
         paddingHorizontal: 20,
-        backgroundColor: theme.backgroundFocusColor,
+        backgroundColor: theme.gray400,
         height: 730,
       }}
       onClose={onClose}>
@@ -63,7 +63,7 @@ const QRModal = ({
           style={{
             fontWeight: '500',
             fontSize: 13,            
-            color: theme.warningTextColor,
+            color: theme.yellow700,
             textAlign: 'left',
             width: '100%',
           }}>
@@ -91,7 +91,7 @@ const QRModal = ({
         <CustomText style={{color: 'rgba(252, 252, 252, 0.54)', fontSize: 10, marginBottom: 4, textAlign: 'left', paddingHorizontal: 20}}>
           {getLanguageString(language, 'BALANCE').toUpperCase()}
         </CustomText>
-        <CustomText style={{fontSize: 24, color: 'white', paddingHorizontal: 20}}>
+        <CustomText style={{fontSize: 24, color: theme.black, paddingHorizontal: 20}}>
           $
           {numeral(
             tokenInfo.price *
@@ -100,7 +100,7 @@ const QRModal = ({
         </CustomText>
         <View style={{flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', width: '100%', paddingHorizontal: 20}}>
           <CustomText style={{
-              color: '#FFFFFF',
+              color: theme.black,
               fontSize: 16,
               marginRight: 8,
             }}>

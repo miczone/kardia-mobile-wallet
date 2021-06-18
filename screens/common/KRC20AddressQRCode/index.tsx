@@ -88,7 +88,7 @@ const QRModal = ({
         </CustomText>
         <View style={{flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between', width: '100%', paddingHorizontal: 20}}>
           <CustomText style={{
-              color: '#FFFFFF',
+              color: theme.black,
               fontSize: 16,
               marginRight: 8,
             }}>
@@ -117,7 +117,7 @@ const QRModal = ({
               width: 44,
               height: 44,
               borderRadius: 22,
-              backgroundColor: '#FFFFFF',
+              backgroundColor: theme.black,
               alignItems: 'center',
               justifyContent: 'center',
             }}>
