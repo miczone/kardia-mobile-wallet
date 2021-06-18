@@ -120,7 +120,7 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
     <View
       style={{
         paddingHorizontal: 20,
-        paddingVertical: 30,
+        paddingVertical: 20,
         marginVertical: 2,
         backgroundColor: theme.primary,
         borderRadius: 12,
