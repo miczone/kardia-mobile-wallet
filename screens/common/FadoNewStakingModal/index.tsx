@@ -90,6 +90,8 @@ const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp)
     var fadoBalance = await getFadoBalance(wallets[selectedWallet].address);
     
     var totalStakedAmount = await getFadoTokenTotalStakedAmount();
+    console.log({totalStakedAmount});
+    
     if(totalStakedAmount > 0){
       setTotalStakedAmount(totalStakedAmount);
     }
@@ -340,7 +342,7 @@ const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp)
           
             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 6}}>
               <CustomText style={{color: theme.textColor, fontStyle: 'italic'}}>
-                {getLanguageString(language, 'ESTIMATED_EARNING')}
+                {getLanguageString(language, 'TRANSACTION_BONUS')}
               </CustomText>
             </View>
           </View>

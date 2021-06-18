@@ -36,7 +36,7 @@ export const getStakerInfo = async (walletAddress: string) => {
 export const getFadoTokenTotalStakedAmount = async () => {
   kardiaContract.updateAbi(FADO_STAKING_ABI);
   try {
-    const totalStakedAmount = await kardiaContract.invokeContract('totalStakedAmount', []).call(FADO_TOKEN_SMC);
+    const totalStakedAmount = await kardiaContract.invokeContract('totalStakedAmount', []).call(FADO_STAKE_SMC);
     console.log(totalStakedAmount);
     
     return totalStakedAmount;
