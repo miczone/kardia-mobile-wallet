@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useContext, useEffect, useState} from 'react';
 import numeral from 'numeral';
-import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {Alert, Image, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {ThemeContext} from '../../ThemeContext';
 
 import {weiToKAI} from '../../services/transaction/amount';
@@ -25,6 +25,7 @@ import { Text } from 'react-native';
 import { theme } from '../../theme/light';
 import { claimFadoReward } from '../../services/fadostaking';
 import { getSelectedWallet, getWallets } from '../../utils/local';
+import { FADO_TOKEN_AVATAR } from '../../fado.config';
 
 interface Prop {
 stakerInfo : StakerInfo
@@ -118,8 +119,8 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
   return (
     <View
       style={{
-        paddingHorizontal: 16,
-        paddingVertical: 12,
+        paddingHorizontal: 20,
+        paddingVertical: 30,
         marginVertical: 2,
         backgroundColor: theme.primary,
         borderRadius: 12,
@@ -145,7 +146,7 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
-          <TextAvatar
+          {/* <TextAvatar
             text={'FADO'}
             style={{
               width: 36,
@@ -156,7 +157,25 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
               justifyContent: 'center',
             }}
             textStyle={{fontSize: 16}}
-          />
+          /> */}
+          <View style={{
+            width: 40,
+            height: 40,
+
+            borderRadius: 20,
+            backgroundColor: 'white',
+
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+
+            borderWidth: 1,
+            borderColor: theme.red700,
+            marginRight: 10
+          }}> 
+            <Image source={{uri: FADO_TOKEN_AVATAR}} style={styles.tokenLogo} />
+          </View>
+         
 
           <View>
             <CustomText style={[styles.validatorName, {color: theme.white}]}>
@@ -172,10 +191,15 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
               style={{
                 fontWeight: 'bold',
                 color: theme.white,
-                fontSize: theme.defaultFontSize + 2,
+                fontSize: theme.defaultFontSize + 4,
+              
               }}>
-
-            {Number(parseDecimals(reward, 18)).toFixed(4)}
+                <CustomText style={{
+                
+                color: theme.white,
+                fontSize: theme.defaultFontSize + 2 ,
+              
+              }}> {getLanguageString(language, 'INTEREST')}:</CustomText> {Number(parseDecimals(reward, 18)).toFixed(4)}
             </CustomText>
           </View>
 
@@ -184,9 +208,15 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
               allowFontScaling={false}
               style={{
                 color: theme.white,
-                fontSize: theme.defaultFontSize + 1,
+                fontSize: theme.defaultFontSize + 4,
+                fontWeight: 'bold',
               }}>
-            {parseDecimals(totalStakedAmount, 18)}
+                <CustomText style={{
+              
+                color: theme.white,
+                fontSize: theme.defaultFontSize + 2,
+              
+              }}>{getLanguageString(language, 'FADOSTAKED')}:</CustomText> {parseDecimals(totalStakedAmount, 18)}
             </CustomText>
           </View>
 
@@ -194,7 +224,7 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
         </View>
       </View>
 
-      <Divider style={{width: '100%', backgroundColor: theme.white}} />
+      <Divider style={{width: '100%', backgroundColor: theme.white , opacity: 0.3}} />
       
       <View style= {{flexDirection: 'row' , width: '100%', justifyContent:'flex-end'}}>
         
@@ -231,12 +261,16 @@ const styles = StyleSheet.create({
   borderRadius: 6,
   backgroundColor: theme.yellow500,
   padding: 6,
+  paddingHorizontal: 18
   },
-
   validatorName:{
     fontSize: 16,
-    fontWeight: 'bold',
-  
+    fontWeight: '600',
     // marginBottom: 18,
-  }
+  },
+  tokenLogo: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+  },
 })

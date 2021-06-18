@@ -163,6 +163,8 @@ export const lang: Language = {
     INVEST: 'Đầu tư',
     CHOOSE_VALIDATOR: 'Uỷ quyền',
     STAKING_AMOUNT: 'Số lượng',
+    FADOSTAKED: 'Đồng FADO đã giao dịch',
+    INTEREST: "Tiền lãi",
     STAKING_AMOUNT_NOT_ENOUGHT: 'Ví hiện tại không đủ KAI',
     AT_LEAST_MIN_DELEGATE: 'Cần đầu tư ít nhất {{MIN_FADO}} FADO',
     DELEGATE: 'Uỷ quyền',

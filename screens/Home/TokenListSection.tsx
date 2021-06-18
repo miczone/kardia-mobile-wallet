@@ -112,7 +112,6 @@ const TokenListSection = ({refreshTime}: {
           }}
           >
           {renderIcon(item.avatar || '')}
-          {/* TODO CUSTOME VIEW CHO ĐẸP ĐẸP */}
             <View
               style={{
               flex:1,
