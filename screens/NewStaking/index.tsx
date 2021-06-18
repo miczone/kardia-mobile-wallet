@@ -26,6 +26,7 @@ import {getLanguageString} from '../../utils/lang';
 import {languageAtom} from '../../atoms/language';
 import CustomText from '../../components/Text';
 
+
 const parseValidatorItemForList = (item: Validator) => {
   return {
     value: item.smcAddress,
@@ -275,7 +276,7 @@ const NewStaking = () => {
                 {getLanguageString(language, 'COMMISSION_RATE')}
               </CustomText>
               <CustomText style={[{color: theme.textColor}]}>
-                {getSelectedCommission()}
+                {getSelectedCommission()} 
               </CustomText>
             </View>
             <View

@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useContext, useEffect, useState} from 'react';
-import {Keyboard, Platform, Text, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
+import React, {FC, useContext, useEffect, useState} from 'react';
+import {Keyboard, Platform, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
 import numeral from 'numeral';
 import {useRecoilValue} from 'recoil';
 import {languageAtom} from '../../../atoms/language';
@@ -11,8 +11,8 @@ import TextInput from '../../../components/TextInput';
 import {ThemeContext} from '../../../ThemeContext';
 import {getLanguageString, parseError} from '../../../utils/lang';
 import {getDigit, isNumber, format, parseKaiBalance, parseDecimals, formatNumberString} from '../../../utils/number';
-import {styles} from './style';
-import {weiToKAI} from '../../../services/transaction/amount';
+
+import {cellValue, weiToKAI} from '../../../services/transaction/amount';
 import Button from '../../../components/Button';
 import {BLOCK_TIME, MIN_DELEGATE} from '../../../config';
 import { getSelectedWallet, getWallets, getTokenList } from '../../../utils/local';
@@ -23,45 +23,86 @@ import {useNavigation} from '@react-navigation/native';
 import { getBalance } from '../../../services/account';
 import { selectedWalletAtom, walletsAtom } from '../../../atoms/wallets';
 import CustomText from '../../../components/Text';
-export default ({
-  validatorItem,
-  visible,
-  onClose,
-}: {
-  validatorItem?: Validator;
-  visible: boolean;
-  onClose: () => void;
-}) => {
-  const navigation = useNavigation();
+import { theme } from '../../../theme/light';
+import { getFadoBalance, stakeFadoToken } from '../../../services/fadostaking';
+import BigNumber from 'bignumber.js';
+
+
+
+interface thisModalProp {
+visible : boolean ,
+onClose : () => void,
+validatorItem? : Validator,
+}
+
+const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp) => {
   const language = useRecoilValue(languageAtom);
+  const navigation = useNavigation();
+
+  const [delegating, setDelegating] = useState(false);
+  const [fadoBalance, setFadoBalance] = useState(0);
   const [amount, setAmount] = useState('0');
   const [amountError, setAmountError] = useState('');
-  const [estimatedProfit, setEstimatedProfit] = useState('');
-  const [estimatedAPR, setEstimatedAPR] = useState('');
-  const [totalStakedAmount, setTotalStakedAmount] = useState('');
-  const [delegating, setDelegating] = useState(false);
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [fadoBalance, setFadoBalance] = useState(0);
+  const[showAuthModal, setShowAuthModal] = useState(false);
 
-  const theme = useContext(ThemeContext);
+  //Reset Func, clear all current stake 
+  const resetState = () => {
+    setAmount('0');
+    setAmountError('');
+    setShowAuthModal(false);
+    setDelegating(false);
+  }
+  // end **resetState** 
 
-  const wallets = useRecoilValue(walletsAtom);
-  const selectedWallet = useRecoilValue(selectedWalletAtom);
+  const validateInputAmout = async () => {
+    setAmountError('');
+
+    if (Number(getDigit(amount)) < MIN_DELEGATE) {
+      setAmountError(
+        getLanguageString(language, 'AT_LEAST_MIN_DELEGATE').replace(
+          '{{MIN_FADO}}',
+          numeral(MIN_DELEGATE).format('0,0'),
+        ),
+      );
+      return false;
+    }
+
+    const wallets = await getWallets();
+    const selectedWallet = await getSelectedWallet();
+    const balance = await getBalance(wallets[selectedWallet].address)
+    if (
+      Number(getDigit(amount)) >
+      Number(weiToKAI(balance))
+    ) {
+      setAmountError(getLanguageString(language, 'STAKING_AMOUNT_NOT_ENOUGHT'));
+      return false;
+    }
+    console.log("ABC");
+    
+    return true;
+  }
+
+  const _getBalance = async () => {
+    const wallets = await getWallets();
+    const selectedWallet = await getSelectedWallet();
+
+    var fadoBalance = await getFadoBalance(wallets[selectedWallet].address);
+    
+    
+    setFadoBalance( Number(weiToKAI(fadoBalance)) );
+
+    return cellValue((weiToKAI(fadoBalance)));
+  }
+
+  // FADO JSC COMMISSION RATE
+  const getSelectedCommission = () => {
+    const formatted = numeral(validatorItem?.commissionRate).format('0,0.00');
+    return formatted === 'NaN' ? '0 %' : `${formatted} %`;
+  };
 
   useEffect(() => {
-    (async () => {
-      try {
-        const {totalStaked} = await getAllValidator();
-           
-        setTotalStakedAmount(totalStaked);
-        // setValidatorList(validators);
-        // setLoading(false);
-      } catch (error) {
-        console.error(error);
-        // setLoading(false);
-      }
-    })();
-  }, []);
+    _getBalance();
+  }, [])
 
   const [keyboardShown, setKeyboardShown] = useState(false);
   const [keyboardOffset, setKeyboardOffset] = useState(0);
@@ -97,143 +138,35 @@ export default ({
     setKeyboardShown(false);
   };
 
-  const resetState = () => {
-    setAmount('0');
+  const getModalStyle = () => {
+    if (Platform.OS === 'android') {
+      return {
+        backgroundColor: theme.modalBgColor,
+        justifyContent: 'flex-start',
+        height: 590,
+        marginBottom: keyboardShown ? -180 : 0,
+        marginTop: keyboardShown ? 180 : 0,
+      };
+    } else {
+      return {
+        backgroundColor: theme.modalBgColor,
+        justifyContent: 'flex-start',
+        height: 560,
+        marginBottom: keyboardOffset,
+        marginTop: -keyboardOffset,
+      };
+    }
+  };
+
+  const stakeHanlder = async () => {
     setAmountError('');
-    setEstimatedProfit('');
-    setEstimatedAPR('');
-    setShowAuthModal(false);
-    setDelegating(false);
-  };
-
-  const calculateStakingAPR = async () => {
-    if (!validatorItem) {
-      return;
-    }
-    try {
-      const newTotalStaked =
-        Number(weiToKAI(totalStakedAmount)) + Number(getDigit(amount));
-      const validatorNewTotalStaked =
-        Number(weiToKAI(validatorItem.stakedAmount)) + Number(getDigit(amount));
-
-      const commission = Number(validatorItem.commissionRate) / 100;
-      const votingPower = validatorNewTotalStaked / newTotalStaked;
-
-      const block = await getLatestBlock();
-      const blockReward = Number(weiToKAI(block.rewards));
-      const delegatorsReward = blockReward * (1 - commission) * votingPower;
-
-      const yourReward =
-        (Number(getDigit(amount)) / validatorNewTotalStaked) * delegatorsReward;
-
-      setEstimatedProfit(`${(yourReward * (30 * 24 * 3600)) / BLOCK_TIME}`);
-      setEstimatedAPR(
-        `${
-          ((yourReward * (365 * 24 * 3600)) /
-            BLOCK_TIME /
-            Number(getDigit(amount))) *
-          100
-        }`,
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    if (validatorItem && amount) {
-      calculateStakingAPR();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [validatorItem, amount]);
-
-  if (!validatorItem) {
-    return null;
-  }
-
-  const _getBalance = () => {
-    if (!wallets[selectedWallet]) return 0;
-    return wallets[selectedWallet].balance;
-  }
-
-  // FADO JSC COMMISSION RATE
-  const getSelectedCommission = () => {
-    const formatted = numeral(validatorItem.commissionRate).format('0,0.00');
-    return formatted === 'NaN' ? '0 %' : `${formatted} %`;
-  };
-
-  const getSelectedStakedAmount = () => {
-    const formatted = numeral(weiToKAI(validatorItem.stakedAmount)).format(
-      '0,0.00',
-    );
-    return formatted === 'NaN' ? '0 KAI' : `${formatted} KAI`;
-  };
-
-  const getSelectedVotingPower = () => {
-    const formatted = numeral(validatorItem.votingPowerPercentage).format(
-      '0,0.00',
-    );
-    return formatted === 'NaN' ? '0 %' : `${formatted} %`;
-  };
-
-  const validate = async () => {
-    setAmountError('');
-
-    if (Number(getDigit(amount)) < MIN_DELEGATE) {
-      setAmountError(
-        getLanguageString(language, 'AT_LEAST_MIN_DELEGATE').replace(
-          '{{MIN_KAI}}',
-          numeral(MIN_DELEGATE).format('0,0'),
-        ),
-      );
-      return false;
-    }
-
-    const wallets = await getWallets();
-    const selectedWallet = await getSelectedWallet();
-    const balance = await getBalance(wallets[selectedWallet].address)
-    if (
-      Number(getDigit(amount)) >
-      Number(weiToKAI(balance))
-    ) {
-      setAmountError(getLanguageString(language, 'STAKING_AMOUNT_NOT_ENOUGHT'));
-      return false;
-    }
-
-    return true;
-  };
-
-  const delegateHandler = async () => {
-    setAmountError('');
-    try {
-      if (Number(getDigit(amount)) < MIN_DELEGATE) {
-        setAmountError(
-          getLanguageString(language, 'AT_LEAST_MIN_DELEGATE').replace(
-            '{{MIN_KAI}}',
-            numeral(MIN_DELEGATE).format('0,0'),
-          ),
-        );
-        return;
-      }
-
+    try{
+      setDelegating(true);
       const wallets = await getWallets();
       const selectedWallet = await getSelectedWallet();
-      const balance = await getBalance(wallets[selectedWallet].address)
-      if (
-        Number(getDigit(amount)) >
-        Number(weiToKAI(balance))
-      ) {
-        setAmountError(
-          getLanguageString(language, 'STAKING_AMOUNT_NOT_ENOUGHT'),
-        );
-        return;
-      }
-      setDelegating(true);
-      const rs = await delegateAction(
-        validatorItem.smcAddress,
-        wallets[selectedWallet],
-        Number(getDigit(amount)),
-      );
+
+      const rs = await stakeFadoToken(Number(getDigit(amount)), wallets[selectedWallet]);
+
       if (rs.status === 0) {
         setDelegating(false);
       } else {
@@ -265,31 +198,10 @@ export default ({
       <AuthModal
         visible={showAuthModal}
         onClose={() => setShowAuthModal(false)}
-        onSuccess={delegateHandler}
+        onSuccess={stakeHanlder}
       />
     );
   }
-
-  const getModalStyle = () => {
-    if (Platform.OS === 'android') {
-      return {
-        backgroundColor: theme.modalBgColor,
-        justifyContent: 'flex-start',
-        height: 590,
-        marginBottom: keyboardShown ? -180 : 0,
-        marginTop: keyboardShown ? 180 : 0,
-      };
-    } else {
-      return {
-        backgroundColor: theme.modalBgColor,
-        justifyContent: 'flex-start',
-        height: 560,
-        marginBottom: keyboardOffset,
-        marginTop: -keyboardOffset,
-      };
-    }
-  };
-// O DAY NE 
 
   return (
     <Modal
@@ -299,21 +211,27 @@ export default ({
         resetState();
         onClose();
       }}
-      contentStyle={getModalStyle()}>
+      contentStyle={getModalStyle()}
+      >
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
         <View style={{flex: 1, width: '100%'}}>
-          <View style={{width: '100%'}}>
-            <View style={{marginBottom: 4, flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={styles.header}>
+            <CustomText style={styles.headline}>Transaction</CustomText>
+          </View>
+
+          <View style={{marginBottom: 4, flexDirection: 'row', justifyContent: 'space-between'}}>
               <CustomText style={{color: theme.textColor}}>
                 {getLanguageString(language, 'STAKING_AMOUNT')}
               </CustomText>
-              <TouchableOpacity onPress={() => setAmount(parseDecimals(_getBalance(), 18).toString())}>
+            
+              <TouchableOpacity onPress={async () => setAmount(parseDecimals(3600434764032778000000, 18).toString())}>
                 <CustomText style={{color: theme.urlColor}}>
-                 { fadoBalance } FADO
+                 { fadoBalance.toFixed(4) } FADO
                 </CustomText>
               </TouchableOpacity>
-            </View>
-            <TextInput
+          </View>
+
+          <TextInput
               message={amountError}
               inputStyle={{
                 backgroundColor: theme.inputBgColor,
@@ -325,16 +243,13 @@ export default ({
               keyboardType="numeric"
               value={amount}
               onChangeText={(newAmount) => {
-                console.log({newAmount});
-                
                 const digitOnly = getDigit(newAmount, true);
 
                 if (digitOnly === '') {
                   setAmount('0');
                   return;
                 }
-                if (isNumber(digitOnly)) {
-                  
+                if (isNumber(digitOnly)) {                                            
                   let formatedValue = formatNumberString(digitOnly);
 
                   const [numParts, decimalParts] = digitOnly.split('.')
@@ -344,17 +259,17 @@ export default ({
                   }
 
                   formatedValue = formatNumberString(numParts) + '.' + decimalParts
-                  console.log({amount});
-                  
-                  setAmount('10');
+                                  
+                  setAmount(formatedValue);
                 }
                 // isNumber(digitOnly) && setAmount(digitOnly);
               }}
               onBlur={() => setAmount(formatNumberString(getDigit(amount)))}
-            />
-          </View>
+           />
+
           <View style={{width: '100%', marginTop: 12}}>
             <CustomText style={{color: theme.textColor}}>Validator</CustomText>
+
             <View
               style={[
                 styles.validatorItemContainer,
@@ -362,8 +277,9 @@ export default ({
                   backgroundColor: theme.backgroundColor,
                 },
               ]}>
-              <TextAvatar
-                text={validatorItem.name}
+
+            <TextAvatar
+                text={validatorItem ? validatorItem.name : 'FAFO'}
                 style={{
                   width: 32,
                   height: 32,
@@ -374,36 +290,31 @@ export default ({
                 }}
                 textStyle={{fontSize: 16}}
               />
-              <View style={{justifyContent: 'space-between'}}>
+
+            <View style={{justifyContent: 'space-between'}}>
                 <CustomText
                   style={{
                     color: theme.textColor,
                     fontSize: 13,
                     fontWeight: 'bold',
                   }}>
-                  {validatorItem.name}
+                  {validatorItem ? validatorItem.name : 'FAFO'}
                 </CustomText>
+
                 <CustomText
                   style={{
                     color: theme.gray600,
                     fontSize: theme.defaultFontSize,
                   }}>
-                  {validatorItem.commissionRate} %
+                  {validatorItem ? validatorItem.commissionRate : 10} %
                 </CustomText>
-              </View>
+
             </View>
           </View>
+
           <Divider style={{width: '100%', backgroundColor: theme.gray400}} />
-          <View style={{width: '100%'}}>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 6}}>
-              <CustomText style={{color: theme.textColor, fontStyle: 'italic'}}>
-                {getLanguageString(language, 'ESTIMATED_APR')}
-              </CustomText>
-              <CustomText style={[{color: theme.textColor}]}>
-                {numeral(estimatedAPR).format('0,0.00')}{' '}
-                {estimatedAPR ? '%' : ''}
-              </CustomText>
-            </View>
+
+          <View style={{width: '100%'}}>           
             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 6}}>
               <CustomText style={{color: theme.textColor, fontStyle: 'italic'}}>
                 {getLanguageString(language, 'COMMISSION_RATE')}
@@ -412,33 +323,25 @@ export default ({
                 {getSelectedCommission()}
               </CustomText>
             </View>
+
             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 6}}>
               <CustomText style={{color: theme.textColor, fontStyle: 'italic'}}>
                 {getLanguageString(language, 'TOTAL_STAKED_AMOUNT')}
               </CustomText>
               <CustomText style={[{color: theme.textColor}]}>
-                {getSelectedStakedAmount()}
+                0
               </CustomText>
             </View>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 6}}>
-              <CustomText style={{color: theme.textColor, fontStyle: 'italic'}}>
-                {getLanguageString(language, 'VOTING_POWER')}
-              </CustomText>
-              <CustomText style={[{color: theme.textColor}]}>
-                {getSelectedVotingPower()}
-              </CustomText>
-            </View>
+          
             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 6}}>
               <CustomText style={{color: theme.textColor, fontStyle: 'italic'}}>
                 {getLanguageString(language, 'ESTIMATED_EARNING')}
               </CustomText>
-              <CustomText style={[{color: theme.textColor}]}>
-                {numeral(estimatedProfit).format('0,0.00')}{' '}
-                {estimatedProfit ? 'KAI' : ''}
-              </CustomText>
             </View>
           </View>
+
           <Divider style={{width: '100%', backgroundColor: theme.gray400}} />
+
           <View style={{width: '100%'}}>
             <Button
               type="outline"
@@ -456,15 +359,45 @@ export default ({
               type="primary"
               title={getLanguageString(language, 'DELEGATE')}
               onPress={async () => {
-                if (await validate()) {
+                
+                if (await validateInputAmout()) {
+                  
+                  
                   setShowAuthModal(true);
+                
                 }
               }}
               textStyle={Platform.OS === 'android' ? {fontFamily: 'WorkSans-SemiBold', fontSize: theme.defaultFontSize + 3} : {fontWeight: '500', fontSize: theme.defaultFontSize + 3}}
             />
           </View>
         </View>
-      </TouchableWithoutFeedback>
-    </Modal>
+      </View>
+    </TouchableWithoutFeedback>
+  </Modal>
   );
 };
+
+export default FadoNewStakingModal;
+
+const styles = StyleSheet.create({
+  header:{
+
+    justifyContent: 'center',
+    alignItems:'center',
+    textAlign: 'center',
+  },
+  headline:{
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: theme.primary,
+  },
+  validatorItemContainer:{
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    padding: 12,
+    marginTop: 4,
+    borderRadius: 8,
+    width: '100%',
+  },
+
+});

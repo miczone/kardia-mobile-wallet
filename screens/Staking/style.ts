@@ -13,7 +13,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     // marginBottom: 20,
     justifyContent: 'space-between',
-    marginBottom: 18
+    marginBottom: 18,
+    textAlign: 'center',
   },
   headline: {
     fontSize: 36,

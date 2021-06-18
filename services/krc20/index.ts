@@ -35,7 +35,7 @@ export const getBalance = async (tokenAddress: string, userAddress: string) => {
     const balance = await krc20.balanceOf(userAddress);
     return balance;
   } catch (error) {
-    console.log('error', userAddress, tokenAddress)
+    console.log('error', {userAddress}, {tokenAddress})
     return 0
   }
 };
