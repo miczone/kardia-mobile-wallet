@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {FC, useContext, useEffect, useState} from 'react';
-import {Keyboard, Platform, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
+import {Keyboard, Platform, StyleSheet, Text, ToastAndroid, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
 import numeral from 'numeral';
 import {useRecoilValue} from 'recoil';
 import {languageAtom} from '../../../atoms/language';
@@ -24,7 +24,7 @@ import { getBalance } from '../../../services/account';
 import { selectedWalletAtom, walletsAtom } from '../../../atoms/wallets';
 import CustomText from '../../../components/Text';
 import { theme } from '../../../theme/light';
-import { getFadoBalance, stakeFadoToken } from '../../../services/fadostaking';
+import { getFadoBalance, getFadoTokenTotalStakedAmount, stakeFadoToken } from '../../../services/fadostaking';
 import BigNumber from 'bignumber.js';
 
 
@@ -44,6 +44,7 @@ const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp)
   const [amount, setAmount] = useState('0');
   const [amountError, setAmountError] = useState('');
   const[showAuthModal, setShowAuthModal] = useState(false);
+  const [totalStakedAmount, setTotalStakedAmount] = useState();
 
   //Reset Func, clear all current stake 
   const resetState = () => {
@@ -88,7 +89,13 @@ const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp)
 
     var fadoBalance = await getFadoBalance(wallets[selectedWallet].address);
     
+    var totalStakedAmount = await getFadoTokenTotalStakedAmount();
+    console.log({totalStakedAmount});
     
+    if(totalStakedAmount > 0){
+      setTotalStakedAmount(totalStakedAmount);
+    }
+
     setFadoBalance( Number(weiToKAI(fadoBalance)) );
 
     return cellValue((weiToKAI(fadoBalance)));
@@ -279,7 +286,7 @@ const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp)
               ]}>
 
             <TextAvatar
-                text={validatorItem ? validatorItem.name : 'FAFO'}
+                text={validatorItem ? validatorItem.name : 'FADO'}
                 style={{
                   width: 32,
                   height: 32,
@@ -298,7 +305,7 @@ const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp)
                     fontSize: 13,
                     fontWeight: 'bold',
                   }}>
-                  {validatorItem ? validatorItem.name : 'FAFO'}
+                  {validatorItem ? validatorItem.name : 'FADO'}
                 </CustomText>
 
                 <CustomText
@@ -329,13 +336,13 @@ const FadoNewStakingModal = ({visible , onClose ,validatorItem} : thisModalProp)
                 {getLanguageString(language, 'TOTAL_STAKED_AMOUNT')}
               </CustomText>
               <CustomText style={[{color: theme.textColor}]}>
-                0
+                {totalStakedAmount && totalStakedAmount != 0 && totalStakedAmount}
               </CustomText>
             </View>
           
             <View style={{flexDirection: 'row', justifyContent: 'space-between', marginVertical: 6}}>
               <CustomText style={{color: theme.textColor, fontStyle: 'italic'}}>
-                {getLanguageString(language, 'ESTIMATED_EARNING')}
+                {getLanguageString(language, 'TRANSACTION_BONUS')}
               </CustomText>
             </View>
           </View>
@@ -381,10 +388,10 @@ export default FadoNewStakingModal;
 
 const styles = StyleSheet.create({
   header:{
-
     justifyContent: 'center',
     alignItems:'center',
     textAlign: 'center',
+    marginBottom:10,
   },
   headline:{
     fontSize: 24,
