@@ -216,7 +216,7 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
                 color: theme.white,
                 fontSize: theme.defaultFontSize + 2,
               
-              }}>{getLanguageString(language, 'FADOSTAKED')}:</CustomText> {parseDecimals(totalStakedAmount, 18)}
+              }}>{getLanguageString(language, 'FADOSTAKED')}:</CustomText> {Number(parseDecimals(totalStakedAmount, 18)).toFixed(4)}
             </CustomText>
           </View>
 
