@@ -17,14 +17,14 @@ import { getSelectedWallet, getWallets } from '../../../utils/local';
 import { format, formatNumberString, getDigit, isNumber } from '../../../utils/number';
 import CustomText from '../../../components/Text';
 
-export default ({visible, onClose, validatorItem, onSuccess}: {
+export default ({visible, onClose, stakerInfo, onSuccess}: {
   visible: boolean;
   onClose: () => void;
   onSuccess: () => void;
-  validatorItem: any;
+  stakerInfo?: StakerInfo
 }) => {
   const navigation = useNavigation();
-  const stakedAmountInKAI = weiToKAI(validatorItem.stakedAmount);
+  // const stakedAmountInKAI = weiToKAI(validatorItem.stakedAmount);
 
   const theme = useContext(ThemeContext);
   const language = useRecoilValue(languageAtom);
@@ -76,47 +76,47 @@ export default ({visible, onClose, validatorItem, onSuccess}: {
     try {
       setSubmitting(true);
       const _undelegateValue = Number(getDigit(undelegateAmount));
-      if (Number(stakedAmountInKAI) < _undelegateValue) {
-        setUndelegateError(
-          getLanguageString(language, 'UNDELEGATE_AMOUNT_TOO_MUCH'),
-        );
-        setSubmitting(false);
-        return;
-      }
-      if (
-        Number(stakedAmountInKAI) - _undelegateValue < MIN_DELEGATE &&
-        Number(stakedAmountInKAI) - _undelegateValue > 0
-      ) {
-        setUndelegateError(
-          getLanguageString(language, 'UNDELEGATE_AMOUNT_REMAIN_1000'),
-        );
-        setSubmitting(false);
-        return;
-      }
+      // if (Number(stakedAmountInKAI) < _undelegateValue) {
+      //   setUndelegateError(
+      //     getLanguageString(language, 'UNDELEGATE_AMOUNT_TOO_MUCH'),
+      //   );
+      //   setSubmitting(false);
+      //   return;
+      // }
+      // if (
+      //   Number(stakedAmountInKAI) - _undelegateValue < MIN_DELEGATE &&
+      //   Number(stakedAmountInKAI) - _undelegateValue > 0
+      // ) {
+      //   setUndelegateError(
+      //     getLanguageString(language, 'UNDELEGATE_AMOUNT_REMAIN_1000'),
+      //   );
+      //   setSubmitting(false);
+      //   return;
+      // }
 
-      const localWallets = await getWallets();
-      const localSelectedWallet = await getSelectedWallet();
-      const _wallet = localWallets[localSelectedWallet];
+      // const localWallets = await getWallets();
+      // const localSelectedWallet = await getSelectedWallet();
+      // const _wallet = localWallets[localSelectedWallet];
 
-      let rs
+      // let rs
 
-      if (Number(stakedAmountInKAI) - _undelegateValue > MIN_DELEGATE) {
-        rs = await undelegateWithAmount(validatorItem.value, _undelegateValue, _wallet);
-      } else {
-        rs = await undelegateAll(validatorItem.value, _wallet);
-      }
-      setSubmitting(false);
-      setUndelegateAmount('');
-      navigation.navigate('Transaction', {
-        screen: 'SuccessTx',
-        params: {
-          type: 'undelegate',
-          txHash: rs,
-          validatorItem: validatorItem,
-          undelegateAmount: _undelegateValue,
-        },
-      });
-      onSuccess();
+      // if (Number(stakedAmountInKAI) - _undelegateValue > MIN_DELEGATE) {
+      //   rs = await undelegateWithAmount(validatorItem.value, _undelegateValue, _wallet);
+      // } else {
+      //   rs = await undelegateAll(validatorItem.value, _wallet);
+      // }
+      // setSubmitting(false);
+      // setUndelegateAmount('');
+      // navigation.navigate('Transaction', {
+      //   screen: 'SuccessTx',
+      //   params: {
+      //     type: 'undelegate',
+      //     txHash: rs,
+      //     validatorItem: validatorItem,
+      //     undelegateAmount: _undelegateValue,
+      //   },
+      // });
+      // onSuccess();
     } catch (err) {
       setSubmitting(false);
       console.error(err);
@@ -158,10 +158,15 @@ export default ({visible, onClose, validatorItem, onSuccess}: {
                   'UNDELEGATE_AMOUNT_PLACEHOLDER',
                 )}
               </CustomText>
-              <TouchableOpacity onPress={() => setUndelegateAmount(formatNumberString(stakedAmountInKAI))}>
-                <CustomText style={{fontSize: theme.defaultFontSize + 1, color: theme.urlColor}} allowFontScaling={false}>{formatNumberString(stakedAmountInKAI, 6)} KAI</CustomText>
+
+              <TouchableOpacity onPress={() => setUndelegateAmount(formatNumberString('10'))}>
+                <CustomText style={{fontSize: theme.defaultFontSize + 1, color: theme.urlColor}} allowFontScaling={false}>
+                  {/* {formatNumberString(stakedAmountInKAI, 6)} KAI */}
+                  {stakerInfo ? (stakerInfo.reward + stakerInfo.stakedAmount) : 0} FADO
+                </CustomText>
               </TouchableOpacity>
             </View>
+
             <CustomTextInput
               keyboardType="numeric"
               message={undelegateError}
@@ -172,7 +177,7 @@ export default ({visible, onClose, validatorItem, onSuccess}: {
               }}
               onChangeText={(newAmount) => {
                 const digitOnly = getDigit(newAmount);
-                if (Number(digitOnly) > Number(stakedAmountInKAI)) {
+                if (Number(digitOnly) > Number(0)) {
                   return;
                 }
                 if (digitOnly === '') {
@@ -197,7 +202,9 @@ export default ({visible, onClose, validatorItem, onSuccess}: {
               // )}
             />
           </View>
+
           <Divider style={{width: '100%', backgroundColor: theme.gray400}} />
+
           <Button
             disabled={submitting}
             title={getLanguageString(language, 'CANCEL')}
@@ -205,6 +212,7 @@ export default ({visible, onClose, validatorItem, onSuccess}: {
             type="outline"
             style={{width: '100%', marginTop: 14}}
           />
+
           <Button
             loading={submitting}
             disabled={submitting}

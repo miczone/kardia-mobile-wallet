@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useContext, useEffect, useState} from 'react';
 import numeral from 'numeral';
-import {TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {ThemeContext} from '../../ThemeContext';
-import {styles} from './style';
+
 import {weiToKAI} from '../../services/transaction/amount';
 import {
   getAllValidator,
@@ -18,6 +18,8 @@ import CustomText from '../../components/Text';
 import { getLatestBlock } from '../../services/blockchain';
 import { formatNumberString, getDigit } from '../../utils/number';
 import { BLOCK_TIME } from '../../config';
+import { useNavigation } from '@react-navigation/native';
+import UndelegateModal from '../common/UndelegateModal';
 
 interface Prop {
 stakerInfo : StakerInfo
@@ -25,14 +27,18 @@ stakerInfo : StakerInfo
 
 const FadoStakingItem = ({stakerInfo}: Prop) => {
   const theme = useContext(ThemeContext);
+  const navigation = useNavigation();
+  const language = useRecoilValue(languageAtom);
 
   const [showFull, setShowFull] = useState(false);
   const [commissionRate, setCommissionRate] = useState(0);
-
+  const [showUndelegateModal, setShowUndelegateModal] = useState(false);
   const [totalStakedAmount, setTotalStakedAmount] = useState(0);
   const [reward, setReward] = useState(0);
-
-  const language = useRecoilValue(languageAtom);
+  
+  const showButton = (value: any) => {
+    return numeral(value).format('0,0.00') !== '0.00'
+  }
 
   useEffect(() => {
     (async () => {
@@ -56,6 +62,21 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
     );
     return formatted === 'NaN' ? '0 KAI' : `${formatted} KAI`;
   };
+
+  if (showUndelegateModal) {
+    return (
+      <UndelegateModal
+        visible={showUndelegateModal}
+        onClose={() => {
+          setShowUndelegateModal(false);
+        }}
+        onSuccess={() => {
+          // setShowUndelegateModal(false);
+        }}
+        stakerInfo={stakerInfo}
+      />
+    );
+  }
 
   return (
     <View
@@ -131,6 +152,17 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
             {totalStakedAmount}
             </CustomText>
           </View>
+
+          {showButton(totalStakedAmount) && (
+              <View style={[styles.dataContainer, {justifyContent: 'center'}]}>
+                <TouchableOpacity onPress={() => setShowUndelegateModal(true)}>
+                  <CustomText style={[{color: theme.urlColor}]}>
+                {getLanguageString(language, 'UNDELEGATE')}
+                  </CustomText>
+                </TouchableOpacity>
+              </View>
+        )}
+        
         </View>
       </View>
     </View>
@@ -138,3 +170,15 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
 };
 
 export default FadoStakingItem;
+
+const styles = StyleSheet.create({
+  dataContainer:{
+  
+  },
+
+  validatorName:{
+    fontSize: 15,
+    fontWeight: 'bold',
+    // marginBottom: 18,
+  }
+})
