@@ -20,47 +20,41 @@ import { formatNumberString, getDigit } from '../../utils/number';
 import { BLOCK_TIME } from '../../config';
 
 const FadoStakingItem = ({
-  item,
+  stakerInfo,
  
 }: {
-  item?: any;
-
+  stakerInfo?: any,
 }) => {
-  const [showFull, setShowFull] = useState(false);
-  const [commissionRate, setCommissionRate] = useState(0);
   const theme = useContext(ThemeContext);
 
+  const [showFull, setShowFull] = useState(false);
+  const [commissionRate, setCommissionRate] = useState(0);
 
-  const [totalStakedAmount, setTotalStakedAmount] = useState('');
-  const [estimatedAPR, setEstimatedAPR] = useState('');
+  const [totalStakedAmount, setTotalStakedAmount] = useState(0);
+  const [reward, setReward] = useState(0);
 
   const language = useRecoilValue(languageAtom);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        // const {totalStaked} = await getAllValidator();
-        // setTotalStakedAmount(totalStaked);
-        // setValidatorList(validators);
-        // setLoading(false);
-      } catch (error) {
-        console.error(error);
-        // setLoading(false);
-      }
-    })();
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       // const {totalStaked} = await getAllValidator();
+  //       // setTotalStakedAmount(totalStaked);
+  //       // setValidatorList(validators);
+  //       // setLoading(false);
+  //     } catch (error) {
+  //       console.error(error);
+  //       // setLoading(false);
+  //     }
+  //   })();
+  // }, []);
 
-
- 
-
-  const getSelectedStakedAmount = () => {
-    const formatted = numeral(weiToKAI(item.stakedAmount)).format(
-      '0,0.00',
-    );
-    return formatted === 'NaN' ? '0 KAI' : `${formatted} KAI`;
-  };
-
-  
+  // const getSelectedStakedAmount = () => {
+  //   const formatted = numeral(weiToKAI(stakerInfo.stakedAmount)).format(
+  //     '0,0.00',
+  //   );
+  //   return formatted === 'NaN' ? '0 KAI' : `${formatted} KAI`;
+  // };
 
   return (
     <View
@@ -73,26 +67,27 @@ const FadoStakingItem = ({
         alignItems: 'center',
         justifyContent: 'space-between',
       }}>
-      <DelegateDetailModal
+
+      {/* <DelegateDetailModal
         validatorItem={{...item, ...{commissionRate}}}
         visible={showFull}
         onClose={() => setShowFull(false)}
-      />
-      <TouchableOpacity
-        onPress={() => setShowFull(!showFull)}
+      /> */}
+
+      <View       
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
           width: '100%',
         }}>
-        <View
+          <View
           style={{
             alignItems: 'center',
             flexDirection: 'row',
             justifyContent: 'space-between',
           }}>
           <TextAvatar
-            text={item ? item.name : 'FADO'}
+            text={'FADO'}
             style={{
               width: 36,
               height: 36,
@@ -106,12 +101,13 @@ const FadoStakingItem = ({
 
           <View>
             <CustomText style={[styles.validatorName, {color: theme.textColor}]}>
-              {item ? item.name : 'FADO'}
+            {stakerInfo.name}
             </CustomText>
           </View>
-        </View>
+          </View>
+
         <View style={{alignItems: 'flex-end', justifyContent: 'space-between'}}>
-          <View style={{justifyContent: 'center'}}>
+          {/* <View style={{justifyContent: 'center'}}>
             <CustomText
               allowFontScaling={false}
               style={{
@@ -119,8 +115,8 @@ const FadoStakingItem = ({
                 color: theme.textColor,
                 fontSize: theme.defaultFontSize + 1,
               }}>
-              {/* {numeral(claimableInKAI).format('0,0.00')} KAI */}
-            0
+
+            {reward}
             </CustomText>
           </View>
 
@@ -131,11 +127,11 @@ const FadoStakingItem = ({
                 color: theme.gray500,
                 fontSize: theme.defaultFontSize,
               }}>
-            0
+            {totalStakedAmount}
             </CustomText>
-          </View>
+          </View> */}
         </View>
-      </TouchableOpacity>
+      </View>
     </View>
   );
 };

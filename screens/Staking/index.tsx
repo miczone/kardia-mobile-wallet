@@ -55,7 +55,7 @@ const StakingScreen = () => {
   const [validatorList, setValidatorList] = useState<Validator[]>([]);
   const [validatorItem, setValidatorItem] = useState<Validator>();
 
-  const [stakerInfo, setStakerInfo] = useState();
+  const [stakerInfo, setStakerInfo] = useState<StakerInfo>();
   const [visible, setVisible] = useState(false);
 
   console.log({visible});
@@ -234,7 +234,7 @@ const StakingScreen = () => {
 
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <CustomText style={[styles.totalSaving, Platform.OS === 'android' ? {color: theme.textColor, fontFamily: 'WorkSans-SemiBold'} : {color: theme.textColor, fontWeight: '500'}]}>
-             0
+             {stakerInfo.stakedAmount}
             </CustomText>
             <CustomText style={{fontSize: theme.defaultFontSize + 6, color: 'rgba(252, 252, 252, 0.54)', fontWeight: '500', fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined}}>
               FADO
@@ -261,7 +261,7 @@ const StakingScreen = () => {
       }
 
       {stakerInfo && 
-             <FadoStakingItem  />
+             <FadoStakingItem stakerInfo={stakerInfo}/>
       }
 
       {stakerInfo &&
