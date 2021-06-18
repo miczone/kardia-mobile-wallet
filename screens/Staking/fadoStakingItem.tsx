@@ -138,7 +138,7 @@ const FadoStakingItem = ({stakerInfo}: Prop) => {
                 fontSize: theme.defaultFontSize + 1,
               }}>
 
-            {parseDecimals(reward, 18)}
+            {Number(parseDecimals(reward, 18)).toFixed(4)}
             </CustomText>
           </View>
 

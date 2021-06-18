@@ -106,6 +106,7 @@ const StakingScreen = () => {
       setStatusBarColor(theme.backgroundColor);
       return () => {
         setStatusBarColor(theme.backgroundColor);
+        setLoading(true);
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []),
@@ -234,9 +235,9 @@ const StakingScreen = () => {
 
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <CustomText style={[styles.totalSaving, Platform.OS === 'android' ? {color: theme.textColor, fontFamily: 'WorkSans-SemiBold'} : {color: theme.textColor, fontWeight: '500'}]}>
-             {parseDecimals((stakerInfo.stakedAmount + stakerInfo.reward), 18)}
+             {Number(parseDecimals((stakerInfo.stakedAmount + stakerInfo.reward), 18)).toFixed(4)}
             </CustomText>
-            <CustomText style={{fontSize: theme.defaultFontSize + 6, color: 'rgba(252, 252, 252, 0.54)', fontWeight: '500', fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined}}>
+            <CustomText style={{fontSize: theme.defaultFontSize + 6, color: '#fff', fontWeight: '500', fontFamily: Platform.OS === 'android' ? 'WorkSans-SemiBold' : undefined}}>
               FADO 
             </CustomText>
           </View>
