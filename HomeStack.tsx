@@ -19,11 +19,12 @@ import SettingStackScreen from './SettingStack';
 import CreateWithMnemonicPhrase from './screens/CreateWithMnemonicPhrase';
 import TransactionScreen from './screens/Transactions';
 import SuccessTx from './screens/SuccessTx';
-import UserContactForm from './screens/Home/UserContactForm';
+
 import SubmitSuccessScreen from './screens/Home/SubmitSuccessScreen';
 import {useRecoilValue} from 'recoil';
 import {languageAtom} from './atoms/language';
 import {getLanguageString} from './utils/lang';
+import UserContactForm from './screens/Home/UserContactForm';
 
 const HomeStack = createStackNavigator();
 
