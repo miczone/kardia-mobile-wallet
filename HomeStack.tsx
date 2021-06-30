@@ -24,7 +24,8 @@ import SubmitSuccessScreen from './screens/Home/SubmitSuccessScreen';
 import {useRecoilValue} from 'recoil';
 import {languageAtom} from './atoms/language';
 import {getLanguageString} from './utils/lang';
-import UserContactForm from './screens/Home/UserContactForm';
+import BuyFadoContactScreen from './screens/Home/BuyFadoContactScreen';
+
 
 const HomeStack = createStackNavigator();
 
@@ -119,7 +120,7 @@ const HomeStackScreen = () => {
 
       <HomeStack.Screen
         name="UserContactForm"
-        component={UserContactForm}
+        component={BuyFadoContactScreen}
         options={{
           headerTitle: getLanguageString(language, 'FADO_CONTACT_SUPPORT'),
         }}
