@@ -284,6 +284,14 @@ export const lang: Language = {
     NOT_ENOUGH_KRC20_FOR_TX: 'Ví không đủ {{SYMBOL}}',
     APPROVE: 'Cấp quyền',
     APPROVE_NOTE: 'Thao tác cấp quyền sẽ không ảnh hưởng đến token của bạn.',
-    APPROVE_ERROR: 'Có lỗi xảy ra, vui lòng thử lại sau.'
+    APPROVE_ERROR: 'Có lỗi xảy ra, vui lòng thử lại sau.',
+
+    FULL_NAME: 'Họ và tên',
+    PHONE: 'Số điện thoại',
+    EMAIL: 'Địa chỉ email',
+    FADO_CONTACT_SUPPORT: 'Liên hệ mua Fado Token',
+    SUPPORT_MESSAGE: 'Vui lòng điền đầy đủ và chính xác thông tin bên dưới để được hỗ trợ nhanh chóng',
+    FADO_CONTACT_SUPPORT_SUCCESS: 'Gửi yêu cầu thành công',
+    BACK_TO_HOME : 'Quay về trang chủ'
   },
 };

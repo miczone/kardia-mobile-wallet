@@ -153,7 +153,7 @@ const TokenListSection = ({refreshTime}: {
             </View>
             <Button
               title={getLanguageString(language, 'BUY_FADO')}
-              onPress={() => Alert.alert('Coming soon')}
+              onPress={() => navigation.navigate('UserContactForm')}
               // onPress={() => Linking.openURL(SIMPLEX_URL)}
               type="ghost"
               size="small"
