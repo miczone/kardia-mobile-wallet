@@ -291,6 +291,17 @@ export const lang: Language = {
     NOT_ENOUGH_KRC20_FOR_TX: 'Insufficient {{SYMBOL}} Balance',
     APPROVE: 'Approve',
     APPROVE_NOTE: 'Approving will NOT cost you any token.',
-    APPROVE_ERROR: 'Error approving your tokens, please try again later.'
+    APPROVE_ERROR: 'Error approving your tokens, please try again later.',
+
+    FULL_NAME: 'Fullname',
+    PHONE: 'Phone',
+    EMAIL: 'Email address',
+    FADO_CONTACT_SUPPORT: 'Buy Fado Token contact',
+    SUPPORT_MESSAGE: 'Please fill in this form to get quickly support from Fado',
+   
+    BACK_TO_HOME: 'Back to home',
+    NOTIFY : "MESSAGE",
+    SUCCESS_MESSAGE: "Your information has been successfully submited",
+    THANK_MESSAGE: "Thank you"
   },
 };

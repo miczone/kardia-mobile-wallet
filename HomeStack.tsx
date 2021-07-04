@@ -20,10 +20,18 @@ import CreateWithMnemonicPhrase from './screens/CreateWithMnemonicPhrase';
 import TransactionScreen from './screens/Transactions';
 import SuccessTx from './screens/SuccessTx';
 
+import SubmitSuccessScreen from './screens/Home/SubmitSuccessScreen';
+import {useRecoilValue} from 'recoil';
+import {languageAtom} from './atoms/language';
+import {getLanguageString} from './utils/lang';
+import BuyFadoContactScreen from './screens/Home/BuyFadoContactScreen';
+
+
 const HomeStack = createStackNavigator();
 
 const HomeStackScreen = () => {
   const theme = useContext(ThemeContext);
+  const language = useRecoilValue(languageAtom);
   return (
     <HomeStack.Navigator
       screenOptions={{
@@ -48,7 +56,6 @@ const HomeStackScreen = () => {
         name="TokenDetail"
         component={TokenDetail}
         options={{headerShown: false}}
-      
       />
       <HomeStack.Screen
         name="TokenTxDetail"
@@ -101,15 +108,29 @@ const HomeStackScreen = () => {
         options={{headerShown: false}}
       />
 
-      <HomeStack.Screen 
+      <HomeStack.Screen
         name="TransactionList"
         component={TransactionScreen}
         options={{
-          headerTitle: "",
+          headerTitle: '',
         }}
       />
 
       <HomeStack.Screen name="SuccessTx" component={SuccessTx} />
+
+      <HomeStack.Screen
+        name="UserContactForm"
+        component={BuyFadoContactScreen}
+        options={{
+          headerTitle: getLanguageString(language, 'FADO_CONTACT_SUPPORT'),
+        }}
+      />
+
+      <HomeStack.Screen
+        name="SubmitSucess"
+        component={SubmitSuccessScreen}
+        options={{headerShown: false}}
+      />
     </HomeStack.Navigator>
   );
 };
