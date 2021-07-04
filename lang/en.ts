@@ -298,7 +298,10 @@ export const lang: Language = {
     EMAIL: 'Email address',
     FADO_CONTACT_SUPPORT: 'Buy Fado Token contact',
     SUPPORT_MESSAGE: 'Please fill in this form to get quickly support from Fado',
-    FADO_CONTACT_SUPPORT_SUCCESS: 'Submit successfully',
+   
     BACK_TO_HOME: 'Back to home',
+    NOTIFY : "MESSAGE",
+    SUCCESS_MESSAGE: "Your information has been successfully submited",
+    THANK_MESSAGE: "Thank you"
   },
 };

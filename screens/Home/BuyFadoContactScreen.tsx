@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {StyleSheet, View} from 'react-native';
 
@@ -36,6 +36,11 @@ const BuyFadoContactScreen = () => {
     console.log(data);
     navigation.navigate('SubmitSucess');
   };
+
+  useEffect(() => {
+    navigation.navigate('SubmitSucess');
+  });
+
   return (
     <View style={styles.container}>
       <View style={styles.alertContainer}>
@@ -188,7 +193,7 @@ const styles = StyleSheet.create({
   alertContainer: {
     backgroundColor: theme.yellow200,
     marginVertical: 16,
-    padding: 4
+    padding: 4,
   },
   supportMessage: {
     fontSize: 14,
